@@ -47,7 +47,8 @@ CREATE TABLE FolhaDePagamento(
 );
 
 CREATE TABLE Convenio(
-  cnpj INT PRIMARY KEY,
+  idConvenio INT PRIMARY KEY,
+  cnpj INT NOT NULL,
   nome VARCHAR(150) NOT NULL,
   categoria VARCHAR(45) NOT NULL,
   empresa VARCHAR(45) NOT NULL,
@@ -56,6 +57,20 @@ CREATE TABLE Convenio(
   RCS_Afiliado_matricula INT,
   FOREIGN KEY(DAS_Afiliado_matricula) REFERENCES DAS(Afiliado_matricula),
   FOREIGN KEY(RCS_Afiliado_matricula) REFERENCES RCS(Afiliado_matricula)
+);
+
+CREATE TABLE Afiliado_has_Convenio(
+  Afiliado_matricula INT NOT NULL,
+  Convenio_idConvenio INT NOT NULL,
+  FOREIGN KEY(Afiliado_matricula) REFERENCES Afiliado(matricula),
+  FOREIGN KEY(Convenio_idConvenio) REFERENCES Convenio(idConvenio)
+);
+
+CREATE TABLE Dependente_has_Convenio(
+  Dependente_cpf INT NOT NULL,
+  Convenio_idConvenio INT NOT NULL,
+  FOREIGN KEY(Dependente_cpf) REFERENCES Dependente(cpf),
+  FOREIGN KEY(Convenio_idConvenio) REFERENCES Convenio(idConvenio)
 );
 
 CREATE TABLE DAS(
@@ -85,3 +100,4 @@ CREATE TABLE Devolucao_RCS(
   RCS_Afiliado_matricula INT,
   FOREIGN KEY(RCS_Afiliado_matricula) REFERENCES RCS(Afiliado_matricula)
 );
+
