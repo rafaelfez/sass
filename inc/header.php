@@ -10,8 +10,6 @@
       <div class="wrapper">
         <nav id="menu">
         <ul>
-          <li><a href="index.php">Home</a></li>
-          <li><a href="alerta.php">Alerta</a></li>
           <li><a href="alteracao.php">Alteração</a></li>
           <li><a href="cadastro.php">Cadastro</a></li>
           <li><a href="consulta.php">Consulta</a></li>
