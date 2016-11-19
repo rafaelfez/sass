@@ -1,9 +1,13 @@
 <?php
 
-$tituloPagina = "Sistema X";
+$tituloPagina = "Sistema SASS";
 
 include("inc/header.php");
 
-include("inc/footer.php");
-
 ?>
+
+<div class="home">
+  <p>Bem vindo!</p>
+</div>
+
+<?php include("inc/footer.php"); ?>

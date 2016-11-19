@@ -8,7 +8,7 @@
     list-style:none;
 	background-color: #69D2E7;
 }
- 
+
 #menu li {
     display: inline-block;
     padding: 10px 10px;
@@ -17,7 +17,6 @@
 }
 
 #menu ul li a {
-	background-color:#69D2E7;
 	color: #333;
 	text-decoration: none;
 }
@@ -32,6 +31,8 @@
     margin: 0;
     padding: 5px 10px;
    	font-size: 20px;
+    text-align: left;
+
 }
 
 #menu ul ul li {
@@ -47,13 +48,21 @@
 }
 
 #menu {
-      min-height: 50px;
-      position: fixed;
-      top: 0;
-      right: 0;
-      left: 0;
-      border-bottom: 1px solid #ccc;
-      background: #69D2E7;
-      z-index: 2;
-      
-    }
+    min-height: 50px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    border-bottom: 1px solid #ccc;
+    background: #69D2E7;
+    z-index: 2;
+
+}
+
+.home {
+  font-size: 60px;
+  text-align: center;
+  position: absolute;
+  left: 40%;
+  top: 35%;
+}
