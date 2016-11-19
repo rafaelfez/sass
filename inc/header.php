@@ -10,8 +10,15 @@
       <div class="wrapper">
         <nav id="menu">
         <ul>
+          <li><a href="alertas.php">Alertas</a></li>
           <li><a href="alteracao.php">Alteração</a></li>
-          <li><a href="cadastro.php">Cadastro</a></li>
+          <li><a href="#">Cadastro</a>
+            <ul>
+              <li><a href="cad_arr.php">Arrumador</a></li>
+              <li><a href="cad_dep.php">Dependente</a></li>
+              <li><a href="cad_con.php">Convênio</a></li>
+            </ul>
+          </li>
           <li><a href="consulta.php">Consulta</a></li>
           <li><a href="insercao.php">Inserção</a></li>
         </ul>
