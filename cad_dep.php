@@ -47,6 +47,9 @@ include("inc/header.php");
           <td><input type="text" id="celular" name="celular" value="<?php echo htmlspecialchars($celular); ?>"/></td>
         </tr>
     </table>
+    <input class="button button--primary button--topic-php" type="submit" value="Cadastrar" />
+    <input class="button button--primary button--topic-php" type="submit" value="Cancelar" />
+  </form>
 </div>
 
 <?php

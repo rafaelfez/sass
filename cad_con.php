@@ -1,7 +1,7 @@
 <?php
 
 $tituloPagina = "Convenio";
-$nome = $empresa = $categoria = '';
+$nome = $empresa = $categoria = $desconto = $valor = '';
 
 include("inc/header.php");
 ?>
@@ -22,8 +22,23 @@ include("inc/header.php");
           <th><label for="categoria">Categoria<span class="required">*</span></label></th>
           <td><input type="text" id="categoria" name="categoria" value="<?php echo htmlspecialchars($categoria); ?>"/></td>
         </tr>
-    </table>
-</div>
+        <tr>
+          <th><label for="desconto">Desconto<span class="required">*<span></label></th>
+          <td><select id="desconto" name="Desconto">
+            <option value="">Selecione um</option>
+            <option value="DAS" <?php if($desconto == 'DAS') echo 'selected'; ?>>DAS</option>
+            <option value="RCS" <?php if($desconto == 'RCS') echo 'selected'; ?>>RCS</option>
+          </select></td>
+        </tr>
+        <tr>
+          <th><label for="valor">Valor<span class="required">*</span></label></th>
+          <td><input type="text" id="valor" name="valor" value="<?php echo htmlspecialchars($valor); ?>"/></td>
+        </tr>
+      </table>
+      <input class="button button--primary button--topic-php" type="submit" value="Cadastrar" />
+      <input class="button button--primary button--topic-php" type="submit" value="Cancelar" />
+    </form>
+  </div>
 
 <?php
 include("inc/footer.php");

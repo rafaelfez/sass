@@ -1,7 +1,7 @@
 <?php
 
 $tituloPagina = "Arrumador";
-$matricula = $nome = $telefone = $nascimento = $endereco = $rg = $cpf = $celular = '';
+$matricula = $nome = $telefone = $nascimento = $endereco = $rg = $cpf = $celular = $sexo = $rcs = '';
 
 include("inc/header.php");
 ?>
@@ -42,8 +42,23 @@ include("inc/header.php");
           <th><label for="celular">Celular<span class="required">*</span></label></th>
           <td><input type="text" id="celular" name="celular" value="<?php echo htmlspecialchars($celular); ?>"/></td>
         </tr>
-    </table>
-</div>
+        <tr>
+          <th><label for="sexo">Sexo<span class="required">*<span></label></th>
+          <td><select id="sexo" name="sexo">
+            <option value="">Selecione um</option>
+            <option value="Masculino" <?php if($sexo == 'Masculino') echo 'selected'; ?>>Masculino</option>
+            <option value="Feminino" <?php if($sexo == 'Feminino') echo 'selected'; ?>>Feminino</option>
+          </select></td>
+        </tr>
+        <tr>
+          <th><label for="rcs">RCS(%)<span class="required">*</span></label></th>
+          <td><input type="text" id="rcs" name="rcs" value="<?php echo htmlspecialchars($rcs); ?>"/></td>
+        </tr>
+      </table>
+      <input class="button button--primary button--topic-php" type="submit" value="Cadastrar" />
+      <input class="button button--primary button--topic-php" type="submit" value="Cancelar" />
+    </form>
+  </div>
 
 <?php
 include("inc/footer.php");
