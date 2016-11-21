@@ -64,5 +64,13 @@
   text-align: center;
   position: absolute;
   left: 40%;
+  top: 15%;
+}
+
+.login {
+	font-size: 50px;
+  text-align: center;
+  position: absolute;
+  left: 40%;
   top: 35%;
 }
