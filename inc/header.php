@@ -1,5 +1,6 @@
 <html>
   <head>
+    <meta charset="utf-8">
     <title><?php echo $tituloPagina; ?></title>
     <link rel="stylesheet" href="css/style.css" type="text/css">
   </head>
@@ -10,6 +11,7 @@
       <div class="wrapper">
         <nav id="menu">
         <ul>
+          <li><a href="index.php">Home</a></li>
           <li><a href="alertas.php">Alertas</a></li>
           <li><a href="alteracao.php">Alteração</a></li>
           <li><a href="#">Cadastro</a>
@@ -21,6 +23,7 @@
           </li>
           <li><a href="consulta.php">Consulta</a></li>
           <li><a href="insercao.php">Inserção</a></li>
+          <li><a href="login.php">Login</a></li>
         </ul>
     </div>
 
