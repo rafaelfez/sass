@@ -41,6 +41,9 @@ try{
     <meta charset="utf-8">
     <title><?php echo $tituloPagina; ?></title>
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
+    <script src="bootstrap/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
   </head>
 
   <body>
@@ -72,7 +75,6 @@ try{
         </tr>
       </table>
       <input  type="submit" name="login" class="btn btn-info" value="Login" />
-      <input class="button button--primary button--topic-php" type="submit" value="Cancelar" />
     </form>
   </div>
 
