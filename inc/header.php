@@ -23,8 +23,24 @@
           </li>
           <li><a href="consulta.php">Consulta</a></li>
           <li><a href="insercao.php">Inserção</a></li>
-          <li><a href="login.php">Login</a></li>
+          <li><a href="logout.php">Sair</a></li>
         </ul>
     </div>
 
     <div id="content">
+      <?php //verificando se esta logado
+      session_start();
+
+      //Caso o usuário não esteja autenticado, limpa os dados e redireciona
+      if ( !isset($_SESSION['username']) and !isset($_SESSION['password']) ) {
+          //Destrói
+          session_destroy();
+
+          //Limpa
+          unset ($_SESSION['username']);
+          unset ($_SESSION['password']);
+
+          //Redireciona para a página de autenticação
+          header('location:login.php');
+      }
+      ?>
