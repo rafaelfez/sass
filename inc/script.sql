@@ -30,9 +30,9 @@ CREATE TABLE Dependente(
   endereco VARCHAR(150) NOT NULL,
   rg INT NOT NULL,
   celular INT NOT NULL,
-  sexo VARCHAR(10),
+  sexo VARCHAR(10) NOT NULL,
   Afiliado_matricula INT,
-  FOREIGN KEY(Afiliado_matricula) REFERENCES Afiliado(matricula)
+  CONSTRAINT fk_Dependente_Afiliado FOREIGN KEY(Afiliado_matricula) REFERENCES Afiliado(matricula)
 );
 
 CREATE TABLE FolhaDePagamento(
@@ -42,8 +42,8 @@ CREATE TABLE FolhaDePagamento(
   saldo DECIMAL(10,2) NOT NULL,
   data DATETIME NOT NULL,
   adicional DECIMAL(10,2),
-  Afiliado_matricula INT,
-  FOREIGN KEY(Afiliado_matricula) REFERENCES Afiliado(matricula)
+  Afiliado_matricula INT NOT NULL,
+  CONSTRAINT fk_FolhaDePagamento_Afiliado FOREIGN KEY(Afiliado_matricula) REFERENCES Afiliado(matricula)
 );
 
 CREATE TABLE Convenio(
@@ -53,51 +53,50 @@ CREATE TABLE Convenio(
   categoria VARCHAR(45) NOT NULL,
   empresa VARCHAR(45) NOT NULL,
   mensalidade VARCHAR(45) NOT NULL,
-  DAS_Afiliado_matricula INT,
-  RCS_Afiliado_matricula INT,
-  FOREIGN KEY(DAS_Afiliado_matricula) REFERENCES DAS(Afiliado_matricula),
-  FOREIGN KEY(RCS_Afiliado_matricula) REFERENCES RCS(Afiliado_matricula)
+  DAS_Afiliado_matricula INT NOT NULL,
+  RCS_Afiliado_matricula INT NOT NULL,
+  CONSTRAINT fk_Convenio_DAS FOREIGN KEY(DAS_Afiliado_matricula) REFERENCES DAS(Afiliado_matricula),
+  CONSTRAINT fk_Convenio_RCS FOREIGN KEY(RCS_Afiliado_matricula) REFERENCES RCS(Afiliado_matricula)
 );
 
 CREATE TABLE Afiliado_has_Convenio(
   Afiliado_matricula INT NOT NULL,
   Convenio_idConvenio INT NOT NULL,
-  FOREIGN KEY(Afiliado_matricula) REFERENCES Afiliado(matricula),
-  FOREIGN KEY(Convenio_idConvenio) REFERENCES Convenio(idConvenio)
+  CONSTRAINT fk_Afiliado_has_Convenio_Afiliado FOREIGN KEY(Afiliado_matricula) REFERENCES Afiliado(matricula),
+  CONSTRAINT fk_Afiliado_has_Convenio_Convenio FOREIGN KEY(Convenio_idConvenio) REFERENCES Convenio(idConvenio)
 );
 
 CREATE TABLE Dependente_has_Convenio(
   Dependente_cpf INT NOT NULL,
   Convenio_idConvenio INT NOT NULL,
-  FOREIGN KEY(Dependente_cpf) REFERENCES Dependente(cpf),
-  FOREIGN KEY(Convenio_idConvenio) REFERENCES Convenio(idConvenio)
+  CONSTRAINT fk_Dependente_has_Convenio_Dependente FOREIGN KEY(Dependente_cpf) REFERENCES Dependente(cpf),
+  CONSTRAINT fk_Dependente_has_Convenio_Convenio FOREIGN KEY(Convenio_idConvenio) REFERENCES Convenio(idConvenio)
 );
 
 CREATE TABLE DAS(
-  Afiliado_matricula INT,
-  FOREIGN KEY(Afiliado_matricula) REFERENCES Afiliado(matricula),
+  Afiliado_matricula INT NOT NULL,
   porcentagem DECIMAL(3,2) NOT NULL,
-  saldo DECIMAL(10,2) NOT NULL
+  saldo DECIMAL(10,2) NOT NULL,
+  CONSTRAINT fk_DAS_Afiliado FOREIGN KEY(Afiliado_matricula) REFERENCES Afiliado(matricula)
 );
 
 CREATE TABLE Devolucao_DAS(
   valor DECIMAL(10,2) NOT NULL,
   data DATETIME NOT NULL,
   DAS_Afiliado_matricula INT,
-  FOREIGN KEY(DAS_Afiliado_matricula) REFERENCES DAS(Afiliado_matricula)
+  CONSTRAINT fk_Devolucao_DAS_DAS FOREIGN KEY(DAS_Afiliado_matricula) REFERENCES DAS(Afiliado_matricula)
 );
 
 CREATE TABLE RCS(
-  Afiliado_matricula INT,
-  FOREIGN KEY(Afiliado_matricula) REFERENCES Afiliado(matricula),
+  Afiliado_matricula INT NOT NULL,
   porcentagem DECIMAL(3,2),
-  saldo DECIMAL(10,2)
+  saldo DECIMAL(10,2),
+  CONSTRAINT fk_RCS_Afiliado FOREIGN KEY(Afiliado_matricula) REFERENCES Afiliado(matricula)
 );
 
 CREATE TABLE Devolucao_RCS(
   valor DECIMAL(10,2) NOT NULL,
   data DATETIME NOT NULL,
   RCS_Afiliado_matricula INT,
-  FOREIGN KEY(RCS_Afiliado_matricula) REFERENCES RCS(Afiliado_matricula)
+  CONSTRAINT fk_Devolucao_RCS_RCS FOREIGN KEY(RCS_Afiliado_matricula) REFERENCES RCS(Afiliado_matricula)
 );
-
