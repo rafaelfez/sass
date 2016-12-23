@@ -3,9 +3,9 @@
     <meta charset="utf-8">
     <title><?php echo $tituloPagina; ?></title>
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">    
-    <script src="bootstrap/js/jquery-3.1.1.min.js" type="text/javascript"></script>
-    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <!--<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css"> -->
+    <!--<script src="bootstrap/js/jquery-3.1.1.min.js" type="text/javascript"></script>-->
+    <!--<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>-->
   </head>
 
   <body>
@@ -29,7 +29,7 @@
           <li><a href="logout.php">Sair</a></li>
         </ul>
     </div>
-
+    
     <div id="content">
       <?php //verificando se esta logado
       session_start();

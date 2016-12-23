@@ -1,4 +1,4 @@
-CREATE DATABASE Sindicato;
+CREATE DATABASE sindicato;
 
 USE sindicato;
 
@@ -97,6 +97,13 @@ CREATE TABLE RCS(
 CREATE TABLE Devolucao_RCS(
   valor DECIMAL(10,2) NOT NULL,
   data DATETIME NOT NULL,
-  RCS_Afiliado_matricula INT,
+  RCS_Afiliado_matriafiliadocula INT,
   CONSTRAINT fk_Devolucao_RCS_RCS FOREIGN KEY(RCS_Afiliado_matricula) REFERENCES RCS(Afiliado_matricula)
 );
+
+ALTER TABLE Afiliado ADD taxa_rcs int;
+
+ALTER TABLE Afiliado DROP COLUMN nascimento;
+
+ALTER TABLE Afiliado ADD nascimento varchar(10);
+
