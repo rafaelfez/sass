@@ -75,11 +75,11 @@ include("inc/header.php");
           <td><input type="text" id="celular" name="celular" value="<?php echo htmlspecialchars($celular); ?>"/></td>
         </tr>
         <tr>
-          <th><label for="celular">Email<span class="required">*</span></label></th>
+          <th><label for="email">Email<span class="required">*</span></label></th>
           <td><input type="text" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>"/></td>
         </tr>
         <tr>
-          <th><label for="celular">Situação<span class="required">*</span></label></th>
+          <th><label for="situacao">Situação<span class="required">*</span></label></th>
           <td><input type="text" id="situacao" name="situacao" value="<?php echo htmlspecialchars($situacao); ?>"/></td>
         </tr>
         <tr>

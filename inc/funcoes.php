@@ -44,3 +44,29 @@ function add_arr($matricula,$nome,$telefone,$nascimento,$endereco,$rg,$cpf,$celu
   }
   return true;
 }
+
+function add_dep($afiliado_matricula,$nome,$telefone,$nascimento,$endereco,$rg,$cpf,$celular,$email,$sexo,$parentesco){
+  include 'conexao.php';
+
+  $sql = "INSERT INTO dependente(cpf,nome,telefone,email,nascimento,endereco,rg,celular,sexo,Afiliado_matricula,parentesco) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+  try{
+	$resultado = $db->prepare($sql);
+	$resultado->bindValue(1, $cpf, PDO::PARAM_INT);
+  $resultado->bindValue(2, $nome, PDO::PARAM_STR);
+  $resultado->bindValue(3, $telefone, PDO::PARAM_INT);
+  $resultado->bindValue(4, $email, PDO::PARAM_INT);
+  $resultado->bindValue(5, $nascimento, PDO::PARAM_STR);
+  $resultado->bindValue(6, $endereco, PDO::PARAM_STR);
+  $resultado->bindValue(7, $rg, PDO::PARAM_INT);
+  $resultado->bindValue(8, $celular, PDO::PARAM_INT);
+  $resultado->bindValue(9, $sexo, PDO::PARAM_STR);
+	$resultado->bindValue(10, $afiliado_matricula, PDO::PARAM_INT);
+	$resultado->bindValue(11, $parentesco, PDO::PARAM_STR);
+    $resultado->execute();
+  } catch (Exception $e) {
+    echo "Error!: " . $e->getMessage() . "<br />";
+    return false;
+  }
+  return true;
+  
+}

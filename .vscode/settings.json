@@ -1,4 +1,5 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-    "php.validate.executablePath": "C:/wamp/bin/php/php7.0.4/php.exe"
+    "php.validate.executablePath": "C:/wamp64/bin/php/php7.0.10/php.exe"
+
 }
