@@ -9,7 +9,7 @@
   </head>
 
   <body>
-
+    <?php /*
     <div class="header">
       <div class="wrapper">
         <nav id="menu">
@@ -29,7 +29,7 @@
           <li><a href="logout.php">Sair</a></li>
         </ul>
     </div>
-    
+    */?>
     <div id="content">
       <?php //verificando se esta logado
       session_start();

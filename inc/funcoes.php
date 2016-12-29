@@ -68,5 +68,26 @@ function add_dep($afiliado_matricula,$nome,$telefone,$nascimento,$endereco,$rg,$
     return false;
   }
   return true;
-  
+}
+
+function add_con($cnpj,$nome,$categoria, $empresa, $mensalidade, $desconto, $DAS_Afiliado_Matricula, $RCS_Afiliado_Matricula){
+  include 'conexao.php';
+
+  $sql = "INSERT INTO convenio(cnpj,nome,categoria,empresa,mensalidade,desconto,DAS_Afiliado_Matricula,RCS_Afiliado_Matricula) VALUES(?,?,?,?,?,?,?,?)";
+  try {
+    $resultado = $db->prepare($sql);
+  	$resultado->bindValue(1, $cnpj, PDO::PARAM_INT);
+    $resultado->bindValue(2, $nome, PDO::PARAM_STR);
+    $resultado->bindValue(3, $categoria, PDO::PARAM_STR);
+    $resultado->bindValue(4, $empresa, PDO::PARAM_STR);
+    $resultado->bindValue(5, $mensalidade, PDO::PARAM_INT);
+    $resultado->bindValue(6, $desconto, PDO::PARAM_STR);
+    $resultado->bindValue(7, $DAS_Afiliado_Matricula, PDO::PARAM_INT);
+    $resultado->bindValue(8, $RCS_Afiliado_Matricula, PDO::PARAM_INT);
+    $resultado->execute();
+  } catch (Exception $e) {
+    echo "Error!: " . $e->getMessage() . "<br />";
+    return false;
+  }
+  return true;
 }

@@ -90,7 +90,7 @@ include("inc/header.php");
         </tr>
     </table>
     <input class="button button--primary button--topic-php" type="submit" value="Cadastrar" />
-    <input class="button button--primary button--topic-php" type="submit" value="Cancelar" />
+    <input type="button" value="Cancelar" onclick="javascript: location.href='index.php';" />
   </form>
 </div>
 
