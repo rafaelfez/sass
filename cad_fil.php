@@ -2,7 +2,7 @@
 
 require 'inc/funcoes.php';
 
-$tituloPagina = "Arrumador";
+$tituloPagina = "Cadastro";
 $matricula = $nome = $telefone = $nascimento = $endereco = $rg = $cpf = $celular = $sexo = $email = $situacao = $taxa_rcs = '';
 
 
@@ -39,8 +39,8 @@ include("inc/header.php");
 ?>
 
 <div class="cad-arr">
-  <h2>Cadastro de Arrumador</h2>
-  <form class="form-cad-arr" method="post" action="cad_arr.php">
+  <h2>Cadastro de Filiado</h2>
+  <form class="form-cad-arr" method="post" action="cad_fil.php">
     <table>
         <tr>
           <th><label for="matricula">Matrícula<span class="required">*</span></label></th>

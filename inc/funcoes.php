@@ -91,3 +91,46 @@ function add_con($cnpj,$nome,$categoria, $empresa, $mensalidade, $desconto, $DAS
   }
   return true;
 }
+
+function buscaAlterar($matricula){
+  include 'conexao.php';
+
+  $sql = "SELECT * from afiliados where matricula = ?";
+
+  try {
+    $resultado=$db->prepare($sql);
+    $resultado->bindValue(1, $matricula, PDO::PARAM_INT);
+    $resultado->execute();
+  } catch (Exception $e) {
+    echo "Error!: " . $e->getMessage() . "<br />";
+    return false;
+  }
+  return $resultado->fetch();
+}
+
+function alterarFiliado($matricula,$nome,$telefone,$nascimento,$endereco,$rg,$cpf,$celular,$sexo,$email,$situacao,$taxa_rcs){
+  include 'conexao.php';
+
+  $sql = "UPDATE afiliado SET nome = ?, telefone = ?, nascimento = ?, endereco = ?, rg = ?, cpf = ?, celular = ?, sexo = ?, email = ?, situacao = ?, taxa_rcs = ? WHERE matricula = ?";
+
+  try {
+    $resultado = $db->prepare($sql);
+    $resultado->bindValue(1, $nome, PDO::PARAM_STR);
+    $resultado->bindValue(2, $telefone, PDO::PARAM_INT);
+    $resultado->bindValue(3, $nascimento, PDO::PARAM_STR);
+    $resultado->bindValue(4, $endereco, PDO::PARAM_STR);
+    $resultado->bindValue(5, $rg, PDO::PARAM_INT);
+    $resultado->bindValue(6, $cpf, PDO::PARAM_INT);
+    $resultado->bindValue(7, $celular, PDO::PARAM_INT);
+    $resultado->bindValue(8, $sexo, PDO::PARAM_STR);
+    $resultado->bindValue(9, $email, PDO::PARAM_INT);
+    $resultado->bindValue(10, $situacao, PDO::PARAM_INT);
+    $resultado->bindValue(11, $taxa_rcs, PDO::PARAM_INT);
+    $resultado->bindValue(12, $matricula, PDO::PARAM_INT);
+    $resultado->execute();
+  } catch (Exception $e) {
+    echo "Error!: " . $e->getMessage() . "<br />";
+    return false;
+  }
+  return true;
+}

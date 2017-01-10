@@ -9,17 +9,22 @@
   </head>
 
   <body>
-    <?php /*
     <div class="header">
       <div class="wrapper">
         <nav id="menu">
         <ul>
           <li><a href="index.php">Home</a></li>
           <li><a href="alertas.php">Alertas</a></li>
-          <li><a href="alteracao.php">Alteração</a></li>
+          <li><a href="#">Alteração</a>
+            <ul>
+              <li><a href="alt_fil.php">Filiado</a></li>
+              <li><a href="alt_dep.php">Dependente</a></li>
+              <li><a href="alt_fil.php">Convênio</a></li>
+            </ul>
+          </li>
           <li><a href="#">Cadastro</a>
             <ul>
-              <li><a href="cad_arr.php">Arrumador</a></li>
+              <li><a href="cad_fil.php">Filiado</a></li>
               <li><a href="cad_dep.php">Dependente</a></li>
               <li><a href="cad_con.php">Convênio</a></li>
             </ul>
@@ -29,7 +34,7 @@
           <li><a href="logout.php">Sair</a></li>
         </ul>
     </div>
-    */?>
+
     <div id="content">
       <?php //verificando se esta logado
       session_start();
