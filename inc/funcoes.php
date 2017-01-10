@@ -92,7 +92,7 @@ function add_con($cnpj,$nome,$categoria, $empresa, $mensalidade, $desconto, $DAS
   return true;
 }
 
-function buscaAlterar($matricula){
+/*function buscaAlterar($matricula){
   include 'conexao.php';
 
   $sql = "SELECT * from afiliados where matricula = ?";
@@ -107,6 +107,7 @@ function buscaAlterar($matricula){
   }
   return $resultado->fetch();
 }
+*/
 
 function alterarFiliado($matricula,$nome,$telefone,$nascimento,$endereco,$rg,$cpf,$celular,$sexo,$email,$situacao,$taxa_rcs){
   include 'conexao.php';
@@ -127,6 +128,32 @@ function alterarFiliado($matricula,$nome,$telefone,$nascimento,$endereco,$rg,$cp
     $resultado->bindValue(10, $situacao, PDO::PARAM_INT);
     $resultado->bindValue(11, $taxa_rcs, PDO::PARAM_INT);
     $resultado->bindValue(12, $matricula, PDO::PARAM_INT);
+    $resultado->execute();
+  } catch (Exception $e) {
+    echo "Error!: " . $e->getMessage() . "<br />";
+    return false;
+  }
+  return true;
+}
+
+function alterarDependente($afiliado_matricula,$nome,$telefone,$nascimento,$endereco,$rg,$cpf,$celular,$email,$sexo,$parentesco){
+  include 'conexao.php';
+
+  $sql = "UPDATE dependente SET nome = ?, telefone = ?, email = ?, nascimento = ?, endereco = ?, rg = ?, celular = ?, sexo = ?, Afiliado_matricula = ?, parentesco = ? WHERE cpf = ?";
+
+  try{
+  	$resultado = $db->prepare($sql);
+    $resultado->bindValue(1, $nome, PDO::PARAM_STR);
+    $resultado->bindValue(2, $telefone, PDO::PARAM_INT);
+    $resultado->bindValue(3, $email, PDO::PARAM_INT);
+    $resultado->bindValue(4, $nascimento, PDO::PARAM_STR);
+    $resultado->bindValue(5, $endereco, PDO::PARAM_STR);
+    $resultado->bindValue(6, $rg, PDO::PARAM_INT);
+    $resultado->bindValue(7, $celular, PDO::PARAM_INT);
+    $resultado->bindValue(8, $sexo, PDO::PARAM_STR);
+  	$resultado->bindValue(9, $afiliado_matricula, PDO::PARAM_INT);
+  	$resultado->bindValue(10, $parentesco, PDO::PARAM_STR);
+    $resultado->bindValue(11, $cpf, PDO::PARAM_INT);
     $resultado->execute();
   } catch (Exception $e) {
     echo "Error!: " . $e->getMessage() . "<br />";

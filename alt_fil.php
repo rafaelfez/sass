@@ -54,7 +54,8 @@ include("inc/header.php");
 </div>
 -->
 <div class="alterar">
-  <form class="form-alterar" method="post" action="alt_fil.php">
+  <h2>Alteração de Filiado</h2>
+  <form class="form-alt-dep" method="post" action="alt_fil.php">
   <table>
     <tr>
       <th><label for="matricula">Matrícula<span class="required">*</span></label></th>
