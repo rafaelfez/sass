@@ -161,3 +161,23 @@ function alterarDependente($afiliado_matricula,$nome,$telefone,$nascimento,$ende
   }
   return true;
 }
+
+function alterarConvenio($cnpj,$nome,$categoria, $empresa, $mensalidade, $desconto){
+  include 'conexao.php';
+
+  $sql = "UPDATE convenio SET nome =  ?, categoria =  ?, empresa =  ?, mensalidade =  ?, desconto =  ? WHERE cnpj = ?";
+  try {
+    $resultado = $db->prepare($sql);
+    $resultado->bindValue(1, $nome, PDO::PARAM_STR);
+    $resultado->bindValue(2, $categoria, PDO::PARAM_STR);
+    $resultado->bindValue(3, $empresa, PDO::PARAM_STR);
+    $resultado->bindValue(4, $mensalidade, PDO::PARAM_INT);
+    $resultado->bindValue(5, $desconto, PDO::PARAM_STR);
+    $resultado->bindValue(6, $cnpj, PDO::PARAM_INT);
+    $resultado->execute();
+  } catch (Exception $e) {
+    echo "Error!: " . $e->getMessage() . "<br />";
+    return false;
+  }
+  return true;
+}

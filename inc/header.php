@@ -19,7 +19,7 @@
             <ul>
               <li><a href="alt_fil.php">Filiado</a></li>
               <li><a href="alt_dep.php">Dependente</a></li>
-              <li><a href="alt_fil.php">Convênio</a></li>
+              <li><a href="alt_con.php">Convênio</a></li>
             </ul>
           </li>
           <li><a href="#">Cadastro</a>
