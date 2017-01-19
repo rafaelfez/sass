@@ -122,10 +122,40 @@
   top: 15%;
 }
 
-.cad_con {
+.cad-con {
 	font-size: 18px;
-	text-align: center;
+  text-align: center;
+  position: absolute;
+  left: 40%;
+  top: 15%;
+}
+
+.pagament {
+	font-size: 52px;
+  text-align: center;
+  position: absolute;
+  left: 40%;
+  top: 15%;
+}
+
+.sms-geral {
+	font-size: 18px;
+	text-align:center;
 	position: absolute;
-	left: 40%;
-	top: 15%;
+	left:20%;
+	top:15%;
+}
+
+.form-container{
+	font-size: 18px;
+	text-align:center;
+	position: absolute;
+	left:16%;
+	top:50%;
+}
+
+.form-container table{
+	padding:5px;
+	font-size:large;
+	text-align:center;
 }

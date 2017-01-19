@@ -108,3 +108,21 @@ ALTER TABLE Afiliado DROP COLUMN nascimento;
 ALTER TABLE Afiliado ADD nascimento varchar(10);
 
 ALTER TABLE Dependente ADD parentesco varchar(30);
+
+ALTER TABLE Dependente DROP COLUMN nascimento;
+
+ALTER TABLE Dependente ADD nascimento varchar(10);
+
+INSERT INTO dependente(cpf,nome,telefone,email,nascimento,endereco,rg,celular,sexo,Afiliado_matricula,parentesco) VALUES (1,1,1,1,1,1,1,1,1,1,1);
+
+ALTER TABLE Convenio ADD desconto varchar(3);
+
+ALTER TABLE Convenio DROP COLUMN idConvenio;
+
+ALTER TABLE Convenio ADD idConvenio INT(4) not null auto_increment primary key;
+
+ALTER TABLE folhadepagamento DROP column periodo;
+
+ALTER TABLE folhadepagamento ADD mes VARCHAR(9) not null;
+
+ALTER TABLE folhadepagamento ADD ano INT(4) not null;

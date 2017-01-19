@@ -30,9 +30,10 @@
             </ul>
           </li>
           <li><a href="consulta.php">Consulta</a></li>
-          <li><a href="insercao.php">Inserção</a></li>
+          <li><a href="pagamento.php">Pagamento</a></li>
           <li><a href="logout.php">Sair</a></li>
         </ul>
+      </nav>
     </div>
 
     <div id="content">

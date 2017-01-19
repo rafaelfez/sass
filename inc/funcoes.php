@@ -181,3 +181,14 @@ function alterarConvenio($cnpj,$nome,$categoria, $empresa, $mensalidade, $descon
   }
   return true;
 }
+
+function get_devedores() {
+    include 'conexao.php';
+
+      try {
+          return $db->query('SELECT nome, telefone, situacao FROM afiliado');
+      } catch (Exception $e) {
+          echo "Error!: " . $e->getMessage() . "<br />";
+          return array();
+      }
+}
