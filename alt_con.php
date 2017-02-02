@@ -30,42 +30,42 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 include("inc/header.php");
 ?>
 
-<div class="alterar">
-  <h2>Alteração de Convenio</h2>
-  <form class="form-alt-con" method="post" action="alt_con.php">
+<div class="cad-arr">
+  <h2 class="bg-info">Alteração de Convênio</h2>
+  <form class="form-group" method="post" action="alt_con.php">
     <table>
         <tr>
-          <th><label for="cnpj">CNPJ<span class="required">*</span></label></th>
-          <td><input type="text" id="cnpj" name="cnpj" value="<?php echo htmlspecialchars($cnpj); ?>"/></td>
+          <th><label for="cnpj">CNPJ:<span class="required">*</span></label></th>
+          <td><input type="text" class="form-control" id="cnpj" name="cnpj" value="<?php echo htmlspecialchars($cnpj); ?>"/></td>
         </tr>
         <tr>
-          <th><label for="nome">Nome<span class="required">*</span></label></th>
-          <td><input type="text" id="nome" name="nome" value="<?php echo htmlspecialchars($nome); ?>"/></td>
+          <th><label for="nome">Nome:<span class="required">*</span></label></th>
+          <td><input type="text" class="form-control" id="nome" name="nome" value="<?php echo htmlspecialchars($nome); ?>"/></td>
         </tr>
         <tr>
-          <th><label for="empresa">Empresa<span class="required">*</span></label></th>
-          <td><input type="text" id="empresa" name="empresa" value="<?php echo htmlspecialchars($empresa); ?>"/></td>
+          <th><label for="empresa">Empresa:<span class="required">*</span></label></th>
+          <td><input type="text" class="form-control" id="empresa" name="empresa" value="<?php echo htmlspecialchars($empresa); ?>"/></td>
         </tr>
         <tr>
-          <th><label for="categoria">Categoria<span class="required">*</span></label></th>
-          <td><input type="text" id="categoria" name="categoria" value="<?php echo htmlspecialchars($categoria); ?>"/></td>
+          <th><label for="categoria">Categoria:<span class="required">*</span></label></th>
+          <td><input type="text" class="form-control" id="categoria" name="categoria" value="<?php echo htmlspecialchars($categoria); ?>"/></td>
         </tr>
         <tr>
-          <th><label for="desconto">Desconto<span class="required">*<span></label></th>
-          <td><select id="desconto" name="desconto">
-            <option value="">Selecione um</option>
+          <th><label for="desconto">Desconto:<span class="required">*<span></label></th>
+          <td><select class="form-control" id="desconto" name="desconto">
+            <option value="">Selecione um:</option>
             <option value="DAS" <?php if($desconto == 'DAS') echo 'selected'; ?>>DAS</option>
             <option value="RCS" <?php if($desconto == 'RCS') echo 'selected'; ?>>RCS</option>
           </select></td>
         </tr>
         <tr>
-          <th><label for="mensalidade">Mensalidade<span class="required">*</span></label></th>
-          <td><input type="text" id="mensalidade" name="mensalidade" value="<?php echo htmlspecialchars($mensalidade); ?>"/></td>
+          <th><label for="mensalidade">Mensalidade:<span class="required">*</span></label></th>
+          <td><input type="text" class="form-control" id="mensalidade" name="mensalidade" value="<?php echo htmlspecialchars($mensalidade); ?>"/></td>
         </tr>
       </table>
-      <input class="button button--primary button--topic-php" type="submit" value="Alterar" />
-      <input type="button" value="Cancelar" onclick="javascript: location.href='index.php';" />
-    </form>
+      <input class="btn btn-primary" type="submit" value="Alterar" />
+  <input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" />
+  </form>
   </div>
 
 <?php

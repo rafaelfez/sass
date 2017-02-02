@@ -7,8 +7,8 @@ include("inc/header.php");
 ?>
 
 <div class="home">
-  <img src="img/saas-logo.png" style="width:600px; height:300px;"/>
-  <p>Bem vindo!</p>
+  <abbr title="Sindicato dos Arrumadores de São Sebastião"><img src="img/saas-logo.png"style="width:600px; height:300px;"/></abbr>
+  <p>Bem-vindo(a)!</p>
 </div>
 
 <?php include("inc/footer.php"); ?>
