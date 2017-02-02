@@ -53,65 +53,65 @@ include("inc/header.php");
   </form>
 </div>
 -->
-<div class="alterar">
-  <h2>Alteração de Filiado</h2>
-  <form class="form-alt-dep" method="post" action="alt_fil.php">
+<div class="cad-arr">
+  <h2 class="bg-info">Alteração de Filiado</h2>
+  <form class="form-group" method="post" action="alt_fil.php">
   <table>
     <tr>
-      <th><label for="matricula">Matrícula<span class="required">*</span></label></th>
-      <td><input type="text" id="matricula" name="matricula" value="<?php echo htmlspecialchars($matricula); ?>"/></td>
+      <th><label for="matricula">Matrícula:<span class="required">*</span></label></th>
+      <td><input type="text" class="form-control" id="matricula" name="matricula" value="<?php echo htmlspecialchars($matricula); ?>"/></td>
     </tr>
     <tr>
-      <th><label for="nome">Nome<span class="required">*</span></label></th>
-      <td><input type="text" id="nome" name="nome" value="<?php echo htmlspecialchars($nome); ?>"/></td>
+      <th><label for="nome">Nome:<span class="required">*</span></label></th>
+      <td><input type="text" class="form-control" id="nome" name="nome" value="<?php echo htmlspecialchars($nome); ?>"/></td>
     </tr>
     <tr>
-      <th><label for="telefone">Telefone<span class="required">*</span></label></th>
-      <td><input type="text" id="telefone" name="telefone" value="<?php echo htmlspecialchars($telefone); ?>"/></td>
+      <th><label for="nascimento">Data de Nascimento:<span class="required">*</span></label></th>
+      <td><input type="text" class="form-control" id="nascimento" name="nascimento" value="<?php echo htmlspecialchars($nascimento); ?>"/></td>
     </tr>
     <tr>
-      <th><label for="nascimento">Data de Nascimento<span class="required">*</span></label></th>
-      <td><input type="text" id="nascimento" name="nascimento" value="<?php echo htmlspecialchars($nascimento); ?>"/></td>
-    </tr>
-    <tr>
-      <th><label for="endereco">Endereço<span class="required">*</span></label></th>
-      <td><input type="text" id="endereco" name="endereco" value="<?php echo htmlspecialchars($endereco); ?>"/></td>
-    </tr>
-    <tr>
-      <th><label for="rg">RG<span class="required">*</span></label></th>
-      <td><input type="text" id="rg" name="rg" value="<?php echo htmlspecialchars($rg); ?>"/></td>
-    </tr>
-    <tr>
-      <th><label for="cpf">CPF<span class="cpf">*</span></label></th>
-      <td><input type="text" id="cpf" name="cpf" value="<?php echo htmlspecialchars($cpf); ?>"/></td>
-    </tr>
-    <tr>
-      <th><label for="email">Email<span class="required">*</span></label></th>
-      <td><input type="text" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>"/></td>
-    </tr>
-    <tr>
-      <th><label for="celular">Celular<span class="required">*</span></label></th>
-      <td><input type="text" id="celular" name="celular" value="<?php echo htmlspecialchars($celular); ?>"/></td>
-    </tr>
-    <tr>
-      <th><label for="sexo">Sexo<span class="required">*<span></label></th>
-      <td><select id="sexo" name="sexo">
-        <option value="">Selecione um</option>
+      <th><label for="sexo">Sexo:<span class="required">*<span></label></th>
+      <td> <select id="sexo" class="form-control" name="sexo">
+        <option value="">Selecione:</option>
         <option value="Masculino" <?php if($sexo == 'Masculino') echo 'selected'; ?>>Masculino</option>
         <option value="Feminino" <?php if($sexo == 'Feminino') echo 'selected'; ?>>Feminino</option>
       </select></td>
     </tr>
     <tr>
-      <th><label for="taxa_rcs">RCS(%)<span class="required">*</span></label></th>
-      <td><input type="text" id="taxa_rcs" name="taxa_rcs" value="<?php echo htmlspecialchars($taxa_rcs); ?>"/></td>
+      <th><label for="telefone">Telefone:<span class="required">*</span></label></th>
+      <td><input type="text" class="form-control" id="telefone" name="telefone" value="<?php echo htmlspecialchars($telefone); ?>"/></td>
     </tr>
     <tr>
-      <th><label for="situacao">Situação<span class="required">*</span></label></th>
-      <td><input type="text" id="situacao" name="situacao" value="<?php echo htmlspecialchars($situacao); ?>"/></td>
+      <th><label for="celular">Celular:<span class="required">*</span></label></th>
+      <td><input type="text" class="form-control" id="celular" name="celular" value="<?php echo htmlspecialchars($celular); ?>"/></td>
+    </tr>
+    <tr>
+      <th><label for="email">Email:<span class="required">*</span></label></th>
+      <td><input type="text" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>"/></td>
+    </tr>
+    <tr>
+      <th><label for="endereco">Endereço:<span class="required">*</span></label></th>
+      <td><input type="text" class="form-control" id="endereco" name="endereco" value="<?php echo htmlspecialchars($endereco); ?>"/></td>
+    </tr>
+    <tr>
+      <th><label for="rg">RG:<span class="required">*</span></label></th>
+      <td><input type="text" class="form-control" id="rg" name="rg" value="<?php echo htmlspecialchars($rg); ?>"/></td>
+    </tr>
+    <tr>
+      <th><label for="cpf">CPF:<span class="cpf">*</span></label></th>
+      <td><input type="text" class="form-control" id="cpf" name="cpf" value="<?php echo htmlspecialchars($cpf); ?>"/></td>
+    </tr>
+    <tr>
+      <th><label for="taxa_rcs">RCS(%):<span class="required">*</span></label></th>
+      <td><input type="text" class="form-control" id="taxa_rcs" name="taxa_rcs" value="<?php echo htmlspecialchars($taxa_rcs); ?>"/></td>
+    </tr>
+    <tr>
+      <th><label for="situacao">Situação:<span class="required">*</span></label></th>
+      <td><input type="text" class="form-control" id="situacao" name="situacao" value="<?php echo htmlspecialchars($situacao); ?>"/></td>
     </tr>
   </table>
-  <input class="button button--primary button--topic-php" type="submit" value="Alterar" />
-  <input type="button" value="Cancelar" onclick="javascript: location.href='index.php';" />
+  <input class="btn btn-primary" type="submit" value="Alterar" />
+  <input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" />
   </form>
 </div>
 
