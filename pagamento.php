@@ -1,27 +1,47 @@
 <?php
 
+require 'inc/funcoes.php';
+
 $tituloPagina = "Pagamento";
 
-$afiliado_matricula = $salario = $adicional = $mes = $ano = '';
+$afiliado_matricula = $bruto = $mes = $ano = $unimed = $uniodonto = $desconto = $plano = $valor = $taxa_rcs = $rcs = $das = '';
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+  $afiliado_matricula = filter_input(INPUT_POST, 'Afiliado_matricula', FILTER_SANITIZE_NUMBER_INT);
+  $mes = filter_input(INPUT_POST, 'mes', FILTER_SANITIZE_STRING);
+  $ano = filter_input(INPUT_POST, 'ano', FILTER_SANITIZE_STRING);
+  $bruto = filter_input(INPUT_POST, 'bruto', FILTER_SANITIZE_NUMBER_INT);
+  $taxa_rcs = filter_input(INPUT_POST,'taxa_rcs', FILTER_SANITIZE_NUMBER_INT);
+  $unimed = filter_input(INPUT_POST, 'unimed', FILTER_SANITIZE_NUMBER_INT);
+  $uniodonto = filter_input(INPUT_POST, 'uniodonto', FILTER_SANITIZE_NUMBER_INT);
+  $das = filter_input(INPUT_POST,'das', FILTER_SANITIZE_NUMBER_INT);
+  $rcs = filter_input(INPUT_POST,'rcs', FILTER_SANITIZE_NUMBER_INT);
+
+
+
+ if(empty($afiliado_matricula)||empty($mes)||empty($ano)||empty($bruto)){
+    mesErro("Por favor insira todos os campos");
+  }else{
+    if(pagamento($afiliado_matricula, $taxa_rcs, $bruto, $unimed, $uniodonto, $rcs, $das, $mes, $ano)){
+      mesErro("Pagamento cadastrado");
+      }else{
+      mesErro("Não foi possível concluir");
+      echo $taxa_rcs . " taxa";
+    }
+  }
+ 
+}
 
 include("inc/header.php");
 ?>
 
-<div class="cad-arr">
+<div class="pagamento">
   <h2>Pagamento</h2>
   <form class="pagamento" method="post" action="pagamento.php">
     <table>
       <tr>
         <th><label for="Afiliado_matricula">Matricula<span class="required">*</span></label></th>
         <td><input type="text" id="Afiliado_matricula" name="Afiliado_matricula" value="<?php echo htmlspecialchars($afiliado_matricula); ?>"/></td>
-      </tr>
-      <tr>
-        <th><label for="salario">Salário Bruto<span class="required">*</span></label></th>
-        <td><input type="text" id="salario" name="salario" value="<?php echo htmlspecialchars($salario); ?>"/></td>
-      </tr>
-      <tr>
-        <th><label for="adicional">Adicional<span class="required">*</span></label></th>
-        <td><input type="text" id="adicional" name="adicional" value="<?php echo htmlspecialchars($adicional); ?>"/></td>
       </tr>
       <tr>
         <th><label for="mes">Mês<span class="required">*<span></label></th>
@@ -51,8 +71,63 @@ include("inc/header.php");
         </select></td>
       </tr>
     </table>
-    <input class="button button--primary button--topic-php" type="submit" value="Inserir" />
-    <input type="button" value="Cancelar" onclick="javascript: location.href='index.php';" />
+  <!--  <input class="button button--primary button--topic-php" type="submit" value="Avançar" />
+  </form>
+  <form class="pagamento2" method="post" action="pagamento.php">-->
+    <table>
+      <tr>
+        <th><label for="bruto">Salário Bruto<span class="required">*</span></label></th>
+        <td><input type="text" id="bruto" name="bruto" value="<?php echo htmlspecialchars($bruto); ?>"/></td>
+      </tr>
+      <tr>
+        <th><label for="unimed">Unimed<span class="required">*</span></label></th>
+        <td><input type="text" id="unimed" name="unimed" value="<?php echo htmlspecialchars($unimed); ?>"/></td>
+      </tr>
+      <tr>
+        <th><label for="uniodonto">Uniodonto<span class="required">*</span></label></th>
+        <td><input type="text" id="uniodonto" name="uniodonto" value="<?php echo htmlspecialchars($uniodonto); ?>"/></td>
+      </tr>
+    </table>
+    <h2>Dependentes</h2>
+    <tr>
+      <th><label for="dependente">Dependente<span class="required">*<span></label></th>
+      <td><select id="dependente" name="dependente">
+        <option value="">Selecione um</option>
+        <?php
+        foreach(get_dependente() as $dependente){
+          echo "<option value=" . $dependente['nome'] . " >" . $dependente['nome'] . "</option>";
+          /*if($dependente['nome'] == $dependente['nome']){
+            echo 'selected';
+          }*/
+        }
+        ?>
+      </select></td>
+    </tr>
+    <tr>
+      <th><label for="plano">Plano<span class="required">*<span></label></th>
+      <td><select id="plano" name="desconto">
+        <option value="">Selecione um</option>
+        <?php
+        foreach(get_convenio() as $plano){
+          echo "<option value=" . $plano['nome'] . " >" . $plano['nome'] . "</option>";
+        }
+        ?>
+      </select></td>
+    </tr>
+    <tr>
+      <th><label for="desconto">Desconto<span class="required">*<span></label></th>
+      <td><select id="desconto" name="desconto">
+        <option value="">Selecione um</option>
+        <option value="DAS" <?php if($desconto == 'DAS') echo 'selected'; ?>>DAS</option>
+        <option value="RCS" <?php if($desconto == 'RCS') echo 'selected'; ?>>RCS</option>
+      </select></td>
+    </tr>
+    <tr>
+      <th><label for="valor">Valor<span class="required">*</span></label></th>
+      <td><input type="text" id="valor" name="valor" value="<?php echo htmlspecialchars($valor); ?>"/></td>
+    </tr>
+    <br />
+    <input class="button button--primary button--topic-php" type="submit" value="Concluir" />
   </form>
 </div>
 
