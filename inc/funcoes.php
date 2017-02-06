@@ -186,9 +186,123 @@ function get_devedores() {
     include 'conexao.php';
 
       try {
-          return $db->query('SELECT nome, telefone, situacao FROM afiliado');
+          return $db->query('SELECT nome, celular, situacao FROM afiliado');
       } catch (Exception $e) {
           echo "Error!: " . $e->getMessage() . "<br />";
           return array();
       }
+}
+
+function get_dependente() {
+  include 'conexao.php';
+
+  try {
+      return $db->query('SELECT nome FROM dependente');
+  } catch (Exception $e) {
+      echo "Error!: " . $e->getMessage() . "<br />";
+      return array();
+  }
+}
+
+function get_convenio() {
+  include 'conexao.php';
+
+  try {
+      return $db->query('SELECT nome, mensalidade, desconto FROM convenio');
+  } catch (Exception $e) {
+      echo "Error!: " . $e->getMessage() . "<br />";
+      return array();
+  }
+}
+
+
+function pagamento($afiliado_matricula,$taxa_rcs, $bruto, $unimed, $uniodonto, $rcs, $das, $mes, $ano, $descontounimed, $descontouniodonto){
+  include 'conexao.php';
+
+  try {
+    $statement = $db->query("SELECT taxa_rcs FROM afiliado WHERE matricula = $afiliado_matricula");
+    $result = $statement->fetch();
+    $taxa_rcs = $result[0];
+  } catch (Exception $e) {
+      echo "Error!: " . $e->getMessage() . "<br />";
+      return array();
+  }
+
+  $das = $bruto * 0.1;
+  $salario = $bruto - $das;
+  $rcs = ($salario*$taxa_rcs)/100;
+  $salario = $salario - $rcs;
+
+
+  /*
+  if($rcs>($unimed+$uniodonto)){
+    $rcs = $rcs - $unimed-$uniodonto;
+    $salario = $salario + $rcs;
+    $devendo = 0;
+  }else{
+    $salario = $salario - $rcs;
+    $devendo = abs($rcs - $unimed - $uniodonto);
+    $rcs=0;
+  }
+  */
+
+  if($descontounimed == 'DAS'){
+      $das = $das - $unimed;
+  }elseif ($descontounimed == 'RCS') {
+      $rcs = $rcs - $unimed;
+  }
+
+  if($descontouniodonto == 'DAS'){
+      $das = $das - $uniodonto;
+  }elseif ($descontouniodonto == 'RCS') {
+      $rcs = $rcs - $uniodonto;
+  }
+
+  if($rcs>0){
+    $salario = $salario+$rcs;
+    $devendo = 0;
+  }else{
+    $devendo = abs($rcs);
+  }
+
+  if($das<0){
+    $devendo = $devendo + abs($das);
+  }
+  /*if($das>0){
+    try {
+      $statement = $db->query("INSERT INTO folhadepagamento(bruto, salario, das, rcs, taxa_rcs, devendo, mes, ano, Afiliado_matricula, unimed, uniodonto) VALUES($bruto, $salario, $das, $rcs, $taxa_rcs, $devendo, $mes, $ano, $afiliado_matricula, $unimed, $uniodonto)");
+      $result = $statement->fetchAll();
+    } catch (Exception $e) {
+        echo "Error!: " . $e->getMessage() . "<br />";
+        return array();
+    }
+  }
+*/
+
+
+  $query1 = "INSERT INTO folhadepagamento(bruto, salario, das, rcs, taxa_rcs, devendo, mes, ano, Afiliado_matricula, unimed, uniodonto) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+
+  if(10>5){
+    try {
+      $resultado = $db->prepare($query1);
+      $resultado->bindValue(1, $bruto, PDO::PARAM_INT);
+      $resultado->bindValue(2, $salario, PDO::PARAM_STR);
+      $resultado->bindValue(3, $das, PDO::PARAM_STR);
+      $resultado->bindValue(4, $rcs, PDO::PARAM_INT);
+      $resultado->bindValue(5, $taxa_rcs, PDO::PARAM_INT);
+      $resultado->bindValue(6, $devendo, PDO::PARAM_INT);
+      $resultado->bindValue(7, $mes, PDO::PARAM_INT);
+      $resultado->bindValue(8, $ano, PDO::PARAM_INT);
+      $resultado->bindValue(9, $afiliado_matricula, PDO::PARAM_INT);
+      $resultado->bindValue(10, $unimed, PDO::PARAM_INT);
+      $resultado->bindValue(11, $uniodonto, PDO::PARAM_INT);
+      $resultado->execute();
+    } catch (Exception $e) {
+      echo "Error!: " . $e->getMessage() . "<br />";
+      return false;
+    }
+  }
+
+
+  return "Bruto:" . $bruto . " Salario:" .$salario. " RCS:" . $rcs . " DAS:" . $das . " Devendo:" . $devendo . " Desc Unimed:" . $descontounimed . " Desc Uniodonto:" . $descontouniodonto;
 }

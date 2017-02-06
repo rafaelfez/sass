@@ -110,8 +110,8 @@ include("inc/header.php");
       <td><input type="text" class="form-control" id="situacao" name="situacao" value="<?php echo htmlspecialchars($situacao); ?>"/></td>
     </tr>
   </table>
-  <input class="btn btn-primary" type="submit" value="Alterar" />
-  <input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" />
+  <abrr title="Alterar Filiado"><input class="btn btn-primary" type="submit" value="Alterar"/></abrr>
+  <abrr title="Cancelar alteração"><input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" /></abrr>
   </form>
 </div>
 

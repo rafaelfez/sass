@@ -15,24 +15,29 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $mensalidade = filter_input(INPUT_POST, 'mensalidade', FILTER_SANITIZE_NUMBER_INT);
 
   if(empty($cnpj) || empty($nome)|| empty($categoria) ||empty($empresa) ||empty($mensalidade) ||empty($desconto)){
-    mesErro("Por favor insira todos os campos");
+    $message = '<div class="alert alert-warning alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Atenção! </strong> Por favor insira todos os campos</div>';
   }else{
     if(add_con($cnpj,$nome,$categoria, $empresa, $mensalidade, $desconto, $DAS_Afiliado_Matricula, $RCS_Afiliado_Matricula)){
-      mesErro("Convênio Cadastrado");
+      $message = '<div class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Cadastro efetuado com sucesso!</div>';
     }else{
-      mesErro("Não foi possível cadastrar");
+      $message = '<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Erro ao efetuar cadastro</div>';
+    }
     }
   }
-}
 
 
 
 
 include("inc/header.php");
 ?>
-
 <div class="cad-arr">
+<?php
+        if(isset($message)){
+          echo $message;
+        }
+      ?>
   <h2 class="bg-info">Cadastro de Convênio</h2>
+  
   <form class="form-group" method="post" action="cad_con.php">
     <table>
         <tr>
@@ -64,8 +69,8 @@ include("inc/header.php");
           <td><input type="text" class="form-control" id="mensalidade" name="mensalidade" value="<?php echo htmlspecialchars($mensalidade); ?>"/></td>
         </tr>
       </table>
-      <input class="btn btn-primary" type="submit" value="Cadastrar" />
-      <input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" />
+      <abbr title="Cadastrar Convênio"><input class="btn btn-primary" type="submit" value="Cadastrar"/></abbr>
+      <abbr title="Cancelar cadastro"><input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" /></abbr>
     </form>
   </div>
 

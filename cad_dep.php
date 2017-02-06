@@ -3,7 +3,7 @@
 require 'inc/funcoes.php';
 
 $tituloPagina = "Dependente";
-$afiliado_matricula = $nome = $telefone = $nascimento = $endereco = $rg = $cpf = $celular = $email = $sexo = $parentesco = '';
+$afiliado_matricula = $nome = $telefone = $nascimento = $endereco = $rg = $cpf = $celular = $email = $sexo = $parentesco = $message = '';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $afiliado_matricula = filter_input(INPUT_POST, 'afiliado_matricula', FILTER_SANITIZE_NUMBER_INT);
@@ -20,12 +20,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
   if(empty($afiliado_matricula) || empty($nome) || empty($telefone) || empty($nascimento) || empty($endereco) || empty($rg) || empty($cpf) || empty($celular) || empty($sexo) || empty($email) || empty($parentesco)){
-    mesErro("Por favor insira todos os campos");
+    $message = '<div class="alert alert-warning alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Atenção! </strong> Por favor insira todos os campos</div>';
   }else{
     if(add_dep($afiliado_matricula,$nome,$telefone,$nascimento,$endereco,$rg,$cpf,$celular,$email,$sexo,$parentesco)){
-      mesErro("Dependente Cadastrado");
+      $message = '<div class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Cadastro efetuado com sucesso!</div>';
     }else{
-      mesErro("Não foi possível cadastrar");
+      $message = '<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Erro ao efetuar cadastro</div>';
     }
   }
 }
@@ -37,6 +37,11 @@ include("inc/header.php");
 ?>
 
 <div class="cad-arr">
+<?php
+        if(isset($message)){
+          echo $message;
+        }
+      ?>
   <h2 class="bg-info">Cadastro de Dependente</h2>
   <form class="form-group" method="post" action="cad_dep.php">
     <table>
@@ -89,8 +94,8 @@ include("inc/header.php");
           <td><input type="text" class="form-control" id="parentesco" name="parentesco" value="<?php echo htmlspecialchars($parentesco); ?>"/></td>
         </tr>
     </table>
-    <input class="btn btn-primary" type="submit" value="Cadastrar" />
-    <input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" />
+   <abbr title="Cadastrar Dependente"><input class="btn btn-primary" type="submit" value="Cadastrar"/></abbr>
+      <abbr title="Cancelar cadastro"><input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" /></abbr>
   </form>
 </div>
 

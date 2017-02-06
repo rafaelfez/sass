@@ -63,8 +63,8 @@ include("inc/header.php");
           <td><input type="text" class="form-control" id="mensalidade" name="mensalidade" value="<?php echo htmlspecialchars($mensalidade); ?>"/></td>
         </tr>
       </table>
-      <input class="btn btn-primary" type="submit" value="Alterar" />
-  <input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" />
+      <abrr title="Alterar Convênio"><input class="btn btn-primary" type="submit" value="Alterar"/></abrr>
+  <abrr title="Cancelar alteração"><input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" /></abrr>
   </form>
   </div>
 

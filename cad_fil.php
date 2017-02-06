@@ -3,7 +3,7 @@
 require 'inc/funcoes.php';
 
 $tituloPagina = "Cadastro";
-$matricula = $nome = $telefone = $nascimento = $endereco = $rg = $cpf = $celular = $sexo = $email = $situacao = $taxa_rcs = '';
+$matricula = $nome = $telefone = $nascimento = $endereco = $rg = $cpf = $celular = $sexo = $email = $situacao = $taxa_rcs = $message = "";
 
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -22,12 +22,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
   if(empty($matricula) || empty($nome) || empty($telefone) || empty($nascimento) || empty($endereco) || empty($rg) || empty($cpf) || empty($celular) || empty($sexo) || empty($email) || empty($situacao) || empty($taxa_rcs)){
-    mesErro("Por favor insira todos os campos");
+    $message = '<div class="alert alert-warning alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Atenção! </strong> Por favor insira todos os campos</div>';
   }else{
     if(add_arr($matricula,$nome,$telefone,$nascimento,$endereco,$rg,$cpf,$celular,$sexo,$email,$situacao,$taxa_rcs)){
-      mesErro("Afiliado Cadastrado");
+      $message = '<div class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Cadastro efetuado com sucesso!</div>';
     }else{
-      mesErro("Não foi possível cadastrar");
+      $message = '<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Erro ao efetuar cadastro</div>';
     }
   }
 }
@@ -37,10 +37,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 include("inc/header.php");
 ?>
-
 <div class="cad-arr">
+<?php
+        if(isset($message)){
+          echo $message;
+        }
+      ?>
   <h2 class="bg-info">Cadastro de Filiado</h2>
   <form class="form-group" method="post" action="cad_fil.php">
+  
     <table>
         <tr>
           <th><label for="matricula">Matrícula:<span class="required">*</span></label></th>
@@ -96,8 +101,8 @@ include("inc/header.php");
         </tr>
         
       </table>
-      <input class="btn btn-primary" type="submit" value="Cadastrar" />
-      <input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" />
+      <abbr title="Cadastrar Filiado"><input class="btn btn-primary" type="submit" value="Cadastrar"/></abbr>
+      <abbr title="Cancelar cadastro"><input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" /></abbr>
     </form>
   </div>
 

@@ -11,7 +11,7 @@ try{
 
   if(isset($_POST["login"])){
     if(empty($_POST["username"]) || empty($_POST["password"])){
-      $message = '<label class="bg-warning" ><img src="img/alerta.png">O prenchimento de todos os campos são obrigatórios.</label>';
+      $message = '<div class="alert alert-warning alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>O prenchimento de todos os campos são obrigatórios.</div>';
     }else{
       $query = "SELECT * FROM usuario WHERE login = :username AND senha = :password";
       $statement = $db->prepare($query);
@@ -26,7 +26,7 @@ try{
         $_SESSION["username"] = $_POST["username"];
         header("location:index.php");
       }else{
-        $message = '<label class="bg-warning"><img src="img/alerta.png">Login ou senha estão incorretos.</label>';
+        $message = '<div class="alert alert-warning alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Login ou senha inválidos.</div>';
       }
     }
   }
@@ -60,13 +60,13 @@ try{
   </div>
 </nav>
 
-  <div class="container">
+  <div class="cad-arr">
   
-    <abbr title="Sindicato dos Arrumadores de São Sebastião"><img src="img/saas-logo.png" style="width:600px; height:300px;"></abbr>
+    <abbr title="Sindicato dos Arrumadores de São Sebastião"><img src="img/saas-logo.png" align="center" style="width:600px; height:300px;"></abbr>
     <form class="form-login" method="post" action="login.php">
       <?php
         if(isset($message)){
-          echo '<label class="text-danger">'.$message.'</label>';
+          echo $message;
         }
       ?>
       <table>
