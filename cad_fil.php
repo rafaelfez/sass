@@ -66,15 +66,17 @@ include("inc/header.php");
         </tr>
         <tr>
           <th><label for="sexo">Sexo:<span class="required">*<span></label></th>
-          <td><select id="sexo" class="form-control" name="sexo">
-            <option value="">Selecione:</option>
+          <td><select id="sexo" class="form-control" name="sexo" required>
+            <option  required value="">Selecione:</option>
             <option value="Masculino" <?php if($sexo == 'Masculino') echo 'selected'; ?>>Masculino</option>
             <option value="Feminino" <?php if($sexo == 'Feminino') echo 'selected'; ?>>Feminino</option>
           </select> <div class="help-block with-errors"></div></td>
         </tr>
         <tr>
           <th><label for="telefone">Telefone:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="telefone" name="telefone" value="<?php echo htmlspecialchars($telefone); ?>"/></td>
+          <td><input type="text" required placeholder="(xx)xxxxx-xxxxx" class="form-control" id="telefone" name="telefone" value="<?php echo htmlspecialchars($telefone); ?>"/>
+          <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="celular">Celular:<span class="required">*</span></label></th>
@@ -114,3 +116,4 @@ include("inc/header.php");
 <?php
 include("inc/footer.php");
 ?>
+
