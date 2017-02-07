@@ -43,20 +43,26 @@ include("inc/header.php");
           echo $message;
         }
       ?>
-  <h2 class="bg-info">Cadastro de Filiado</h2>
-  <form class="form-group" method="post" action="cad_fil.php">
+   <h2 class="bg-info">Cadastro de Filiado</h2>
+  <form class="form-group" data-toggle="validator" method="post" action="cad_fil.php">
   
     <table>
         <tr>
           <th><label for="matricula">Matrícula:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="matricula" name="matricula" value="<?php echo htmlspecialchars($matricula); ?>"/></td>
+          <td><input type="text" required placeholder="###" class="form-control" id="matricula" name="matricula"  data-error="Por favor, informe um número de matrícula correto." required value="<?php echo htmlspecialchars($matricula); ?>"/> <div class="help-block with-errors"></div>
+
+       </td>
         </tr>
         <tr>
           <th><label for="nome">Nome:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="nome" name="nome" value="<?php echo htmlspecialchars($nome); ?>"/></td>
+          <td><input type="text" required placeholder="###" class="form-control" id="nome" name="nome" data-error="Por favor, informe um nome correto." value="<?php echo htmlspecialchars($nome); ?>"/> <div class="help-block with-errors"></div>
+
+          </td>
         </tr>
         <th><label for="nascimento">Data de Nascimento:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="nascimento" name="nascimento" value="<?php echo htmlspecialchars($nascimento); ?>"/></td>
+          <td><input type="text" required placeholder="DD/MM/AAAA" class="form-control" id="nascimento" name="nascimento" value="<?php echo htmlspecialchars($nascimento); ?>"/>
+          <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="sexo">Sexo:<span class="required">*<span></label></th>
@@ -64,9 +70,8 @@ include("inc/header.php");
             <option value="">Selecione:</option>
             <option value="Masculino" <?php if($sexo == 'Masculino') echo 'selected'; ?>>Masculino</option>
             <option value="Feminino" <?php if($sexo == 'Feminino') echo 'selected'; ?>>Feminino</option>
-          </select></td>
+          </select> <div class="help-block with-errors"></div></td>
         </tr>
-        <tr>
         <tr>
           <th><label for="telefone">Telefone:<span class="required">*</span></label></th>
           <td><input type="text" class="form-control" id="telefone" name="telefone" value="<?php echo htmlspecialchars($telefone); ?>"/></td>
