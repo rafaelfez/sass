@@ -49,13 +49,13 @@ include("inc/header.php");
     <table>
         <tr>
           <th><label for="matricula">Matrícula:<span class="required">*</span></label></th>
-          <td><input type="text" required placeholder="###" class="form-control" id="matricula" name="matricula"  data-error="Por favor, informe um número de matrícula correto." required value="<?php echo htmlspecialchars($matricula); ?>"/> <div class="help-block with-errors"></div>
-
+          <td><input type="text" required placeholder="" class="form-control" id="matricula" name="matricula"  data-error="Por favor, informe um número de matrícula correto." required value="<?php echo htmlspecialchars($matricula); ?>"/> 
+          <div class="help-block with-errors"></div>
        </td>
         </tr>
         <tr>
           <th><label for="nome">Nome:<span class="required">*</span></label></th>
-          <td><input type="text" required placeholder="###" class="form-control" id="nome" name="nome" data-error="Por favor, informe um nome correto." value="<?php echo htmlspecialchars($nome); ?>"/> <div class="help-block with-errors"></div>
+          <td><input type="text" required placeholder="" class="form-control" id="nome" name="nome" data-error="Por favor, informe um nome correto." value="<?php echo htmlspecialchars($nome); ?>"/> <div class="help-block with-errors"></div>
 
           </td>
         </tr>
@@ -92,7 +92,7 @@ include("inc/header.php");
         </tr>
         <tr>
           <th><label for="endereco">Endereço:<span class="required">*</span></label></th>
-          <td><input type="text" required placeholder="Rua A, número 200, Centro" class="form-control" id="endereco" name="endereco" value="<?php echo htmlspecialchars($endereco); ?>"/>
+          <td><input type="text" required placeholder="Rua A, número 20, Centro" class="form-control" id="endereco" name="endereco" value="<?php echo htmlspecialchars($endereco); ?>"/>
             <div class="help-block with-errors"></div>
           </td>
         </tr>
