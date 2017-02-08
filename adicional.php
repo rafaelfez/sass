@@ -9,20 +9,23 @@ $afiliado_matricula = $mes = $ano = $adicional = '';
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $afiliado_matricula = filter_input(INPUT_POST, 'Afiliado_matricula', FILTER_SANITIZE_NUMBER_INT);
   $mes = filter_input(INPUT_POST, 'mes', FILTER_SANITIZE_STRING);
-  $ano = filter_input(INPUT_POST, 'ano', FILTER_SANITIZE_STRING);
-  $adicional = filter_input(INPUT_POST, 'adicional', FILTER_SANITIZE_NUMBER_INT);
+  $ano = filter_input(INPUT_POST, 'ano', FILTER_SANITIZE_NUMBER_INT);
+  $adicional = filter_input(INPUT_POST, 'adicional', FILTER_SANITIZE_STRING);
 
 
 
- if(empty($afiliado_matricula)||empty($mes)||empty($ano)||empty($valor)){
+if(empty($afiliado_matricula)||empty($mes)||empty($ano)||empty($adicional)){
     mesErro("Por favor insira todos os campos");
   }else{
-    if(pagamento($afiliado_matricula, $mes, $ano, $valor)){
+    if(adicional($afiliado_matricula, $mes, $ano, $adicional)){
       mesErro("Adicional cadastrado");
       }else{
       mesErro("Não foi possível concluir");
     }
   }
+
+
+  /*echo adicional($afiliado_matricula, $mes, $ano, $adicional);*/
 
 }
 
