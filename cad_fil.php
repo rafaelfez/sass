@@ -49,13 +49,13 @@ include("inc/header.php");
     <table>
         <tr>
           <th><label for="matricula">Matrícula:<span class="required">*</span></label></th>
-          <td><input type="text" required placeholder="###" class="form-control" id="matricula" name="matricula"  data-error="Por favor, informe um número de matrícula correto." required value="<?php echo htmlspecialchars($matricula); ?>"/> <div class="help-block with-errors"></div>
-
+          <td><input type="text" required placeholder="" class="form-control" id="matricula" name="matricula"  data-error="Por favor, informe um número de matrícula correto." required value="<?php echo htmlspecialchars($matricula); ?>"/> 
+          <div class="help-block with-errors"></div>
        </td>
         </tr>
         <tr>
           <th><label for="nome">Nome:<span class="required">*</span></label></th>
-          <td><input type="text" required placeholder="###" class="form-control" id="nome" name="nome" data-error="Por favor, informe um nome correto." value="<?php echo htmlspecialchars($nome); ?>"/> <div class="help-block with-errors"></div>
+          <td><input type="text" required placeholder="" class="form-control" id="nome" name="nome" data-error="Por favor, informe um nome correto." value="<?php echo htmlspecialchars($nome); ?>"/> <div class="help-block with-errors"></div>
 
           </td>
         </tr>
@@ -66,43 +66,59 @@ include("inc/header.php");
         </tr>
         <tr>
           <th><label for="sexo">Sexo:<span class="required">*<span></label></th>
-          <td><select id="sexo" class="form-control" name="sexo">
-            <option value="">Selecione:</option>
+          <td><select id="sexo" class="form-control" name="sexo" required>
+            <option  required value="">Selecione:</option>
             <option value="Masculino" <?php if($sexo == 'Masculino') echo 'selected'; ?>>Masculino</option>
             <option value="Feminino" <?php if($sexo == 'Feminino') echo 'selected'; ?>>Feminino</option>
           </select> <div class="help-block with-errors"></div></td>
         </tr>
         <tr>
           <th><label for="telefone">Telefone:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="telefone" name="telefone" value="<?php echo htmlspecialchars($telefone); ?>"/></td>
+          <td><input type="text" required placeholder="(xx)xxxx-xxxx" class="form-control" id="telefone" name="telefone" value="<?php echo htmlspecialchars($telefone); ?>"/>
+          <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="celular">Celular:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="celular" name="celular" value="<?php echo htmlspecialchars($celular); ?>"/></td>
+          <td><input type="text" required placeholder="(xx)xxxxx-xxxx" class="form-control" id="celular" name="celular" value="<?php echo htmlspecialchars($celular); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="email">Email:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>"/></td>
+          <td><input type="text" required placeholder="nome@mail.com" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="endereco">Endereço:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="endereco" name="endereco" value="<?php echo htmlspecialchars($endereco); ?>"/></td>
+          <td><input type="text" required placeholder="Rua A, número 20, Centro" class="form-control" id="endereco" name="endereco" value="<?php echo htmlspecialchars($endereco); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="rg">RG:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="rg" name="rg" value="<?php echo htmlspecialchars($rg); ?>"/></td>
+          <td><input type="text" required placeholder="123456789-0" class="form-control" id="rg" name="rg" value="<?php echo htmlspecialchars($rg); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="cpf">CPF:<span class="cpf">*</span></label></th>
-          <td><input type="text" class="form-control" id="cpf" name="cpf" value="<?php echo htmlspecialchars($cpf); ?>"/></td>
+          <td><input type="text" required placeholder="123456789-0" class="form-control" id="cpf" name="cpf" value="<?php echo htmlspecialchars($cpf); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="situacao">Situação:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="situacao" name="situacao" value="<?php echo htmlspecialchars($situacao); ?>"/></td>
+          <td><input type="text" required placeholder="Digite a situação..." class="form-control" id="situacao" name="situacao" value="<?php echo htmlspecialchars($situacao); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="taxa_rcs">RCS(%):<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="taxa_rcs" name="taxa_rcs" value="<?php echo htmlspecialchars($taxa_rcs); ?>"/></td>
+          <td><input type="text" required placeholder="Digite a % (somente número)" class="form-control" id="taxa_rcs" name="taxa_rcs" value="<?php echo htmlspecialchars($taxa_rcs); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         
       </table>

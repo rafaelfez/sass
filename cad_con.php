@@ -38,42 +38,54 @@ include("inc/header.php");
       ?>
   <h2 class="bg-info">Cadastro de Convênio</h2>
   
-  <form class="form-group" method="post" action="cad_con.php">
+  <form class="form-group" data-toggle="validator" method="post" action="cad_con.php">
     <table>
         <tr>
           <th><label for="cnpj">CNPJ:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="cnpj" name="cnpj" value="<?php echo htmlspecialchars($cnpj); ?>"/></td>
+          <td><input type="text" required placeholder="" class="form-control" id="cnpj" name="cnpj" value="<?php echo htmlspecialchars($cnpj); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="nome">Nome:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="nome" name="nome" value="<?php echo htmlspecialchars($nome); ?>"/></td>
+          <td><input type="text" required placeholder="" class="form-control" id="nome" name="nome" value="<?php echo htmlspecialchars($nome); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="empresa">Empresa:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="empresa" name="empresa" value="<?php echo htmlspecialchars($empresa); ?>"/></td>
+          <td><input type="text" required placeholder="" class="form-control" id="empresa" name="empresa" value="<?php echo htmlspecialchars($empresa); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="categoria">Categoria:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="categoria" name="categoria" value="<?php echo htmlspecialchars($categoria); ?>"/></td>
+          <td><input type="text" required placeholder="" class="form-control" id="categoria" name="categoria" value="<?php echo htmlspecialchars($categoria); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="desconto" >Desconto:<span class="required">*<span></label></th>
-          <td><select class="form-control" id="desconto" name="desconto">
+          <td><select class="form-control" required id="desconto" name="desconto">
             <option value="">Selecione:</option>
             <option value="DAS" <?php if($desconto == 'DAS') echo 'selected'; ?>>DAS</option>
             <option value="RCS" <?php if($desconto == 'RCS') echo 'selected'; ?>>RCS</option>
-          </select></td>
+          </select>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="mensalidade">Mensalidade:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="mensalidade" name="mensalidade" value="<?php echo htmlspecialchars($mensalidade); ?>"/></td>
+          <td><input type="text" class="form-control" id="mensalidade" name="mensalidade" value="<?php echo htmlspecialchars($mensalidade); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
       </table>
       <abbr title="Cadastrar Convênio"><input class="btn btn-primary" type="submit" value="Cadastrar"/></abbr>
       <abbr title="Cancelar cadastro"><input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" /></abbr>
     </form>
   </div>
-
 <?php
 include("inc/footer.php");
 ?>
+
