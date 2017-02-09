@@ -30,7 +30,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       mesErro("Não foi possível concluir");
     }
   }
- 
+
 }
 
 include("inc/header.php");
@@ -74,7 +74,7 @@ include("inc/header.php");
   <!--  <input class="button button--primary button--topic-php" type="submit" value="Avançar" />
   </form>
   <form class="pagamento2" method="post" action="pagamento.php">-->
-    
+
       <tr>
         <th><label for="bruto">Salário Bruto:<span class="required">*</span></label></th>
         <td><input type="text" class="form-control" id="bruto" name="bruto" value="<?php echo htmlspecialchars($bruto); ?>"/></td>
@@ -147,6 +147,8 @@ include("inc/header.php");
     <abrr title="Concluir registro de pagamento"><input class="btn btn-primary" type="submit" value="Concluir" /></abrr>
     <abrr title="Cancelar pagamento"><input class="btn btn-danger" type="button" value="Cancelar"  onclick="javascript: location.href='index.php';"/></abrr>
   </form>
+
+  <a href="adicional.php">Adicional</a>
 </div>
 
 

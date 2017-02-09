@@ -263,10 +263,12 @@ function pagamento($afiliado_matricula,$taxa_rcs, $bruto, $unimed, $uniodonto, $
     $devendo = 0;
   }else{
     $devendo = abs($rcs);
+    $rcs = 0;
   }
 
   if($das<0){
     $devendo = $devendo + abs($das);
+    $das=0;
   }
   /*if($das>0){
     try {
@@ -282,7 +284,7 @@ function pagamento($afiliado_matricula,$taxa_rcs, $bruto, $unimed, $uniodonto, $
 
   $query1 = "INSERT INTO folhadepagamento(bruto, salario, das, rcs, taxa_rcs, devendo, mes, ano, Afiliado_matricula, unimed, uniodonto) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
-  if(10>5){
+  if($bruto>=0){
     try {
       $resultado = $db->prepare($query1);
       $resultado->bindValue(1, $bruto, PDO::PARAM_INT);
@@ -291,7 +293,7 @@ function pagamento($afiliado_matricula,$taxa_rcs, $bruto, $unimed, $uniodonto, $
       $resultado->bindValue(4, $rcs, PDO::PARAM_INT);
       $resultado->bindValue(5, $taxa_rcs, PDO::PARAM_INT);
       $resultado->bindValue(6, $devendo, PDO::PARAM_INT);
-      $resultado->bindValue(7, $mes, PDO::PARAM_INT);
+      $resultado->bindValue(7, $mes, PDO::PARAM_STR);
       $resultado->bindValue(8, $ano, PDO::PARAM_INT);
       $resultado->bindValue(9, $afiliado_matricula, PDO::PARAM_INT);
       $resultado->bindValue(10, $unimed, PDO::PARAM_INT);
@@ -305,4 +307,36 @@ function pagamento($afiliado_matricula,$taxa_rcs, $bruto, $unimed, $uniodonto, $
 
 
   return "Bruto:" . $bruto . " Salario:" .$salario. " RCS:" . $rcs . " DAS:" . $das . " Devendo:" . $devendo . " Desc Unimed:" . $descontounimed . " Desc Uniodonto:" . $descontouniodonto;
+}
+
+function adicional($afiliado_matricula, $mes, $ano, $adicional){
+
+  include 'conexao.php';
+
+  try {
+    $statement = $db->query("SELECT devendo FROM folhadepagamento WHERE Afiliado_matricula = $afiliado_matricula");
+    $result = $statement->fetch();
+    $devendo = $result[0];
+  } catch (Exception $e) {
+      echo "Error!: " . $e->getMessage() . "<br />";
+      return array();
+  }
+
+  if($adicional==$devendo){
+    $query = "UPDATE folhadepagamento SET adicional=?, devendo=0 WHERE Afiliado_matricula=? AND ano=? AND mes=?";
+    try {
+        $resultado = $db->prepare($query);
+        $resultado->bindValue(1, $adicional, PDO::PARAM_INT);
+        $resultado->bindValue(2, $afiliado_matricula, PDO::PARAM_INT);
+        $resultado->bindValue(3, $ano, PDO::PARAM_INT);
+        $resultado->bindValue(4, $mes, PDO::PARAM_STR);;
+        $resultado->execute();
+      } catch (Exception $e) {
+        echo "Error!: " . $e->getMessage() . "<br />";
+        return false;
+      }
+    }else{
+      return false;
+    }
+    return "adicional:" . $adicional . " devendo:" . $devendo;
 }
