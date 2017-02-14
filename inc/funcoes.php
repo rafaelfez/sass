@@ -340,3 +340,28 @@ function adicional($afiliado_matricula, $mes, $ano, $adicional){
     }
     return "adicional:" . $adicional . " devendo:" . $devendo;
 }
+
+function get_pagamentos(){
+  include 'conexao.php';
+
+  try {
+    return $db->query("SELECT idPagamento, Afiliado_matricula, salario, mes, ano, das FROM folhadepagamento");
+  } catch (Exception $e) {
+    echo "Error!: " . $e->getMessage() . "<br />";
+    return false;
+  }
+}
+
+function get_das(){
+  include 'conexao.php';
+
+  try {
+    $statement = $db->query("SELECT SUM(das) from folhadepagamento");
+    $result = $statement->fetch();
+    $das = $result[0];
+  } catch (Exception $e) {
+    echo "Error!: " . $e->getMessage() . "<br />";
+    return false;
+  }
+  return $das;
+}
