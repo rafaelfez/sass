@@ -35,5 +35,10 @@ include("inc/header.php");
     <abrr title="Consultar Filiado"><input class="btn btn-primary" type="submit" value="Consultar"/></abrr>
     <abrr title="Cancelar Consulta"><input class="btn btn-danger" type="button" value="Cancelar"  onclick="javascript: location.href='index.php';"/></abrr>
   </form>
+  <br />
+  <br />
   <a href="das.php">DAS</a>
+  <br />
+  <br />
+  <a href="historico.php">Histórico</a>
 </div>

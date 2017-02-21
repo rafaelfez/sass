@@ -377,7 +377,11 @@ function get_filiado($matricula){
 function lista_filiado($matricula){
   include 'conexao.php';
 
-  $sql = 'SELECT nome, matricula, celular, taxa_rcs FROM afiliado WHERE matricula = ?';
+  if($matricula==''){
+    $sql = 'SELECT nome, matricula, celular, taxa_rcs FROM afiliado';
+  }else{
+    $sql = 'SELECT nome, matricula, celular, taxa_rcs FROM afiliado WHERE matricula = ?';
+  }
 
   try {
       $results = $db->prepare($sql);
@@ -410,7 +414,11 @@ function get_dependente($cpf) {
 function lista_dependente($matricula){
   include 'conexao.php';
 
-  $sql = 'SELECT cpf, nome, parentesco FROM dependente WHERE Afiliado_matricula = ?';
+  if($matricula==''){
+    $sql = 'SELECT cpf, Afiliado_matricula, nome, parentesco FROM dependente';
+  }else{
+    $sql = 'SELECT cpf, Afiliado_matricula, nome, parentesco FROM dependente WHERE Afiliado_matricula = ?';
+  }
 
   try {
       $results = $db->prepare($sql);
@@ -443,7 +451,11 @@ function get_pagamentos($id){
 function listaPagamentos($matricula){
   include 'conexao.php';
 
+  if($matricula==''){
+    $sql = 'SELECT Afiliado_matricula, bruto, salario, mes, ano, unimed, uniodonto, adicional, das, rcs, idPagamento FROM folhadepagamento';
+  }else{
   $sql = 'SELECT Afiliado_matricula, bruto, salario, mes, ano, unimed, uniodonto, adicional, das, rcs, idPagamento FROM folhadepagamento WHERE Afiliado_matricula = ?';
+  }
 
   try {
       $results = $db->prepare($sql);
