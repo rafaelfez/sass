@@ -5,6 +5,10 @@ require 'inc/funcoes.php';
 $tituloPagina = "Alteração";
 $afiliado_matricula = $nome = $telefone = $nascimento = $endereco = $rg = $cpf = $celular = $email = $sexo = $parentesco = '';
 
+if (isset($_GET['cpf'])) {
+    list($afiliado_matricula, $nome, $telefone, $nascimento, $endereco, $rg, $cpf, $celular, $sexo, $parentesco, $email) = get_dependente(filter_input(INPUT_GET, 'cpf', FILTER_SANITIZE_NUMBER_INT));
+}
+
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $afiliado_matricula = filter_input(INPUT_POST, 'afiliado_matricula', FILTER_SANITIZE_NUMBER_INT);
   $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);

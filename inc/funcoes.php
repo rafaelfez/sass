@@ -193,16 +193,7 @@ function get_devedores() {
       }
 }
 
-function get_dependente() {
-  include 'conexao.php';
 
-  try {
-      return $db->query('SELECT nome FROM dependente');
-  } catch (Exception $e) {
-      echo "Error!: " . $e->getMessage() . "<br />";
-      return array();
-  }
-}
 
 function get_convenio() {
   include 'conexao.php';
@@ -228,10 +219,10 @@ function pagamento($afiliado_matricula,$taxa_rcs, $bruto, $unimed, $uniodonto, $
       return array();
   }
 
-  $das = $bruto * 0.1;
-  $salario = $bruto - $das;
-  $rcs = ($salario*$taxa_rcs)/100;
-  $salario = $salario - $rcs;
+  $rcs = ($bruto*$taxa_rcs)/100;
+  $salario = $bruto - $rcs;
+  $das = $salario * 0.1;
+  $salario = $salario - $das;
 
 
   /*
@@ -341,16 +332,6 @@ function adicional($afiliado_matricula, $mes, $ano, $adicional){
     return "adicional:" . $adicional . " devendo:" . $devendo;
 }
 
-function get_pagamentos(){
-  include 'conexao.php';
-
-  try {
-    return $db->query("SELECT idPagamento, Afiliado_matricula, salario, mes, ano, das FROM folhadepagamento");
-  } catch (Exception $e) {
-    echo "Error!: " . $e->getMessage() . "<br />";
-    return false;
-  }
-}
 
 function get_das(){
   include 'conexao.php';
@@ -364,4 +345,140 @@ function get_das(){
     return false;
   }
   return $das;
+}
+
+function get_pagamentos_das(){
+  include 'conexao.php';
+
+  try {
+    return $db->query("SELECT idPagamento, Afiliado_matricula, salario, mes, ano, das FROM folhadepagamento");
+  } catch (Exception $e) {
+    echo "Error!: " . $e->getMessage() . "<br />";
+    return false;
+  }
+}
+
+function get_filiado($matricula){
+    include 'conexao.php';
+
+    $sql = 'SELECT * FROM afiliado WHERE matricula = ?';
+
+    try {
+        $results = $db->prepare($sql);
+        $results->bindValue(1, $matricula, PDO::PARAM_INT);
+        $results->execute();
+    } catch (Exception $e) {
+        echo "Error!: " . $e->getMessage() . "<br />";
+        return false;
+    }
+    return $results->fetch();
+}
+
+function lista_filiado($matricula){
+  include 'conexao.php';
+
+  $sql = 'SELECT nome, matricula, celular, taxa_rcs FROM afiliado WHERE matricula = ?';
+
+  try {
+      $results = $db->prepare($sql);
+      $results->bindValue(1, $matricula, PDO::PARAM_INT);
+      $results->execute();
+  } catch (Exception $e) {
+      echo "Error!: " . $e->getMessage() . "<br />";
+      return false;
+  }
+  return $results->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+function get_dependente($cpf) {
+  include 'conexao.php';
+
+  $sql = 'SELECT * FROM dependente WHERE cpf = ?';
+
+  try {
+      $results = $db->prepare($sql);
+      $results->bindValue(1, $cpf, PDO::PARAM_INT);
+      $results->execute();
+  } catch (Exception $e) {
+      echo "Error!: " . $e->getMessage() . "<br />";
+      return false;
+  }
+  return $results->fetch();
+}
+
+function lista_dependente($matricula){
+  include 'conexao.php';
+
+  $sql = 'SELECT cpf, nome, parentesco FROM dependente WHERE Afiliado_matricula = ?';
+
+  try {
+      $results = $db->prepare($sql);
+      $results->bindValue(1, $matricula, PDO::PARAM_INT);
+      $results->execute();
+  } catch (Exception $e) {
+      echo "Error!: " . $e->getMessage() . "<br />";
+      return false;
+  }
+  return $results->fetchAll(PDO::FETCH_ASSOC);
+
+}
+
+function get_pagamentos($id){
+  include 'conexao.php';
+
+  $sql = 'SELECT Afiliado_matricula, bruto, salario, mes, ano, unimed, uniodonto, adicional, das, rcs, idPagamento, devendo FROM folhadepagamento WHERE idPagamento = ?';
+
+  try {
+      $results = $db->prepare($sql);
+      $results->bindValue(1, $id, PDO::PARAM_INT);
+      $results->execute();
+  } catch (Exception $e) {
+      echo "Error!: " . $e->getMessage() . "<br />";
+      return false;
+  }
+  return $results->fetch();
+}
+
+function listaPagamentos($matricula){
+  include 'conexao.php';
+
+  $sql = 'SELECT Afiliado_matricula, bruto, salario, mes, ano, unimed, uniodonto, adicional, das, rcs, idPagamento FROM folhadepagamento WHERE Afiliado_matricula = ?';
+
+  try {
+      $results = $db->prepare($sql);
+      $results->bindValue(1, $matricula, PDO::PARAM_INT);
+      $results->execute();
+  } catch (Exception $e) {
+      echo "Error!: " . $e->getMessage() . "<br />";
+      return false;
+  }
+  return $results->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+function alterarPagamento($bruto, $salario, $mes, $ano, $unimed, $uniodonto, $adicional, $das, $rcs, $id){
+  include 'conexao.php';
+
+  $sql = "UPDATE folhadepagamento SET bruto = ?, salario = ?, mes = ?, ano = ?, unimed = ?, uniodonto = ?, adicional = ?, das = ?, rcs = ? WHERE idPagamento = ?";
+
+  try {
+    $resultado = $db->prepare($sql);
+    $resultado->bindValue(1, $bruto, PDO::PARAM_INT);
+    $resultado->bindValue(2, $salario, PDO::PARAM_INT);
+    $resultado->bindValue(3, $mes, PDO::PARAM_STR);
+    $resultado->bindValue(4, $ano, PDO::PARAM_INT);
+    $resultado->bindValue(5, $unimed, PDO::PARAM_INT);
+    $resultado->bindValue(6, $uniodonto, PDO::PARAM_INT);
+    $resultado->bindValue(7, $adicional, PDO::PARAM_INT);
+    $resultado->bindValue(8, $das, PDO::PARAM_STR);
+    $resultado->bindValue(9, $rcs, PDO::PARAM_INT);
+    $resultado->bindValue(10, $id, PDO::PARAM_INT);
+    $resultado->execute();
+  } catch (Exception $e) {
+    echo "Error!: " . $e->getMessage() . "<br />";
+    return false;
+  }
+  return true;
+
 }

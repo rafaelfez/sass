@@ -32,7 +32,7 @@ include("inc/header.php");
       </tr>
   <ul class="items">
     <?php
-    foreach(get_pagamentos() as $item){
+    foreach(get_pagamentos_das() as $item){
       echo "<tr><td>" . $item['das'] . "</td>" . "<td>" . $item['salario'] . "</td>" . "<td>" . $item['Afiliado_matricula'] . "</td>" . "<td>" . $item['mes'] . "</td>" . "<td>" . $item['ano'] . "</td></tr>";
       }
     ?>

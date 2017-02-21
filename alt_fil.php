@@ -5,10 +5,9 @@ require 'inc/funcoes.php';
 $tituloPagina = "Alteração";
 $matricula = $nome = $telefone = $nascimento = $endereco = $rg = $cpf = $celular = $sexo = $taxa_rcs = $email = $situacao = '';
 
-/*if (isset($_GET['matricula'])) {
-    list($matricula,$nome,$telefone,$nascimento,$endereco,$rg,$cpf,$celular,$sexo,$email,$situacao,$taxa_rcs) = buscaAlterar(filter_input(INPUT_GET, 'matricula', FILTER_SANITIZE_NUMBER_INT));
+if (isset($_GET['matricula'])) {
+    list($matricula, $nome, $telefone, $email, $endereco, $rg, $cpf, $celular, $sexo, $situacao, $taxa_rcs, $nascimento) = get_filiado(filter_input(INPUT_GET, 'matricula', FILTER_SANITIZE_NUMBER_INT));
 }
-*/
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $matricula = filter_input(INPUT_POST, 'matricula', FILTER_SANITIZE_NUMBER_INT);
