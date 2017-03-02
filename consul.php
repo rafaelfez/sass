@@ -37,3 +37,6 @@ include("inc/header.php");
     }
   ?>
 </ul>
+<a href="impress.php?matricula=<?php echo $matricula ?>">Via do cliente</a>
+
+
