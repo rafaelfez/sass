@@ -186,7 +186,10 @@ function get_devedores() {
     include 'conexao.php';
 
       try {
-          return $db->query('SELECT nome, celular, situacao FROM afiliado');
+          /*return $db->query('SELECT nome, celular, situacao FROM afiliado');*/
+          return $db->query('SELECT afiliado.nome, afiliado.celular, folhadepagamento.devendo, folhadepagamento.mes FROM afiliado
+                              INNER JOIN folhadepagamento ON afiliado.matricula = folhadepagamento.Afiliado_matricula
+                                WHERE folhadepagamento.devendo > 0 ORDER BY folhadepagamento.idPagamento DESC');
       } catch (Exception $e) {
           echo "Error!: " . $e->getMessage() . "<br />";
           return array();
@@ -452,9 +455,9 @@ function listaPagamentos($matricula){
   include 'conexao.php';
 
   if($matricula==''){
-    $sql = 'SELECT Afiliado_matricula, bruto, salario, mes, ano, unimed, uniodonto, adicional, das, rcs, idPagamento FROM folhadepagamento';
+    $sql = 'SELECT Afiliado_matricula, bruto, salario, mes, ano, unimed, uniodonto, adicional, das, rcs, devendo, idPagamento FROM folhadepagamento';
   }else{
-  $sql = 'SELECT Afiliado_matricula, bruto, salario, mes, ano, unimed, uniodonto, adicional, das, rcs, idPagamento FROM folhadepagamento WHERE Afiliado_matricula = ?';
+    $sql = 'SELECT Afiliado_matricula, bruto, salario, mes, ano, unimed, uniodonto, adicional, das, rcs, devendo, idPagamento FROM folhadepagamento WHERE Afiliado_matricula = ?';
   }
 
   try {
@@ -493,4 +496,19 @@ function alterarPagamento($bruto, $salario, $mes, $ano, $unimed, $uniodonto, $ad
   }
   return true;
 
+}
+
+function get_celular(){
+  include 'conexao.php';
+
+  $sql = "SELECT celular from afiliado";
+
+  try {
+      $results = $db->prepare($sql);
+      $results->execute();
+  } catch (Exception $e) {
+      echo "Error!: " . $e->getMessage() . "<br />";
+      return false;
+  }
+  return $results->fetchAll(PDO::FETCH_ASSOC);
 }
