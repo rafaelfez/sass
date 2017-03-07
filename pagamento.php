@@ -25,8 +25,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     mesErro("Por favor insira todos os campos");
   }else{
     if(pagamento($afiliado_matricula, $taxa_rcs, $bruto, $unimed, $uniodonto, $rcs, $das, $mes, $ano, $descontounimed, $descontouniodonto)){
-      mesErro("Pagamento cadastrado");
-      }else{
+    mesErro("Pagamento realizado");
+    }else{
       mesErro("Não foi possível concluir");
     }
   }
