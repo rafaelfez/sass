@@ -37,7 +37,7 @@ include("inc/header.php");
   <form class="form-group" method="post" action="adicional.php">
     <table>
       <tr>
-        <th><label for="Afiliado_matricula">Matricula:<span class="required">*</span></label></th>
+        <th><label for="Afiliado_matricula">Matrícula:<span class="required">*</span></label></th>
         <td><input type="text" class="form-control" id="Afiliado_matricula" name="Afiliado_matricula" value="<?php echo htmlspecialchars($afiliado_matricula); ?>"/></td>
       </tr>
       <tr>
@@ -68,7 +68,7 @@ include("inc/header.php");
         </select></td>
       </tr>
       <tr>
-        <th><label for="adicional">Adicional:<span class="required">*</span></label></th>
+        <th><label for="adicional">Adicional (R$):<span class="required">*</span></label></th>
         <td><input type="text" class="form-control" id="adicional" name="adicional" value="<?php echo htmlspecialchars($adicional); ?>"/></td>
       </tr>
     </table>

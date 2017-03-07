@@ -41,7 +41,7 @@ include("inc/header.php");
   <form class="form-group" method="post" action="pagamento.php">
     <table>
       <tr>
-        <th><label for="Afiliado_matricula">Matricula:<span class="required">*</span></label></th>
+        <th><label for="Afiliado_matricula">Matrícula:<span class="required">*</span></label></th>
         <td><input type="text" class="form-control" id="Afiliado_matricula" name="Afiliado_matricula" value="<?php echo htmlspecialchars($afiliado_matricula); ?>"/></td>
       </tr>
       <tr>
@@ -76,11 +76,11 @@ include("inc/header.php");
   <form class="pagamento2" method="post" action="pagamento.php">-->
 
       <tr>
-        <th><label for="bruto">Salário Bruto:<span class="required">*</span></label></th>
+        <th><label for="bruto">Salário (R$):<span class="required">*</span></label></th>
         <td><input type="text" class="form-control" id="bruto" name="bruto" value="<?php echo htmlspecialchars($bruto); ?>"/></td>
       </tr>
       <tr>
-        <th><label for="unimed">Unimed:<span class="required">*</span></label></th>
+        <th><label for="unimed">Desconto Unimed (R$):<span class="required">*</span></label></th>
         <td><input type="text" class="form-control" id="unimed" name="unimed" value="<?php echo htmlspecialchars($unimed); ?>"/></td>
         <th><label for="descontounimed">Desconto<span class="required">*<span></label></th>
          <td><select class="form-control" id="descontounimed" name="descontounimed">
@@ -90,7 +90,7 @@ include("inc/header.php");
          </td>
       </tr>
       <tr>
-        <th><label for="uniodonto">Uniodonto:<span class="required">*</span></label></th>
+        <th><label for="uniodonto">Desconto Uniodonto (R$):<span class="required">*</span></label></th>
         <td><input type="text" class="form-control" id="uniodonto" name="uniodonto" value="<?php echo htmlspecialchars($uniodonto); ?>"/></td>
         <th><label for="descontouniodonto">Desconto<span class="required">*<span></label></th>
           <td><select class="form-control" id="descontouniodonto" name="descontouniodonto">
@@ -147,8 +147,6 @@ include("inc/header.php");
     <abrr title="Concluir registro de pagamento"><input class="btn btn-primary" type="submit" value="Concluir" /></abrr>
     <abrr title="Cancelar pagamento"><input class="btn btn-danger" type="button" value="Cancelar"  onclick="javascript: location.href='index.php';"/></abrr>
   </form>
-
-  <a href="adicional.php">Adicional</a>
 </div>
 
 
