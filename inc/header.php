@@ -32,7 +32,13 @@
         </li>
       <li><a href="alertas.php">Alertas</a></li>
       <li><a href="consulta.php">Consulta</a></li>
-      <li><a href="pagamento.php">Pagamento</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Pagamento <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+          <li><a href="pagamento.php">Salário</a></li>
+          <li><a href="adicional.php">Fluxo Adicional</a></li>
+          <li><a href="encargos">Encargos Sociais</a></li>
+        </ul> 
+        </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
     

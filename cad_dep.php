@@ -121,6 +121,8 @@ include("inc/header.php");
   </form>
 </div>
 
+<footer>
 <?php
 include("inc/footer.php");
 ?>
+</footer>
