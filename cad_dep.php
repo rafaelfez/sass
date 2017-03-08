@@ -2,7 +2,7 @@
 
 require 'inc/funcoes.php';
 
-$tituloPagina = "Dependente";
+$tituloPagina = "Cadastro de Dependente";
 $afiliado_matricula = $nome = $telefone = $nascimento = $endereco = $rg = $cpf = $celular = $email = $sexo = $parentesco = $message = '';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -47,19 +47,19 @@ include("inc/header.php");
     <table>
         <tr>
           <th><label for="afiliado_matricula">Matrícula do Arrumador:<span class="required">*</span></label></th>
-          <td><input type="text" required placeholder="" class="form-control" id="afiliado_matricula" name="afiliado_matricula" value="<?php echo htmlspecialchars($afiliado_matricula); ?>"/>
+          <td><input type="text" required placeholder="" class="form-control" id="afiliado_matricula" name="afiliado_matricula" required value="<?php echo htmlspecialchars($afiliado_matricula); ?>"/>
             <div class="help-block with-errors"></div>
           </td>
         </tr>
         <tr>
           <th><label for="nome">Nome:<span class="required">*</span></label></th>
-          <td><input type="text" required placeholder="" class="form-control" id="nome" name="nome" value="<?php echo htmlspecialchars($nome); ?>"/>
+          <td><input type="text" required placeholder="" class="form-control" id="nome" name="nome" required value="<?php echo htmlspecialchars($nome); ?>"/>
             <div class="help-block with-errors"></div>
           </td>
         </tr>
         <tr>
           <th><label for="nascimento">Data de Nascimento:<span class="required">*</span></label></th>
-          <td><input type="text" required placeholder="DD/MM/AAAA" class="form-control" id="nascimento" name="nascimento" value="<?php echo htmlspecialchars($nascimento); ?>"/>
+          <td><input type="text" required placeholder="DD/MM/AAAA" class="form-control" id="nascimento" name="nascimento" required value="<?php echo htmlspecialchars($nascimento); ?>"/>
             <div class="help-block with-errors"></div>
           </td>
         </tr>
@@ -99,13 +99,13 @@ include("inc/header.php");
         </tr>
         <tr>
           <th><label for="rg">RG:<span class="required">*</span></label></th>
-          <td><input type="text"required placeholder="Digite somente os números" required placeholder="###" class="form-control" id="rg" name="rg" value="<?php echo htmlspecialchars($rg); ?>"/>
+          <td><input type="text" placeholder="Digite somente os números" required placeholder="###" class="form-control" id="rg" name="rg" value="<?php echo htmlspecialchars($rg); ?>"/>
             <div class="help-block with-errors"></div>
           </td>
         </tr>
         <tr>
           <th><label for="cpf">CPF:<span class="cpf">*</span></label></th>
-          <td><input type="text" required placeholder="Digite somente os números" class="form-control" id="cpf" name="cpf" value="<?php echo htmlspecialchars($cpf); ?>"/>
+          <td><input type="text" required placeholder="Digite somente os números" class="form-control" id="cpf" name="cpf" required value="<?php echo htmlspecialchars($cpf); ?>"/>
             <div class="help-block with-errors"></div>
           </td>
         </tr>
@@ -116,6 +116,7 @@ include("inc/header.php");
           </td>
         </tr>
     </table>
+    <br/>
    <abbr title="Cadastrar Dependente"><input class="btn btn-primary" type="submit" value="Cadastrar"/></abbr>
       <abbr title="Cancelar cadastro"><input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" /></abbr>
   </form>

@@ -34,9 +34,9 @@
       <li><a href="consulta.php">Consulta</a></li>
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Pagamento <span class="caret"></span></a>
       <ul class="dropdown-menu">
-          <li><a href="pagamento.php">Salário</a></li>
+          <li><a href="pagamento.php">Convênios</a></li>
           <li><a href="adicional.php">Fluxo Adicional</a></li>
-          <li><a href="encargos">Encargos Sociais</a></li>
+          <li><a href="encargos.php">Encargos Sociais</a></li>
         </ul> 
         </li>
     </ul>

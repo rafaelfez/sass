@@ -2,7 +2,7 @@
 
 require 'inc/funcoes.php';
 
-$tituloPagina = "Pagamento";
+$tituloPagina = "Pagamento de Convênios";
 
 $afiliado_matricula = $bruto = $mes = $ano = $unimed = $uniodonto = $plano = $valor = $taxa_rcs = $rcs = $das = $descontounimed = $descontouniodonto = '';
 
@@ -37,16 +37,18 @@ include("inc/header.php");
 ?>
 
 <div class="cad-arr">
-  <h2 class="bg-info">Pagamento</h2>
-  <form class="form-group" method="post" action="pagamento.php">
+  <h2 class="bg-info">Pagamento de Convênios</h2>
+  <form class="form-group" data-toggle="validator" method="post" action="pagamento.php">
     <table>
       <tr>
         <th><label for="Afiliado_matricula">Matrícula:<span class="required">*</span></label></th>
-        <td><input type="text" class="form-control" id="Afiliado_matricula" name="Afiliado_matricula" value="<?php echo htmlspecialchars($afiliado_matricula); ?>"/></td>
+        <td><input type="text" class="form-control" id="Afiliado_matricula" name="Afiliado_matricula" required value="<?php echo htmlspecialchars($afiliado_matricula); ?>"/>
+          <div class="help-block with-errors"></div>
+        </td>
       </tr>
       <tr>
         <th><label for="mes">Mês:<span class="required">*<span></label></th>
-        <td><select class="form-control"  id="mes" name="mes">
+        <td><select class="form-control"  id="mes" name="mes" required>
           <option value="">Selecione:</option>
           <option value="Janeiro" <?php if($mes == 'Janeiro') echo 'selected'; ?>>Janeiro</option>
           <option value="Fevereiro" <?php if($mes == 'Fevereiro') echo 'selected'; ?>>Fevereiro</option>
@@ -60,16 +62,20 @@ include("inc/header.php");
           <option value="Outubro" <?php if($mes == 'Outubro') echo 'selected'; ?>>Outubro</option>
           <option value="Novembro" <?php if($mes == 'Novembro') echo 'selected'; ?>>Novembro</option>
           <option value="Dezembro" <?php if($mes == 'Dezembro') echo 'selected'; ?>>Dezembro</option>
-        </select></td>
+        </select>
+          <div class="help-block with-errors"></div>
+        </td>
       </tr>
       <tr>
         <th><label for="ano">Ano:<span class="required">*<span></label></th>
-        <td><select class="form-control" id="ano" name="ano">
+        <td><select class="form-control" id="ano" name="ano" required>
           <option value="2017" <?php if($ano == '2017') echo 'selected'; ?>>2017</option>
           <option value="2018" <?php if($ano == '2018') echo 'selected'; ?>>2018</option>
           <option value="2019" <?php if($ano == '2019') echo 'selected'; ?>>2019</option>
           <option value="2020" <?php if($ano == '2020') echo 'selected'; ?>>2020</option>
-        </select></td>
+        </select>
+          <div class="help-block with-errors"></div>
+        </td>
       </tr>
   <!--  <input class="button button--primary button--topic-php" type="submit" value="Avançar" />
   </form>
@@ -77,26 +83,34 @@ include("inc/header.php");
 
       <tr>
         <th><label for="bruto">Salário (R$):<span class="required">*</span></label></th>
-        <td><input type="text" class="form-control" id="bruto" name="bruto" value="<?php echo htmlspecialchars($bruto); ?>"/></td>
+        <td><input type="text" class="form-control" id="bruto" name="bruto" required value="<?php echo htmlspecialchars($bruto); ?>"/>
+          <div class="help-block with-errors"></div>
+        </td>
       </tr>
       <tr>
         <th><label for="unimed">Desconto Unimed (R$):<span class="required">*</span></label></th>
-        <td><input type="text" class="form-control" id="unimed" name="unimed" value="<?php echo htmlspecialchars($unimed); ?>"/></td>
+        <td><input type="text" class="form-control" id="unimed" name="unimed" required value="<?php echo htmlspecialchars($unimed); ?>"/>
+          <div class="help-block with-errors"></div>
+        </td>
         <th><label for="descontounimed">Desconto<span class="required">*<span></label></th>
-         <td><select class="form-control" id="descontounimed" name="descontounimed">
+         <td><select class="form-control" id="descontounimed" name="descontounimed" required>
            <option value="">Selecione um</option>
            <option value="DAS" <?php if($descontounimed == 'DAS') echo 'selected'; ?>>DAS</option>
            <option value="RCS" <?php if($descontounimed == 'RCS') echo 'selected'; ?>>RCS</option>
+           <div class="help-block with-errors"></div>
          </td>
       </tr>
       <tr>
         <th><label for="uniodonto">Desconto Uniodonto (R$):<span class="required">*</span></label></th>
-        <td><input type="text" class="form-control" id="uniodonto" name="uniodonto" value="<?php echo htmlspecialchars($uniodonto); ?>"/></td>
+        <td><input type="text" class="form-control" id="uniodonto" name="uniodonto" required value="<?php echo htmlspecialchars($uniodonto); ?>"/>
+          <div class="help-block with-errors"></div>
+        </td>
         <th><label for="descontouniodonto">Desconto<span class="required">*<span></label></th>
-          <td><select class="form-control" id="descontouniodonto" name="descontouniodonto">
+          <td><select class="form-control" id="descontouniodonto" name="descontouniodonto" required>
             <option value="">Selecione um</option>
             <option value="DAS" <?php if($descontouniodonto == 'DAS') echo 'selected'; ?>>DAS</option>
             <option value="RCS" <?php if($descontouniodonto == 'RCS') echo 'selected'; ?>>RCS</option>
+            <div class="help-block with-errors"></div>
           </td>
       </tr>
       </table>

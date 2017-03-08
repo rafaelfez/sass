@@ -72,11 +72,11 @@ try{
       <table>
         <tr>
           <th><label for="login">Login:<span class="required"></span></label></th>
-          <td><abbr title="Insira seu login de usuário"><input type="text" name="username" class="form-control" /></abbr></td>
+          <td><abbr title="Insira seu login de usuário"><input type="text" name="username" class="form-control" required/></abbr></td>
         </tr>
         <tr>
           <th><label for="senha">Senha:<span class="required"></span></label></th>
-          <td><abbr title="Insira sua senha"><input type="password" name="password" class="form-control"/></abbr></td>
+          <td><abbr title="Insira sua senha"><input type="password" name="password" class="form-control" required /></abbr></td>
         </tr>
       </table>
       <abbr title="Entrar no sistema"><input type="submit" name="login" class="btn btn-info" value="Entrar" />
