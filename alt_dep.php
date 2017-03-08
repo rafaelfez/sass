@@ -2,7 +2,7 @@
 
 require 'inc/funcoes.php';
 
-$tituloPagina = "Alteração";
+$tituloPagina = "Alteração de Dependente";
 $afiliado_matricula = $nome = $telefone = $nascimento = $endereco = $rg = $cpf = $celular = $email = $sexo = $parentesco = '';
 
 if (isset($_GET['cpf'])) {
@@ -42,60 +42,83 @@ include("inc/header.php");
 
 <div class="cad-arr">
   <h2 class="bg-info">Alteração de Dependente</h2>
-  <form class="form-group" method="post" action="alt_dep.php">
+  <form class="form-group" data-toggle="validator" method="post" action="alt_dep.php">
     <table>
         <tr>
           <th><label for="afiliado_matricula">Matrícula do Arrumador:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="afiliado_matricula" name="afiliado_matricula" value="<?php echo htmlspecialchars($afiliado_matricula); ?>"/></td>
+          <td><input type="text" class="form-control" id="afiliado_matricula" name="afiliado_matricula" required value="<?php echo htmlspecialchars($afiliado_matricula); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="nome">Nome:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="nome" name="nome" value="<?php echo htmlspecialchars($nome); ?>"/></td>
+          <td><input type="text" class="form-control" id="nome" name="nome" required value="<?php echo htmlspecialchars($nome); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="nascimento">Data de Nascimento:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="nascimento" name="nascimento" value="<?php echo htmlspecialchars($nascimento); ?>"/></td>
+          <td><input type="text" class="form-control" id="nascimento" name="nascimento" required value="<?php echo htmlspecialchars($nascimento); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
 
         <tr>
           <th><label for="sexo">Sexo:<span class="required">*<span></label></th>
-          <td><select class="form-control" id="sexo" name="sexo">
+          <td><select class="form-control" id="sexo" name="sexo" required>
             <option value="">Selecione um:</option>
             <option value="Masculino" <?php if($sexo == 'Masculino') echo 'selected'; ?>>Masculino</option>
             <option value="Feminino" <?php if($sexo == 'Feminino') echo 'selected'; ?>>Feminino</option>
-          </select></td>
+          </select>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="telefone">Telefone:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="telefone" name="telefone" value="<?php echo htmlspecialchars($telefone); ?>"/></td>
+          <td><input type="text" class="form-control" id="telefone" name="telefone" required value="<?php echo htmlspecialchars($telefone); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="celular">Celular:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="celular" name="celular" value="<?php echo htmlspecialchars($celular); ?>"/></td>
+          <td><input type="text" class="form-control" id="celular" name="celular" required value="<?php echo htmlspecialchars($celular); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="email">Email:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>"/></td>
+          <td><input type="text" class="form-control" id="email" name="email" required value="<?php echo htmlspecialchars($email); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="endereco">Endereço:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="endereco" name="endereco" value="<?php echo htmlspecialchars($endereco); ?>"/></td>
+          <td><input type="text" class="form-control" id="endereco" name="endereco" required value="<?php echo htmlspecialchars($endereco); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
         <tr>
           <th><label for="rg">RG:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="rg" name="rg" value="<?php echo htmlspecialchars($rg); ?>"/></td>
+          <td><input type="text" class="form-control" id="rg" name="rg" required value="<?php echo htmlspecialchars($rg); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
 
         <tr>
           <th><label for="cpf">CPF:<span class="cpf">*</span></label></th>
-          <td><input type="text" class="form-control" id="cpf" name="cpf" value="<?php echo htmlspecialchars($cpf); ?>"/></td>
+          <td><input type="text" class="form-control" id="cpf" name="cpf" required value="<?php echo htmlspecialchars($cpf); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
 
         <tr>
           <th><label for="parentesco">Parentesco:<span class="required">*</span></label></th>
-          <td><input type="text" class="form-control" id="parentesco" name="parentesco" value="<?php echo htmlspecialchars($parentesco); ?>"/></td>
+          <td><input type="text" class="form-control" id="parentesco" name="parentesco" required value="<?php echo htmlspecialchars($parentesco); ?>"/>
+            <div class="help-block with-errors"></div>
+          </td>
         </tr>
     </table>
+    <br/>
     <abbr title="Alterar Dependente"><input class="btn btn-primary" type="submit" value="Alterar"/></abbr>
     <abbr title="Cancelar alteração"><input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" /></abbr>
   </form>

@@ -11,7 +11,9 @@ include("inc/header.php");
   <h2 class="bg-info">SMS para todos Filiados</h2>
   <form class="form-group" method="post" action="send.php">
     <textarea name="mensagem" class="form-control" rows="5" cols="40" maxlength="100"></textarea>
-    <button type="submit">Enviar</button>
+    <br/>
+      <abrr title="Enviar mensagem SMS"><input class="btn btn-primary" type="submit" value="Enviar" /></abrr>
+      <abbr title="Cancelar envio de SMS"><input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" /></abbr>
     </form>
     <!--<abrr title="Enviar alerta para todos Filiados"><input class="btn btn-primary" type="submit" value="Enviar" /></abrr>
     <abrr title="Cancelar alerta"><input class="btn btn-danger" type="button" value="Cancelar"  onclick="javascript: location.href='index.php';" /></abrr>

@@ -28,10 +28,10 @@ include("inc/header.php");
     <table>
       <tr>
         <th><label for="matricula">Matrícula:<span class="required"></span></label></th>
-        <td><input type="text" class="form-control" id="matricula" name="matricula" value="<?php echo htmlspecialchars($matricula); ?>"/></td>
+        <td><input type="text" class="form-control" id="matricula" name="matricula" required value="<?php echo htmlspecialchars($matricula); ?>"/></td>
       </tr>
     </table>
-    <br />
+    </br>
     <abrr title="Consultar Filiado"><input class="btn btn-primary" type="submit" value="Consultar"/></abrr>
     <abrr title="Cancelar Consulta"><input class="btn btn-danger" type="button" value="Cancelar"  onclick="javascript: location.href='index.php';"/></abrr>
   </form>

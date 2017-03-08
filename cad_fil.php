@@ -2,7 +2,7 @@
 
 require 'inc/funcoes.php';
 
-$tituloPagina = "Cadastro";
+$tituloPagina = "Cadastro de Filiado";
 $matricula = $nome = $telefone = $nascimento = $endereco = $rg = $cpf = $celular = $sexo = $email = $situacao = $taxa_rcs = $message = "";
 
 
@@ -120,8 +120,8 @@ include("inc/header.php");
             <div class="help-block with-errors"></div>
           </td>
         </tr>
-        
       </table>
+      <br/>
       <abbr title="Cadastrar Filiado"><input class="btn btn-primary" type="submit" value="Cadastrar"/></abbr>
       <abbr title="Cancelar cadastro"><input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" /></abbr>
     </form>

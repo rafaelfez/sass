@@ -1,7 +1,7 @@
 <?php
 require("inc/funcoes.php");
 
-$tituloPagina = "Consulta";
+$tituloPagina = "Histórico";
 
 $matricula = '';
 
