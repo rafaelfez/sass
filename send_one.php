@@ -1,5 +1,7 @@
 <?php
+
 require 'inc/funcoes.php';
+
 // INICIO
 function requisicaoApi($params, $endpoint){
     $url = "http://api.directcallsoft.com/{$endpoint}";
@@ -27,25 +29,20 @@ $req = requisicaoApi(array('client_id'=>$client_id, 'client_secret'=>$client_sec
 $access_token = $req['access_token'];
 // Enviadas via POST do nosso contato.html
 $nome = "Sindicato dos Arrumadores";
-$mensagem = $_POST['mensagem'];
+$mensagem = "Voce esta com uma pendência no sindicato de R$";
 // Monta a mensagem
 $SMS = "{$nome} - {$mensagem}";
+//pega o numero de celular
+$celular = $_POST['celular'];
+//pega o valor que deve e acrescenta ao sms
+$devendo = $_POST['devendo'];
+$SMS .= "{$devendo}";
 
-//pegar todos contatos
-$get_celular = get_celular();
-$cel = array();
-
-array_walk_recursive($get_celular, function($item, $key){
-  global $cel;
-  if($key == 'celular') $cel[] = $item."";
-});
-
-$umalinha = implode(";", $cel);
 
 // Array com os parametros para o envio
 $data = array(
     'origem'=>"5511988656702", // Seu numero que Ã© origem
-    'destino'=>$umalinha, // E o numero de destino
+    'destino'=>$celular, // E o numero de destino
     'tipo'=>"texto",
     'access_token'=>$access_token,
     'texto'=>$SMS
@@ -66,7 +63,7 @@ include("inc/header.php");
 ?>
 
 <div class="home">
-  <p>SMS Enviados!</p>
+  <p>SMS Enviado!</p>
   <br/>
   <abbr title="Sindicato dos Arrumadores de São Sebastião"><img src="img/saas-logo.png"style="width:600px; height:300px;"/></abbr>
 </div>
