@@ -4,29 +4,26 @@ require 'inc/funcoes.php';
 
 $tituloPagina = "Encargos Sociais";
 
-$afiliado_matricula = $mes = $ano = $encargo = '';
+$afiliado_matricula = $mes = $ano = $tipo = $valor = '';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $afiliado_matricula = filter_input(INPUT_POST, 'Afiliado_matricula', FILTER_SANITIZE_NUMBER_INT);
   $mes = filter_input(INPUT_POST, 'mes', FILTER_SANITIZE_STRING);
   $ano = filter_input(INPUT_POST, 'ano', FILTER_SANITIZE_NUMBER_INT);
-  $encargo = filter_input(INPUT_POST, 'encargo', FILTER_SANITIZE_STRING);
+  $tipo = filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_STRING);
+  $valor = filter_input(INPUT_POST, 'valor', FILTER_SANITIZE_NUMBER_INT);
 
 
 
-if(empty($afiliado_matricula)||empty($mes)||empty($ano)||empty($encargo)){
+if(empty($afiliado_matricula)||empty($mes)||empty($ano)||empty($tipo)||empty($valor)){
     mesErro("Por favor insira todos os campos");
   }else{
-    if(adicional($afiliado_matricula, $mes, $ano, $encargo)){
+    if(encargo($afiliado_matricula, $mes, $ano, $tipo, $valor)){
       mesErro("Encargos sociais registrados");
-      }else{
+    }else{
       mesErro("Não foi possível concluir");
     }
   }
-
-
-  /*echo adicional($afiliado_matricula, $mes, $ano, $adicional);*/
-
 }
 
 include("inc/header.php");
@@ -74,8 +71,19 @@ include("inc/header.php");
         </td>
       </tr>
       <tr>
-        <th><label for="encargo">Total (R$):<span class="required">*</span></label></th>
-        <td><input type="text" class="form-control" id="encargo" name="encargo" required value="<?php echo htmlspecialchars($encargo); ?>"/>
+        <th><label for="tipo">Tipo:<span class="required">*<span></label></th>
+        <td><select class="form-control" id="tipo" name="tipo" required>
+          <option value="">Selecione:</option>
+          <option value="decimoterceiro" <?php if($tipo == 'decimoterceiro') echo 'selected'; ?>>13 Salario</option>
+          <option value="refeicao" <?php if($tipo == 'refeicao') echo 'selected'; ?>>Vale Refeição</option>
+          <option value="ferias" <?php if($tipo == 'ferias') echo 'selected'; ?>>Férias</option>
+        </select>
+          <div class="help-block with-errors"></div>
+        </td>
+      </tr>
+      <tr>
+        <th><label for="valor">Valor (R$):<span class="required">*</span></label></th>
+        <td><input type="text" class="form-control" id="valor" name="valor" required value="<?php echo htmlspecialchars($valor); ?>"/>
           <div class="help-block with-errors"></div>
         </td>
       </tr>

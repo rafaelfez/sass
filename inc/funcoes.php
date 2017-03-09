@@ -512,3 +512,24 @@ function get_celular(){
   }
   return $results->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function encargo($afiliado_matricula, $mes, $ano, $tipo, $valor){
+
+  include 'conexao.php';
+
+  $query = "INSERT INTO encargo(Afiliado_matricula, mes, ano, tipo, valor) VALUES(?,?,?,?,?)";
+
+  try {
+    $resultado = $db->prepare($query);
+    $resultado->bindValue(1, $afiliado_matricula, PDO::PARAM_INT);
+    $resultado->bindValue(2, $mes, PDO::PARAM_STR);
+    $resultado->bindValue(3, $ano, PDO::PARAM_INT);
+    $resultado->bindValue(4, $tipo, PDO::PARAM_STR);
+    $resultado->bindValue(5, $valor, PDO::PARAM_INT);
+    $resultado->execute();
+  } catch (Exception $e) {
+    echo "Error!: " . $e->getMessage() . "<br />";
+    return false;
+  }
+  return true;
+}
