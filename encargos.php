@@ -4,21 +4,22 @@ require 'inc/funcoes.php';
 
 $tituloPagina = "Encargos Sociais";
 
-$afiliado_matricula = $mes = $ano = $tipo = $valor = '';
+$afiliado_matricula = $mes = $ano = $decimoterceiro = $refeicao = $ferias = '';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $afiliado_matricula = filter_input(INPUT_POST, 'Afiliado_matricula', FILTER_SANITIZE_NUMBER_INT);
   $mes = filter_input(INPUT_POST, 'mes', FILTER_SANITIZE_STRING);
   $ano = filter_input(INPUT_POST, 'ano', FILTER_SANITIZE_NUMBER_INT);
-  $tipo = filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_STRING);
-  $valor = filter_input(INPUT_POST, 'valor', FILTER_SANITIZE_NUMBER_INT);
+  $decimoterceiro = filter_input(INPUT_POST, 'decimoterceiro', FILTER_SANITIZE_NUMBER_INT);
+  $refeicao = filter_input(INPUT_POST, 'refeicao', FILTER_SANITIZE_NUMBER_INT);
+  $ferias = filter_input(INPUT_POST, 'ferias', FILTER_SANITIZE_NUMBER_INT);
 
 
 
-if(empty($afiliado_matricula)||empty($mes)||empty($ano)||empty($tipo)||empty($valor)){
+if(empty($afiliado_matricula)||empty($mes)||empty($ano)||empty($decimoterceiro)||empty($refeicao)||empty($ferias)){
     mesErro("Por favor insira todos os campos");
   }else{
-    if(encargo($afiliado_matricula, $mes, $ano, $tipo, $valor)){
+    if(encargo($afiliado_matricula, $mes, $ano, $decimoterceiro, $refeicao, $ferias)){
       mesErro("Encargos sociais registrados");
     }else{
       mesErro("Não foi possível concluir");
@@ -71,19 +72,20 @@ include("inc/header.php");
         </td>
       </tr>
       <tr>
-        <th><label for="tipo">Tipo:<span class="required">*<span></label></th>
-        <td><select class="form-control" id="tipo" name="tipo" required>
-          <option value="">Selecione:</option>
-          <option value="decimoterceiro" <?php if($tipo == 'decimoterceiro') echo 'selected'; ?>>13 Salario</option>
-          <option value="refeicao" <?php if($tipo == 'refeicao') echo 'selected'; ?>>Vale Refeição</option>
-          <option value="ferias" <?php if($tipo == 'ferias') echo 'selected'; ?>>Férias</option>
-        </select>
+        <th><label for="valor">13º Salário (R$):<span class="required">*</span></label></th>
+        <td><input type="text" class="form-control" id="decimoterceiro" name="decimoterceiro" required value="<?php echo htmlspecialchars($decimoterceiro); ?>"/>
           <div class="help-block with-errors"></div>
         </td>
       </tr>
       <tr>
-        <th><label for="valor">Valor (R$):<span class="required">*</span></label></th>
-        <td><input type="text" class="form-control" id="valor" name="valor" required value="<?php echo htmlspecialchars($valor); ?>"/>
+        <th><label for="valor">Vale Refeição (R$):<span class="required">*</span></label></th>
+        <td><input type="text" class="form-control" id="refeicao" name="refeicao" required value="<?php echo htmlspecialchars($refeicao); ?>"/>
+          <div class="help-block with-errors"></div>
+        </td>
+      </tr>
+      <tr>
+        <th><label for="valor">Férias (R$):<span class="required">*</span></label></th>
+        <td><input type="text" class="form-control" id="ferias" name="ferias" required value="<?php echo htmlspecialchars($ferias); ?>"/>
           <div class="help-block with-errors"></div>
         </td>
       </tr>
