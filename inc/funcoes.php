@@ -534,3 +534,62 @@ function encargo($afiliado_matricula, $mes, $ano, $decimoterceiro, $refeicao, $f
   }
   return true;
 }
+
+function get_encargos($id){
+  include 'conexao.php';
+
+  $sql = 'SELECT Afiliado_matricula, mes, ano, decimoterceiro, refeicao, ferias, idEncargo FROM encargo WHERE idEncargo = ?';
+
+  try {
+      $results = $db->prepare($sql);
+      $results->bindValue(1, $id, PDO::PARAM_INT);
+      $results->execute();
+  } catch (Exception $e) {
+      echo "Error!: " . $e->getMessage() . "<br />";
+      return false;
+  }
+  return $results->fetch();
+}
+
+function listaEncargos($matricula){
+  include 'conexao.php';
+
+  if($matricula==''){
+    $sql = 'SELECT Afiliado_matricula, mes, ano, decimoterceiro, refeicao, ferias, idEncargo FROM encargo';
+  }else{
+    $sql = 'SELECT Afiliado_matricula, mes, ano, decimoterceiro, refeicao, ferias, idEncargo FROM encargo WHERE Afiliado_matricula = ?';
+  }
+
+  try {
+      $results = $db->prepare($sql);
+      $results->bindValue(1, $matricula, PDO::PARAM_INT);
+      $results->execute();
+  } catch (Exception $e) {
+      echo "Error!: " . $e->getMessage() . "<br />";
+      return false;
+  }
+  return $results->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function alterarEncargo($afiliado_matricula, $mes, $ano, $decimoterceiro, $refeicao, $ferias, $id){
+  include 'conexao.php';
+
+  $sql = "UPDATE encargo SET Afiliado_matricula = ?, mes = ?, ano = ?, decimoterceiro = ?, refeicao = ?, ferias = ?  WHERE idEncargo = ?";
+
+  try {
+    $resultado = $db->prepare($sql);
+    $resultado->bindValue(1, $afiliado_matricula, PDO::PARAM_INT);
+    $resultado->bindValue(2, $mes, PDO::PARAM_STR);
+    $resultado->bindValue(3, $ano, PDO::PARAM_INT);
+    $resultado->bindValue(4, $decimoterceiro, PDO::PARAM_INT);
+    $resultado->bindValue(5, $refeicao, PDO::PARAM_INT);
+    $resultado->bindValue(6, $ferias, PDO::PARAM_INT);
+    $resultado->bindValue(7, $id, PDO::PARAM_INT);
+    $resultado->execute();
+  } catch (Exception $e) {
+    echo "Error!: " . $e->getMessage() . "<br />";
+    return false;
+  }
+  return true;
+
+}

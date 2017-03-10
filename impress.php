@@ -48,4 +48,23 @@ include("inc/header.php");
     }
   ?>
 </ul>
+<h2>Encargos</h2>
+<ul>
+  <?php
+    foreach(listaEncargos($matricula) as $item){
+      echo "<table border=1 width=300 height=200>"
+      ."<tr>"
+      ."<td colspan='2' align=center><b>Período</b></td>"
+      ."<tr><td align=center>Mês: ".$item['mes']."</td><td align=center>Ano: ".$item['ano']."</td></tr>"
+      ."<td colspan='2' align=center><b>Encargos</b></td>"
+      ."<tr><td align=center colspan='2'>13º Salário: ".$item['decimoterceiro']."</td></tr>"
+      ."<tr><td align=center colspan='2'>Vale Refeição:: ".$item['refeicao']."</td></tr>"
+      ."<tr><td align=center colspan='2'>Férias: ".$item['ferias']."</td>"
+      ."</tr>"
+      ."</table>"
+      ."<br />";
+    }
+  ?>
+</ul>
+
 <input type="button" name="imprimir" value="Imprimir" onclick="window.print();">
