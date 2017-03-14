@@ -38,3 +38,13 @@ include("inc/header.php");
       }
     ?>
   </ul>
+
+<h2>Histórico de Encargos</h2>
+  <ul>
+    <?php
+      foreach(listaEncargos($matricula) as $item){    
+        echo "<li><a href='alt_enc.php?id=" .$item['idEncargo'] . "'>". "Matricula: " . $item['Afiliado_matricula'] . " - Mês: " .$item['mes'] . "  -  Ano: " .$item['ano'] . "  -  13º: " .$item['decimoterceiro'] . "  -  Refeição: " .$item['refeicao'] .  "  -  Férias: " .$item['ferias'] . "</a>";
+        echo "</li>";
+      }
+    ?>
+  </ul>

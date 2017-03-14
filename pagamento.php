@@ -10,12 +10,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $afiliado_matricula = filter_input(INPUT_POST, 'Afiliado_matricula', FILTER_SANITIZE_NUMBER_INT);
   $mes = filter_input(INPUT_POST, 'mes', FILTER_SANITIZE_STRING);
   $ano = filter_input(INPUT_POST, 'ano', FILTER_SANITIZE_STRING);
-  $bruto = filter_input(INPUT_POST, 'bruto', FILTER_SANITIZE_NUMBER_INT);
+  $bruto = filter_input(INPUT_POST, 'bruto',  FILTER_SANITIZE_STRING);
   $taxa_rcs = filter_input(INPUT_POST,'taxa_rcs', FILTER_SANITIZE_NUMBER_INT);
-  $unimed = filter_input(INPUT_POST, 'unimed', FILTER_SANITIZE_NUMBER_INT);
-  $uniodonto = filter_input(INPUT_POST, 'uniodonto', FILTER_SANITIZE_NUMBER_INT);
-  $das = filter_input(INPUT_POST,'das', FILTER_SANITIZE_NUMBER_INT);
-  $rcs = filter_input(INPUT_POST,'rcs', FILTER_SANITIZE_NUMBER_INT);
+  $unimed = filter_input(INPUT_POST, 'unimed',  FILTER_SANITIZE_STRING);
+  $uniodonto = filter_input(INPUT_POST, 'uniodonto',  FILTER_SANITIZE_STRING);
+  $das = filter_input(INPUT_POST,'das',  FILTER_SANITIZE_STRING);
+  $rcs = filter_input(INPUT_POST,'rcs',  FILTER_SANITIZE_STRING);
   $descontounimed = filter_input(INPUT_POST, 'descontounimed', FILTER_SANITIZE_STRING);
   $descontouniodonto = filter_input(INPUT_POST, 'descontouniodonto', FILTER_SANITIZE_STRING);
 
@@ -88,7 +88,7 @@ include("inc/header.php");
         </td>
       </tr>
       <tr>
-        <th><label for="unimed">Desconto Unimed (R$):<span class="required">*</span></label></th>
+        <th><label for="unimed">Unimed (R$):<span class="required">*</span></label></th>
         <td><input type="text" class="form-control" id="unimed" name="unimed" required value="<?php echo htmlspecialchars($unimed); ?>"/>
           <div class="help-block with-errors"></div>
         </td>
@@ -101,7 +101,7 @@ include("inc/header.php");
          </td>
       </tr>
       <tr>
-        <th><label for="uniodonto">Desconto Uniodonto (R$):<span class="required">*</span></label></th>
+        <th><label for="uniodonto">Uniodonto (R$):<span class="required">*</span></label></th>
         <td><input type="text" class="form-control" id="uniodonto" name="uniodonto" required value="<?php echo htmlspecialchars($uniodonto); ?>"/>
           <div class="help-block with-errors"></div>
         </td>

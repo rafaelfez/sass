@@ -15,9 +15,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $afiliado_matricula = filter_input(INPUT_POST, 'Afiliado_matricula', FILTER_SANITIZE_NUMBER_INT);
   $mes = filter_input(INPUT_POST, 'mes', FILTER_SANITIZE_STRING);
   $ano = filter_input(INPUT_POST, 'ano', FILTER_SANITIZE_NUMBER_INT);
-  $decimoterceiro = filter_input(INPUT_POST, 'decimoterceiro', FILTER_SANITIZE_NUMBER_INT);
-  $refeicao = filter_input(INPUT_POST, 'refeicao', FILTER_SANITIZE_NUMBER_INT);
-  $ferias = filter_input(INPUT_POST, 'ferias', FILTER_SANITIZE_NUMBER_INT);
+  $decimoterceiro = filter_input(INPUT_POST, 'decimoterceiro', FILTER_SANITIZE_STRING);
+  $refeicao = filter_input(INPUT_POST, 'refeicao', FILTER_SANITIZE_STRING);
+  $ferias = filter_input(INPUT_POST, 'ferias', FILTER_SANITIZE_STRING);
   $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
 
 
@@ -26,7 +26,7 @@ if(empty($afiliado_matricula)||empty($mes)||empty($ano)||empty($decimoterceiro)|
     mesErro("Por favor insira todos os campos");
   }else{
     if(alterarEncargo($afiliado_matricula, $mes, $ano, $decimoterceiro, $refeicao, $ferias, $id)){
-      mesErro("Encargos sociais registrados");
+      mesErro("Encargos sociais alterados");
     }else{
       mesErro("Não foi possível concluir");
     }

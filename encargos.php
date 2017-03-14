@@ -10,9 +10,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $afiliado_matricula = filter_input(INPUT_POST, 'Afiliado_matricula', FILTER_SANITIZE_NUMBER_INT);
   $mes = filter_input(INPUT_POST, 'mes', FILTER_SANITIZE_STRING);
   $ano = filter_input(INPUT_POST, 'ano', FILTER_SANITIZE_NUMBER_INT);
-  $decimoterceiro = filter_input(INPUT_POST, 'decimoterceiro', FILTER_SANITIZE_NUMBER_INT);
-  $refeicao = filter_input(INPUT_POST, 'refeicao', FILTER_SANITIZE_NUMBER_INT);
-  $ferias = filter_input(INPUT_POST, 'ferias', FILTER_SANITIZE_NUMBER_INT);
+  $decimoterceiro = filter_input(INPUT_POST, 'decimoterceiro', FILTER_SANITIZE_STRING);
+  $refeicao = filter_input(INPUT_POST, 'refeicao', FILTER_SANITIZE_STRING);
+  $ferias = filter_input(INPUT_POST, 'ferias', FILTER_SANITIZE_STRING);
 
 
 
