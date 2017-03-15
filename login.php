@@ -6,7 +6,7 @@ session_start();
 $message = "";
 
 try{
-  $db = new PDO("mysql:host=localhost;dbname=sindicato;port=3306","root","");
+  $db = new PDO("mysql:host=localhost;dbname=sindicato;port=3306","root","234");
   $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   if(isset($_POST["login"])){
@@ -61,7 +61,7 @@ try{
 </nav>
 
   <div class="cad-arr">
-  
+
     <abbr title="Sindicato dos Arrumadores de São Sebastião"><img src="img/saas-logo.png" align="center" style="width:600px; height:300px;"></abbr>
     <form class="form-login" method="post" action="login.php">
       <?php

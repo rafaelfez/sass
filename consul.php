@@ -48,4 +48,4 @@ include("inc/header.php");
   ?>
 </ul>
 
-<a href="impress.php?matricula=<?php echo $matricula ?>">Via do cliente</a>
+<abbr title="Via do cliente"><input class="btn btn-success" type="button" value="Via do Cliente" onclick="javascript: location.href='impress.php?matricula=<?php echo $matricula?>';" /></abbr>

@@ -22,7 +22,9 @@ include("inc/header.php");
   </form>
 </div>
 <div class="form-container">
-  <table border=5>
+  <h2 class="bg-info">Transações</h2>
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
       <tr>
         <th>DAS</th>
         <th>Salario</th>
@@ -30,16 +32,15 @@ include("inc/header.php");
         <th>Mes</th>
         <th>Ano</th>
       </tr>
-  <ul class="items">
-    <?php
-    foreach(get_pagamentos_das() as $item){
-      echo "<tr><td>" . $item['das'] . "</td>" . "<td>" . $item['salario'] . "</td>" . "<td>" . $item['Afiliado_matricula'] . "</td>" . "<td>" . $item['mes'] . "</td>" . "<td>" . $item['ano'] . "</td></tr>";
-      }
-    ?>
-  </ul>
+    </thead>
+    <tbody>
+    <ul class="items">
+      <?php
+      foreach(get_pagamentos_das() as $item){
+        echo "<tr><td>" . $item['das'] . "</td>" . "<td>" . $item['salario'] . "</td>" . "<td>" . $item['Afiliado_matricula'] . "</td>" . "<td>" . $item['mes'] . "</td>" . "<td>" . $item['ano'] . "</td></tr>";
+        }
+      ?>
+    </ul>
+    </tbody>
+  </table>
 </div>
-
-
-<?php
-include("inc/footer.php");
-?>

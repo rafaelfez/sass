@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <title><?php echo $tituloPagina; ?></title>
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css"> 
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
     <script src="bootstrap/js/jquery-3.1.1.min.js" type="text/javascript"></script>
     <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
   </head>
@@ -23,13 +23,6 @@
           <li><a href="cad_con.php">Convênio</a></li>
         </ul>
         </li>
-       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Alteração <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="alt_fil.php">Filiado</a></li>
-          <li><a href="alt_dep.php">Dependente</a></li>
-          <li><a href="alt_con.php">Convênio</a></li>
-        </ul> 
-        </li>
       <li><a href="alertas.php">Alertas</a></li>
       <li><a href="consulta.php">Consulta</a></li>
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Pagamento <span class="caret"></span></a>
@@ -37,11 +30,11 @@
           <li><a href="pagamento.php">Convênios</a></li>
           <li><a href="adicional.php">Fluxo Adicional</a></li>
           <li><a href="encargos.php">Encargos Sociais</a></li>
-        </ul> 
+        </ul>
         </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-    
+
       <li><a href="logout.php"><abbr title="Sair do sistema"><span class="glyphicon glyphicon-log-out"></span></abbr> Sair</a></li>
     </ul>
   </div>

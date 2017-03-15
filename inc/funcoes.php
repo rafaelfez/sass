@@ -50,20 +50,25 @@ function add_dep($afiliado_matricula,$nome,$telefone,$nascimento,$endereco,$rg,$
 
   $sql = "INSERT INTO dependente(cpf,nome,telefone,email,nascimento,endereco,rg,celular,sexo,Afiliado_matricula,parentesco) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
   try{
-	$resultado = $db->prepare($sql);
-	$resultado->bindValue(1, $cpf, PDO::PARAM_INT);
-  $resultado->bindValue(2, $nome, PDO::PARAM_STR);
-  $resultado->bindValue(3, $telefone, PDO::PARAM_INT);
-  $resultado->bindValue(4, $email, PDO::PARAM_INT);
-  $resultado->bindValue(5, $nascimento, PDO::PARAM_STR);
-  $resultado->bindValue(6, $endereco, PDO::PARAM_STR);
-  $resultado->bindValue(7, $rg, PDO::PARAM_INT);
-  $resultado->bindValue(8, $celular, PDO::PARAM_INT);
-  $resultado->bindValue(9, $sexo, PDO::PARAM_STR);
-	$resultado->bindValue(10, $afiliado_matricula, PDO::PARAM_INT);
-	$resultado->bindValue(11, $parentesco, PDO::PARAM_STR);
-    $resultado->execute();
-  } catch (Exception $e) {
+    if(get_filiado($afiliado_matricula)==true){
+      $resultado = $db->prepare($sql);
+      $resultado->bindValue(1, $cpf, PDO::PARAM_INT);
+      $resultado->bindValue(2, $nome, PDO::PARAM_STR);
+      $resultado->bindValue(3, $telefone, PDO::PARAM_INT);
+      $resultado->bindValue(4, $email, PDO::PARAM_INT);
+      $resultado->bindValue(5, $nascimento, PDO::PARAM_STR);
+      $resultado->bindValue(6, $endereco, PDO::PARAM_STR);
+      $resultado->bindValue(7, $rg, PDO::PARAM_INT);
+      $resultado->bindValue(8, $celular, PDO::PARAM_INT);
+      $resultado->bindValue(9, $sexo, PDO::PARAM_STR);
+      $resultado->bindValue(10, $afiliado_matricula, PDO::PARAM_INT);
+      $resultado->bindValue(11, $parentesco, PDO::PARAM_STR);
+      $resultado->execute();
+    }else{
+      mesErro('Matricula do Filiado não existe');
+      return false;
+    }
+      } catch (Exception $e) {
     echo "Error!: " . $e->getMessage() . "<br />";
     return false;
   }
@@ -91,23 +96,6 @@ function add_con($cnpj,$nome,$categoria, $empresa, $mensalidade, $desconto, $DAS
   }
   return true;
 }
-
-/*function buscaAlterar($matricula){
-  include 'conexao.php';
-
-  $sql = "SELECT * from afiliados where matricula = ?";
-
-  try {
-    $resultado=$db->prepare($sql);
-    $resultado->bindValue(1, $matricula, PDO::PARAM_INT);
-    $resultado->execute();
-  } catch (Exception $e) {
-    echo "Error!: " . $e->getMessage() . "<br />";
-    return false;
-  }
-  return $resultado->fetch();
-}
-*/
 
 function alterarFiliado($matricula,$nome,$telefone,$nascimento,$endereco,$rg,$cpf,$celular,$sexo,$email,$situacao,$taxa_rcs){
   include 'conexao.php';
@@ -186,7 +174,6 @@ function get_devedores() {
     include 'conexao.php';
 
       try {
-          /*return $db->query('SELECT nome, celular, situacao FROM afiliado');*/
           return $db->query('SELECT afiliado.nome, afiliado.celular, folhadepagamento.devendo, folhadepagamento.mes FROM afiliado
                               INNER JOIN folhadepagamento ON afiliado.matricula = folhadepagamento.Afiliado_matricula
                                 WHERE folhadepagamento.devendo > 0 ORDER BY folhadepagamento.idPagamento DESC');
@@ -213,32 +200,29 @@ function get_convenio() {
 function pagamento($afiliado_matricula,$taxa_rcs, $bruto, $unimed, $uniodonto, $rcs, $das, $mes, $ano, $descontounimed, $descontouniodonto){
   include 'conexao.php';
 
-  try {
-    $statement = $db->query("SELECT taxa_rcs FROM afiliado WHERE matricula = $afiliado_matricula");
-    $result = $statement->fetch();
-    $taxa_rcs = $result[0];
-  } catch (Exception $e) {
-      echo "Error!: " . $e->getMessage() . "<br />";
-      return array();
+  if(get_filiado($afiliado_matricula)==true){
+      if(unico($afiliado_matricula, $mes, $ano)==false){
+        try {
+          $statement = $db->query("SELECT taxa_rcs FROM afiliado WHERE matricula = $afiliado_matricula");
+          $result = $statement->fetch();
+          $taxa_rcs = $result[0];
+        } catch (Exception $e) {
+            echo "Error!: " . $e->getMessage() . "<br />";
+            return array();
+        }
+    }else{
+      mesErro('Já existe um pagamento pra esse filiado neste período');
+      return false;
+    }
+  }else{
+    mesErro('Matricula não cadastrada');
+    return false;
   }
 
   $rcs = ($bruto*$taxa_rcs)/100;
   $salario = $bruto - $rcs;
   $das = $salario * 0.1;
   $salario = $salario - $das;
-
-
-  /*
-  if($rcs>($unimed+$uniodonto)){
-    $rcs = $rcs - $unimed-$uniodonto;
-    $salario = $salario + $rcs;
-    $devendo = 0;
-  }else{
-    $salario = $salario - $rcs;
-    $devendo = abs($rcs - $unimed - $uniodonto);
-    $rcs=0;
-  }
-  */
 
   if($descontounimed == 'DAS'){
       $das = $das - $unimed;
@@ -264,16 +248,6 @@ function pagamento($afiliado_matricula,$taxa_rcs, $bruto, $unimed, $uniodonto, $
     $devendo = $devendo + abs($das);
     $das=0;
   }
-  /*if($das>0){
-    try {
-      $statement = $db->query("INSERT INTO folhadepagamento(bruto, salario, das, rcs, taxa_rcs, devendo, mes, ano, Afiliado_matricula, unimed, uniodonto) VALUES($bruto, $salario, $das, $rcs, $taxa_rcs, $devendo, $mes, $ano, $afiliado_matricula, $unimed, $uniodonto)");
-      $result = $statement->fetchAll();
-    } catch (Exception $e) {
-        echo "Error!: " . $e->getMessage() . "<br />";
-        return array();
-    }
-  }
-*/
 
 
   $query1 = "INSERT INTO folhadepagamento(bruto, salario, das, rcs, taxa_rcs, devendo, mes, ano, Afiliado_matricula, unimed, uniodonto) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
@@ -298,9 +272,27 @@ function pagamento($afiliado_matricula,$taxa_rcs, $bruto, $unimed, $uniodonto, $
       return false;
     }
   }
-
-
   return "Bruto:" . $bruto . " Salario:" .$salario. " RCS:" . $rcs . " DAS:" . $das . " Devendo:" . $devendo . " Desc Unimed:" . $descontounimed . " Desc Uniodonto:" . $descontouniodonto;
+}
+
+function unico($matricula, $mes, $ano){
+  //função para não haver dois ou mais pagamentos no mesmo periodo da mesma pessoa
+
+    include 'conexao.php';
+
+    $sql = "SELECT * FROM folhadepagamento WHERE Afiliado_matricula = $matricula AND mes='$mes' AND ano='$ano'";
+
+    try {
+        $results = $db->prepare($sql);
+        $results->bindValue(1, $matricula, PDO::PARAM_INT);
+        $results->bindValue(2, $mes, PDO::PARAM_STR);
+        $results->bindValue(3, $ano, PDO::PARAM_STR);
+        $results->execute();
+    } catch (Exception $e) {
+        echo "Error!: " . $e->getMessage() . "<br />";
+        return false;
+    }
+    return $results->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function adicional($afiliado_matricula, $mes, $ano, $adicional){
@@ -308,9 +300,14 @@ function adicional($afiliado_matricula, $mes, $ano, $adicional){
   include 'conexao.php';
 
   try {
-    $statement = $db->query("SELECT devendo FROM folhadepagamento WHERE Afiliado_matricula = $afiliado_matricula");
-    $result = $statement->fetch();
-    $devendo = $result[0];
+    if(get_filiado($afiliado_matricula)==true){
+      $statement = $db->query("SELECT devendo FROM folhadepagamento WHERE Afiliado_matricula = $afiliado_matricula AND ano= '$ano' AND mes='$mes'");
+      $result = $statement->fetch();
+      $devendo = $result[0];
+    }else{
+      mesErro('Matricula não cadastrada');
+      return false;
+    }
   } catch (Exception $e) {
       echo "Error!: " . $e->getMessage() . "<br />";
       return array();
@@ -330,9 +327,10 @@ function adicional($afiliado_matricula, $mes, $ano, $adicional){
         return false;
       }
     }else{
+      mesErro('Adicional diferente do valor Devendo');
       return false;
     }
-    return "adicional:" . $adicional . " devendo:" . $devendo;
+    return true;
 }
 
 
@@ -519,19 +517,29 @@ function encargo($afiliado_matricula, $mes, $ano, $decimoterceiro, $refeicao, $f
 
   $query = "INSERT INTO encargo(Afiliado_matricula, mes, ano, decimoterceiro, refeicao, ferias) VALUES(?,?,?,?,?,?)";
 
-  try {
-    $resultado = $db->prepare($query);
-    $resultado->bindValue(1, $afiliado_matricula, PDO::PARAM_INT);
-    $resultado->bindValue(2, $mes, PDO::PARAM_STR);
-    $resultado->bindValue(3, $ano, PDO::PARAM_INT);
-    $resultado->bindValue(4, $decimoterceiro, PDO::PARAM_INT);
-    $resultado->bindValue(5, $refeicao, PDO::PARAM_INT);
-    $resultado->bindValue(6, $ferias, PDO::PARAM_INT);
-    $resultado->execute();
-  } catch (Exception $e) {
-    echo "Error!: " . $e->getMessage() . "<br />";
-    return false;
-  }
+  if(get_filiado($afiliado_matricula)==true){
+    if(unico($afiliado_matricula, $mes, $ano)==false){
+      try {
+        $resultado = $db->prepare($query);
+        $resultado->bindValue(1, $afiliado_matricula, PDO::PARAM_INT);
+        $resultado->bindValue(2, $mes, PDO::PARAM_STR);
+        $resultado->bindValue(3, $ano, PDO::PARAM_INT);
+        $resultado->bindValue(4, $decimoterceiro, PDO::PARAM_INT);
+        $resultado->bindValue(5, $refeicao, PDO::PARAM_INT);
+        $resultado->bindValue(6, $ferias, PDO::PARAM_INT);
+        $resultado->execute();
+        } catch (Exception $e) {
+          echo "Error!: " . $e->getMessage() . "<br />";
+          return false;
+        }
+        }else{
+        mesErro('Já existe encargos para esse filiado neste período');
+        return false;
+      }
+      }else{
+      mesErro('Matricula não cadastrada');
+      return false;
+    }
   return true;
 }
 
@@ -576,20 +584,24 @@ function alterarEncargo($afiliado_matricula, $mes, $ano, $decimoterceiro, $refei
 
   $sql = "UPDATE encargo SET Afiliado_matricula = ?, mes = ?, ano = ?, decimoterceiro = ?, refeicao = ?, ferias = ?  WHERE idEncargo = ?";
 
-  try {
-    $resultado = $db->prepare($sql);
-    $resultado->bindValue(1, $afiliado_matricula, PDO::PARAM_INT);
-    $resultado->bindValue(2, $mes, PDO::PARAM_STR);
-    $resultado->bindValue(3, $ano, PDO::PARAM_INT);
-    $resultado->bindValue(4, $decimoterceiro, PDO::PARAM_INT);
-    $resultado->bindValue(5, $refeicao, PDO::PARAM_INT);
-    $resultado->bindValue(6, $ferias, PDO::PARAM_INT);
-    $resultado->bindValue(7, $id, PDO::PARAM_INT);
-    $resultado->execute();
-  } catch (Exception $e) {
-    echo "Error!: " . $e->getMessage() . "<br />";
-    return false;
-  }
+  if(get_filiado($afiliado_matricula)==true){
+    try {
+      $resultado = $db->prepare($sql);
+      $resultado->bindValue(1, $afiliado_matricula, PDO::PARAM_INT);
+      $resultado->bindValue(2, $mes, PDO::PARAM_STR);
+      $resultado->bindValue(3, $ano, PDO::PARAM_INT);
+      $resultado->bindValue(4, $decimoterceiro, PDO::PARAM_INT);
+      $resultado->bindValue(5, $refeicao, PDO::PARAM_INT);
+      $resultado->bindValue(6, $ferias, PDO::PARAM_INT);
+      $resultado->bindValue(7, $id, PDO::PARAM_INT);
+      $resultado->execute();
+      } catch (Exception $e) {
+        echo "Error!: " . $e->getMessage() . "<br />";
+        return false;
+      }
+      }else{
+      mesErro('Matricula não cadastrada');
+      return false;
+    }
   return true;
-
 }

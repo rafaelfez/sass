@@ -52,7 +52,7 @@ include("inc/header.php");
 <ul>
   <?php
     foreach(listaEncargos($matricula) as $item){
-      echo "<table border=1 width=300 height=200>"
+      echo "<table border=1 width=250 height=150>"
       ."<tr>"
       ."<td colspan='2' align=center><b>Período</b></td>"
       ."<tr><td align=center>Mês: ".$item['mes']."</td><td align=center>Ano: ".$item['ano']."</td></tr>"
@@ -67,4 +67,4 @@ include("inc/header.php");
   ?>
 </ul>
 
-<input type="button" name="imprimir" value="Imprimir" onclick="window.print();">
+<input type="button" name="imprimir" value="Imprimir" class="btn btn-success" onclick="window.print();">
