@@ -9,12 +9,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $matricula = filter_input(INPUT_POST, 'matricula', FILTER_SANITIZE_NUMBER_INT);
 
   if(empty($matricula)){
-     mesErro("Por favor insira a matricula");
+     mesAlerta("Por favor insira a matricula");
    }else{
      if(get_filiado($matricula)){
       header("location: consul.php?matricula=$matricula");
       }else{
-       mesErro("Não foi possível concluir");
+       mesFalha("Não foi encontrada esta matricula");
      }
    }
 }

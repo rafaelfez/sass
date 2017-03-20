@@ -3,7 +3,7 @@
 require 'inc/funcoes.php';
 
 $tituloPagina = "Cadastro de Filiado";
-$matricula = $nome = $telefone = $nascimento = $endereco = $numero_endereco = $bairro = $cidade = $cep = $uf = $rg = $cpf = $celular = $sexo = $email = $situacao = $taxa_rcs = $message = "";
+$matricula = $nome = $telefone = $nascimento = $endereco = $numero_endereco = $bairro = $cidade = $cep = $uf = $rg = $cpf = $celular = $sexo = $email = $taxa_rcs = $message = "";
 
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -22,16 +22,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $sexo = filter_input(INPUT_POST, 'sexo', FILTER_SANITIZE_STRING);
   $taxa_rcs = filter_input(INPUT_POST, 'taxa_rcs', FILTER_SANITIZE_NUMBER_INT);
   $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
-  $situacao = filter_input(INPUT_POST, 'situacao', FILTER_SANITIZE_STRING);
 
-
-  if(empty($matricula) || empty($nome) || empty($nascimento) || empty($celular) ||  empty($email) || empty($endereco) || empty($rg) || empty($cpf) || empty($situacao) || empty($taxa_rcs)){
-    $message = '<div class="alert alert-warning alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Atenção! </strong> Por favor insira todos os campos</div>';
+  if(empty($matricula) || empty($nome) || empty($nascimento) || empty($celular) ||  empty($email) || empty($endereco) || empty($rg) || empty($cpf) || empty($taxa_rcs)){
+    mesAlerta("Por favor insira todos os campos");
   }else{
-    if(add_fil($matricula,$nome,$nascimento,$sexo,$telefone,$celular,$email,$endereco,$rg,$cpf,$situacao,$taxa_rcs)){
-      $message = '<div class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Cadastro efetuado com sucesso!</div>';
+    if(add_fil($matricula,$nome,$nascimento,$sexo,$telefone,$celular,$email,$endereco,$rg,$cpf,$taxa_rcs)){
+      mesSucesso("Filiado cadastrado");
     }else{
-      $message = '<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Erro ao efetuar cadastro</div>';
+      mesFalha("Não foi possível concluir");
     }
   }
 }
@@ -48,32 +46,7 @@ include("inc/header.php");
   </div>
   <div class="panel-body">
 
-
-      <div class="">
-  <?php
-  if(isset($message)){
-    echo $message;
-  }
-  ?>
-  </div>
-
   <form class="form-horizontal" data-toggle="validator" role="form" method="post" action="cad_fil.php">
-
-
-
-<!--
-
-    <form id="form_cad_fil" data-toggle="validator" role="form">
-
-      <div class="form-group">
-
-        <label for="textNome" class="control-label">Matrícula</label>
-        <input id="textNome" class="form-control" placeholder="Digite a matrícula..." data-minlength="6"  type="text">
-        <div class="help-block"></div>
-      </div>
-
-      ------------------------
--->
 
       <div class="form-group has-feedback">
         <label for="matricula" class="col-sm-2 control-label">Matrícula:<span class="required">*</span></label>
@@ -129,7 +102,7 @@ include("inc/header.php");
       </select> <div class="help-block with-errors"></div>
       </div>
       </div>
-      
+
       <div class="form-group has-feedback">
       <label for="telefone" class="col-sm-2 control-label">Telefone:<span class="required">*</span></label>
       <div class="col-sm-10">
@@ -217,7 +190,7 @@ include("inc/header.php");
       </select> <div class="help-block with-errors"></div>
       </div>
       </div>
-  
+
       <div class="form-group has-feedback">
       <label for="cep" class="col-sm-2 control-label">CEP:<span class="required">*</span></label>
       <div class="col-sm-10">
@@ -227,14 +200,6 @@ include("inc/header.php");
       </div>
       </div>
   -->
-      <div class="form-group has-feedback">
-      <label for="situacao" class="col-sm-2 control-label">Situação:<span class="required">*</span></label>
-      <div class="col-sm-10">
-      <input type="text" required data-error="Por favor, informe a situação do filiado." placeholder="" class="form-control" id="situacao" name="situacao" value="<?php echo htmlspecialchars($situacao); ?>"/>
-       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-      <div class="help-block with-errors"></div>
-      </div>
-      </div>
 
       <div class="form-group has-feedback">
       <label for="taxa_rcs" class="col-sm-2 control-label">RCS(%):<span class="required">*</span></label>
@@ -259,8 +224,3 @@ include("inc/header.php");
 
       </div>
 </div>
-</br>
-<br>
-<?php
-include("inc/footer.php");
-?>

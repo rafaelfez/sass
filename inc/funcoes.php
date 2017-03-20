@@ -17,11 +17,23 @@ function mesErro($texto){
   echo '</html>';
 }
 
-function add_fil($matricula,$nome,$nascimento,$sexo,$telefone,$celular,$email,$endereco,$rg,$cpf,$situacao,$taxa_rcs){
+function mesSucesso($texto){
+  echo '<div class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$texto.'</div>';
+}
+
+function mesAlerta($texto){
+  echo '<div class="alert alert-warning alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$texto.'</div>';
+}
+
+function mesFalha($texto){
+  echo '<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$texto.'</div>';
+}
+
+function add_fil($matricula,$nome,$nascimento,$sexo,$telefone,$celular,$email,$endereco,$rg,$cpf,$taxa_rcs){
 
   include 'conexao.php';
 
-  $sql = "INSERT INTO afiliado(matricula,nome,telefone,nascimento,endereco,rg,cpf,celular,sexo,email,situacao,taxa_rcs) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+  $sql = "INSERT INTO afiliado(matricula,nome,telefone,nascimento,endereco,rg,cpf,celular,sexo,email,taxa_rcs) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
   try {
     $resultado = $db->prepare($sql);
@@ -35,8 +47,7 @@ function add_fil($matricula,$nome,$nascimento,$sexo,$telefone,$celular,$email,$e
     $resultado->bindValue(8, $celular, PDO::PARAM_INT);
     $resultado->bindValue(9, $sexo, PDO::PARAM_STR);
     $resultado->bindValue(10, $email, PDO::PARAM_INT);
-    $resultado->bindValue(11, $situacao, PDO::PARAM_INT);
-    $resultado->bindValue(12, $taxa_rcs, PDO::PARAM_INT);
+    $resultado->bindValue(11, $taxa_rcs, PDO::PARAM_INT);
     $resultado->execute();
   } catch (Exception $e) {
     echo "Error!: " . $e->getMessage() . "<br />";

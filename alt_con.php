@@ -14,12 +14,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $mensalidade = filter_input(INPUT_POST, 'mensalidade', FILTER_SANITIZE_NUMBER_INT);
 
   if(empty($cnpj) || empty($nome)|| empty($categoria) ||empty($empresa) ||empty($mensalidade) ||empty($desconto)){
-    mesErro("Por favor insira todos os campos");
+    mesAlerta("Por favor insira todos os campos");
   }else{
     if(alterarConvenio($cnpj,$nome,$categoria, $empresa, $mensalidade, $desconto)){
-      mesErro("Convênio Alterado");
+      mesSucesso("Convênio Alterado");
     }else{
-      mesErro("Não foi possível alterar");
+      mesFalha("Não foi possível alterar");
     }
   }
 }

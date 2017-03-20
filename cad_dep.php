@@ -20,12 +20,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
   if(empty($afiliado_matricula) || empty($nome) || empty($telefone) || empty($nascimento) || empty($endereco) || empty($rg) || empty($cpf) || empty($celular) || empty($sexo) || empty($email) || empty($parentesco)){
-    $message = '<div class="alert alert-warning alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Atenção! </strong> Por favor insira todos os campos</div>';
+    mesAlerta("Por favor insira todos os campos");
   }else{
     if(add_dep($afiliado_matricula,$nome,$telefone,$nascimento,$endereco,$rg,$cpf,$celular,$email,$sexo,$parentesco)){
-      $message = '<div class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Cadastro efetuado com sucesso!</div>';
+      mesSucesso("Dependente cadastrado com sucesso!");
     }else{
-      $message = '<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Erro ao efetuar cadastro</div>';
+      mesFalha("Erro ao efetuar cadastro");
     }
   }
 }
@@ -41,21 +41,16 @@ include("inc/header.php");
     <h2 class="panel-title"><big>Cadastro de Dependente</big></h2>
   </div>
 <div class="panel-body">
-<?php
-        if(isset($message)){
-          echo $message;
-        }
-      ?>
   <form class="form-horizontal" data-toggle="validator" method="post"  role="form" action="cad_dep.php">
     <div class="form-group has-feedback">
         <label for="matricula" class="col-sm-2 control-label">Matricula do Arrumador:<span class="required">*</span></label>
         <div class="col-sm-10">
         <input type="text" required class="form-control  form-control-success" id="afiliado_matricula" name="afiliado_matricula"   data-error="Por favor, informe um número de matrícula correto." pattern="[0-9]{5}$" value="<?php echo htmlspecialchars($afiliado_matricula); ?>"/>
-        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         <div class="help-block with-errors"></div>
       </div>
       </div>
-      
+
       <div class="form-group has-feedback">
       <label for="nome" class="col-sm-2 control-label">Nome Completo:<span class="required">*</span></label>
       <div class="col-sm-10">
@@ -64,7 +59,7 @@ include("inc/header.php");
       <div class="help-block with-errors"></div>
       </div>
       </div>
-      
+
       <script>
         $(document).ready(function() {
           $('.datepicker').datepicker({
@@ -91,7 +86,7 @@ include("inc/header.php");
       <select id="sexo" class="form-control" data-error="Por favor, selecione o sexo." name="sexo" required>
         <option value="">Selecione:</option>
         <option value="Masculino" <?php if($sexo == 'Masculino') echo 'selected'; ?>>Masculino</option>
-        <option value="Feminino" <?php if($sexo == 'Feminino') echo 'selected'; ?>>Feminino</option>   
+        <option value="Feminino" <?php if($sexo == 'Feminino') echo 'selected'; ?>>Feminino</option>
        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
       </select> <div class="help-block with-errors"></div>
       </div>

@@ -22,12 +22,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
  if(empty($afiliado_matricula)||empty($mes)||empty($ano)||empty($bruto)){
-    mesErro("Por favor insira todos os campos");
+    mesAlerta("Por favor insira todos os campos");
   }else{
     if(pagamento($afiliado_matricula, $taxa_rcs, $bruto, $unimed, $uniodonto, $rcs, $das, $mes, $ano, $descontounimed, $descontouniodonto)){
-    mesErro("Pagamento realizado");
+    mesSucesso("Pagamento realizado");
     }else{
-      mesErro("Não foi possível concluir");
+      mesFalha("Não foi possível concluir");
     }
   }
 
@@ -36,7 +36,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 include("inc/header.php");
 ?>
 
-<div class="cad-arr">
+<div class="pagamento">
   <h2 class="bg-info">Pagamento de Convênios</h2>
   <form class="form-group" data-toggle="validator" method="post" action="pagamento.php">
     <table>

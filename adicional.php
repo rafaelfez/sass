@@ -15,12 +15,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
 if(empty($afiliado_matricula)||empty($mes)||empty($ano)||empty($adicional)){
-    mesErro("Por favor insira todos os campos");
+    mesAlerta("Por favor insira todos os campos");
   }else{
     if(adicional($afiliado_matricula, $mes, $ano, $adicional)){
-      mesErro("Adicional cadastrado");
+      mesSucesso("Adicional cadastrado");
       }else{
-      mesErro("Não foi possível concluir");
+      mesFalha("Não foi possível concluir");
     }
   }
 

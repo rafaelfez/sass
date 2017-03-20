@@ -67,21 +67,6 @@
   top: 15%;
 }
 
-.login img{
-	font-size: 50px;
-  position: absolute;
-  left: 28%;
-  top: 15%;
-}
-
-.login form{
-	font-size:50px;
-  text-align: center;
-	position: absolute;
-	left: 43%;
-  top: 65%;
-}
-
 .consulta {
 	font-size: 30px;
   text-align: center;
@@ -103,6 +88,14 @@
   text-align: center;
   position: absolute;
   left: 60%;
+  top: 15%;
+}
+
+.login {
+	font-size: 18px;
+  text-align: left;
+  position: absolute;
+  left: 27%;
   top: 15%;
 }
 
@@ -130,21 +123,30 @@
   top: 15%;
 }
 
-.pagament {
-	font-size: 52px;
+.pagamento {
+	font-size: 18px;
+  text-align: center;
+  position: absolute;
+  left: 32%;
+  top: 15%;
+}
+
+.sms-geral {
+	font-size: 18px;
   text-align: center;
   position: absolute;
   left: 40%;
   top: 15%;
 }
 
-.sms-geral {
+.sms-devedores {
 	font-size: 18px;
-	text-align:center;
-	position: absolute;
-	left:20%;
-	top:15%;
+  text-align: center;
+  position: absolute;
+  left: 32%;
+  top: 45%;
 }
+
 
 .form-container{
 	font-size: 18px;

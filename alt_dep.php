@@ -24,12 +24,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
   if(empty($afiliado_matricula) || empty($nome) || empty($telefone) || empty($nascimento) || empty($endereco) || empty($rg) || empty($cpf) || empty($celular) || empty($sexo) || empty($email) || empty($parentesco)){
-    mesErro("Por favor insira todos os campos");
+    mesAlerta("Por favor insira todos os campos");
   }else{
     if(alterarDependente($afiliado_matricula,$nome,$telefone,$nascimento,$endereco,$rg,$cpf,$celular,$email,$sexo,$parentesco)){
-      mesErro("Dependente Alterado");
+      mesSucesso("Dependente Alterado");
     }else{
-      mesErro("Não foi possível alterar");
+      mesFalha("Não foi possível alterar");
     }
   }
 }

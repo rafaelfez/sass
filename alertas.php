@@ -7,7 +7,7 @@ $tituloPagina = "Alertas";
 include("inc/header.php");
 ?>
 
-<div class="cad-arr">
+<div class="sms-geral">
   <h2 class="bg-info">SMS para todos Filiados</h2>
   <form id="sms-geral" class="form-group" method="post" action="send.php">
     <textarea name="mensagem" class="form-control" rows="5" cols="40" maxlength="100"></textarea>
@@ -21,7 +21,7 @@ include("inc/header.php");
 -->
 </div>
 
-<div class="form-container">
+<div class="sms-devedores">
     <ul class="items">
       <br />
       <br />

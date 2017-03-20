@@ -25,12 +25,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
   if(empty($matricula) || empty($nome) || empty($telefone) || empty($nascimento) || empty($endereco) || empty($rg) || empty($cpf) || empty($celular) || empty($sexo) || empty($email) || empty($situacao) || empty($taxa_rcs)){
-    mesErro("Por favor insira todos os campos");
+    mesAlerta("Por favor insira todos os campos");
   }else{
     if(alterarFiliado($matricula,$nome,$telefone,$nascimento,$endereco,$rg,$cpf,$celular,$sexo,$email,$situacao,$taxa_rcs)){
-      mesErro("Filiado Alterado");
+      mesSucesso("Filiado Alterado");
     }else{
-      mesErro("Não foi possível alterar");
+      mesFalha("Não foi possível alterar");
     }
   }
 }

@@ -17,12 +17,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
 if(empty($afiliado_matricula)||empty($mes)||empty($ano)||empty($decimoterceiro)||empty($refeicao)||empty($ferias)){
-    mesErro("Por favor insira todos os campos");
+    mesAlerta("Por favor insira todos os campos");
   }else{
     if(encargo($afiliado_matricula, $mes, $ano, $decimoterceiro, $refeicao, $ferias)){
-      mesErro("Encargos sociais registrados");
+      mesSucesso("Encargos sociais registrados");
     }else{
-      mesErro("Não foi possível concluir");
+      mesFalha("Não foi possível concluir");
     }
   }
 }

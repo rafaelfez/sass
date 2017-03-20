@@ -23,12 +23,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $devendo = filter_input(INPUT_POST, 'devendo',  FILTER_SANITIZE_STRING);
 
   if(empty($salario) || empty($bruto) || empty($mes) || empty($ano)){
-    mesErro("Por favor insira todos os campos");
+    mesAlerta("Por favor insira todos os campos");
   }else{
     if(alterarPagamento($bruto, $salario, $mes, $ano, $unimed, $uniodonto, $adicional, $das, $rcs, $id)){
-      mesErro("Pagamento alterado");
+      mesSucesso("Pagamento alterado");
     }else{
-      mesErro("Não foi possível concluir");
+      mesFalha("Não foi possível concluir");
     }
   }
 

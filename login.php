@@ -49,7 +49,7 @@ try{
 
   <body class>
 
-    <nav class="navbar navbar">
+<nav class="navbar navbar">
   <div class="container-fluid">
     <div class="navbar-header">
       <abbr title="Home"><a class="navbar-brand" href="index.php">SASS</a>
@@ -60,9 +60,11 @@ try{
   </div>
 </nav>
 
-  <div class="cad-arr">
+  <div class="login">
 
     <abbr title="Sindicato dos Arrumadores de São Sebastião"><img src="img/saas-logo.png" align="center" style="width:600px; height:300px;"></abbr>
+    <br>
+    <br>
     <div class="panel panel-primary">
   <div class="panel-heading">
     <h2 class="panel-title"><big>Login</big></h2>
@@ -88,5 +90,6 @@ try{
     </form>
   </div>
   </div>
+</div>
 
 <?php include("inc/footer.php"); ?>
