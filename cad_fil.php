@@ -3,7 +3,7 @@
 require 'inc/funcoes.php';
 
 $tituloPagina = "Cadastro de Filiado";
-$matricula = $nome = $telefone = $nascimento = $endereco = $rg = $cpf = $celular = $sexo = $email = $situacao = $taxa_rcs = $message = "";
+$matricula = $nome = $telefone = $nascimento = $endereco = $numero_endereco = $bairro = $cidade = $cep = $uf = $rg = $cpf = $celular = $sexo = $email = $situacao = $taxa_rcs = $message = "";
 
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -12,6 +12,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $telefone = filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_NUMBER_INT);
   $nascimento = filter_input(INPUT_POST, 'nascimento', FILTER_SANITIZE_STRING);
   $endereco = filter_input(INPUT_POST, 'endereco', FILTER_SANITIZE_STRING);
+  //$numero_endereco = filter_input(INPUT_POST, 'numero_endereco', FILTER_SANITIZE_NUMBER_INT);
+  //$bairro = filter_input(INPUT_POST, 'bairro', FILTER_SANITIZE_STRING);
+  //$cidade = filter_input(INPUT_POST, 'cidade', FILTER_SANITIZE_STRING);
+  //$cep = filter_input(INPUT_POST, 'cep', FILTER_SANITIZE_NUMBER_INT);
   $rg = filter_input(INPUT_POST, 'rg', FILTER_SANITIZE_NUMBER_INT);
   $cpf = filter_input(INPUT_POST, 'cpf', FILTER_SANITIZE_NUMBER_INT);
   $celular = filter_input(INPUT_POST, 'celular', FILTER_SANITIZE_NUMBER_INT);
@@ -21,10 +25,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $situacao = filter_input(INPUT_POST, 'situacao', FILTER_SANITIZE_STRING);
 
 
-  if(empty($matricula) || empty($nome) || empty($telefone) || empty($nascimento) || empty($endereco) || empty($rg) || empty($cpf) || empty($celular) || empty($sexo) || empty($email) || empty($situacao) || empty($taxa_rcs)){
+  if(empty($matricula) || empty($nome) || empty($nascimento) || empty($celular) ||  empty($email) || empty($endereco) || empty($rg) || empty($cpf) || empty($situacao) || empty($taxa_rcs)){
     $message = '<div class="alert alert-warning alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Atenção! </strong> Por favor insira todos os campos</div>';
   }else{
-    if(add_arr($matricula,$nome,$telefone,$nascimento,$endereco,$rg,$cpf,$celular,$sexo,$email,$situacao,$taxa_rcs)){
+    if(add_fil($matricula,$nome,$nascimento,$sexo,$telefone,$celular,$email,$endereco,$rg,$cpf,$situacao,$taxa_rcs)){
       $message = '<div class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Cadastro efetuado com sucesso!</div>';
     }else{
       $message = '<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Erro ao efetuar cadastro</div>';
@@ -37,96 +41,226 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 include("inc/header.php");
 ?>
-<div class="cad-arr">
-<?php
-        if(isset($message)){
-          echo $message;
-        }
-      ?>
-   <h2 class="bg-info">Cadastro de Filiado</h2>
-  <form class="form-group" data-toggle="validator" method="post" action="cad_fil.php">
-  
-    <table>
-        <tr>
-          <th><label for="matricula">Matrícula:<span class="required">*</span></label></th>
-          <td><input type="text" required placeholder="" class="form-control" id="matricula" name="matricula"  data-error="Por favor, informe um número de matrícula correto." required value="<?php echo htmlspecialchars($matricula); ?>"/> 
-          <div class="help-block with-errors"></div>
-       </td>
-        </tr>
-        <tr>
-          <th><label for="nome">Nome:<span class="required">*</span></label></th>
-          <td><input type="text" required placeholder="" class="form-control" id="nome" name="nome" data-error="Por favor, informe um nome correto." value="<?php echo htmlspecialchars($nome); ?>"/> <div class="help-block with-errors"></div>
 
-          </td>
-        </tr>
-        <th><label for="nascimento">Data de Nascimento:<span class="required">*</span></label></th>
-          <td><input type="text" required placeholder="DD/MM/AAAA" class="form-control" id="nascimento" name="nascimento" value="<?php echo htmlspecialchars($nascimento); ?>"/>
-          <div class="help-block with-errors"></div>
-          </td>
-        </tr>
-        <tr>
-          <th><label for="sexo">Sexo:<span class="required">*<span></label></th>
-          <td><select id="sexo" class="form-control" name="sexo" required>
-            <option  required value="">Selecione:</option>
-            <option value="Masculino" <?php if($sexo == 'Masculino') echo 'selected'; ?>>Masculino</option>
-            <option value="Feminino" <?php if($sexo == 'Feminino') echo 'selected'; ?>>Feminino</option>
-          </select> <div class="help-block with-errors"></div></td>
-        </tr>
-        <tr>
-          <th><label for="telefone">Telefone:<span class="required">*</span></label></th>
-          <td><input type="text" required placeholder="(xx)xxxx-xxxx" class="form-control" id="telefone" name="telefone" value="<?php echo htmlspecialchars($telefone); ?>"/>
-          <div class="help-block with-errors"></div>
-          </td>
-        </tr>
-        <tr>
-          <th><label for="celular">Celular:<span class="required">*</span></label></th>
-          <td><input type="text" required placeholder="(xx)xxxxx-xxxx" class="form-control" id="celular" name="celular" value="<?php echo htmlspecialchars($celular); ?>"/>
-            <div class="help-block with-errors"></div>
-          </td>
-        </tr>
-        <tr>
-          <th><label for="email">Email:<span class="required">*</span></label></th>
-          <td><input type="text" required placeholder="nome@mail.com" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>"/>
-            <div class="help-block with-errors"></div>
-          </td>
-        </tr>
-        <tr>
-          <th><label for="endereco">Endereço:<span class="required">*</span></label></th>
-          <td><input type="text" required placeholder="Rua A, número 20, Centro" class="form-control" id="endereco" name="endereco" value="<?php echo htmlspecialchars($endereco); ?>"/>
-            <div class="help-block with-errors"></div>
-          </td>
-        </tr>
-        <tr>
-          <th><label for="rg">RG:<span class="required">*</span></label></th>
-          <td><input type="text" required placeholder="123456789-0" class="form-control" id="rg" name="rg" value="<?php echo htmlspecialchars($rg); ?>"/>
-            <div class="help-block with-errors"></div>
-          </td>
-        </tr>
-        <tr>
-          <th><label for="cpf">CPF:<span class="cpf">*</span></label></th>
-          <td><input type="text" required placeholder="123456789-0" class="form-control" id="cpf" name="cpf" value="<?php echo htmlspecialchars($cpf); ?>"/>
-            <div class="help-block with-errors"></div>
-          </td>
-        </tr>
-        <tr>
-          <th><label for="situacao">Situação:<span class="required">*</span></label></th>
-          <td><input type="text" required placeholder="Digite a situação..." class="form-control" id="situacao" name="situacao" value="<?php echo htmlspecialchars($situacao); ?>"/>
-            <div class="help-block with-errors"></div>
-          </td>
-        </tr>
-        <tr>
-          <th><label for="taxa_rcs">RCS(%):<span class="required">*</span></label></th>
-          <td><input type="text" required placeholder="Digite a % (somente número)" class="form-control" id="taxa_rcs" name="taxa_rcs" value="<?php echo htmlspecialchars($taxa_rcs); ?>"/>
-            <div class="help-block with-errors"></div>
-          </td>
-        </tr>
-      </table>
-      <br/>
-      <abbr title="Cadastrar Filiado"><input class="btn btn-primary" type="submit" value="Cadastrar"/></abbr>
-      <abbr title="Cancelar cadastro"><input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" /></abbr>
-    </form>
+  <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2 class="panel-title"><big>Cadastro de Filiado</big></h2>
+  </div>
+  <div class="panel-body">
+
+
+      <div class="">
+  <?php
+  if(isset($message)){
+    echo $message;
+  }
+  ?>
   </div>
 
+  <form class="form-horizontal" data-toggle="validator" role="form" method="post" action="cad_fil.php">
+
+
+
+<!--
+
+    <form id="form_cad_fil" data-toggle="validator" role="form">
+
+      <div class="form-group">
+
+        <label for="textNome" class="control-label">Matrícula</label>
+        <input id="textNome" class="form-control" placeholder="Digite a matrícula..." data-minlength="6"  type="text">
+        <div class="help-block"></div>
+      </div>
+
+      ------------------------
+-->
+
+      <div class="form-group has-feedback">
+        <label for="matricula" class="col-sm-2 control-label">Matrícula:<span class="required">*</span></label>
+        <div class="col-sm-10">
+        <input type="text" required class="form-control  form-control-success" id="matricula" name="matricula"   data-error="Por favor, informe um número de matrícula correto." pattern="[0-9]{5,7}$" value="<?php echo htmlspecialchars($matricula); ?>"/>
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+        <div class="help-block with-errors"></div>
+      </div>
+      </div>
+
+
+
+      <div class="form-group has-feedback">
+      <label for="nome" class="col-sm-2 control-label">Nome Completo:<span class="required">*</span></label>
+      <div class="col-sm-10">
+      <input type="text" required placeholder="" class="form-control" id="nome" name="nome" data-error="Por favor, informe um nome correto." value="<?php echo htmlspecialchars($nome); ?>"/>
+       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
+      </div>
+      </div>
+
+
+
+
+      <script>
+        $(document).ready(function() {
+          $('.datepicker').datepicker({
+            language: "pt-BR",
+            orientation: "bottom auto",
+            autoclose: true,
+            todayHighlight: true
+           });
+         });
+
+      </script>
+      <div class="form-group has-feedback">
+      <label for="nascimento" class="col-sm-2 control-label">Data de Nascimento:<span class="required">*</span></label>
+      <div class="col-sm-10">
+      <input data-provide="datepicker" pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}$" placeholder="dd/mm/aaaa" class="form-control datepicker" id="nascimento" name="nascimento" data-error="Por favor, informe uma data de nascimento correta." required value="<?php echo htmlspecialchars($nascimento); ?>"/>
+      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
+      </div>
+      </div>
+
+      <div class="form-group has-feedback">
+      <label for="sexo" class="col-sm-2 control-label">Sexo:<span class="required">*</span></label>
+      <div class="col-sm-10">
+      <select id="sexo" class="form-control" data-error="Por favor, selecione o sexo." name="sexo" required>
+        <option value="">Selecione:</option>
+        <option value="Masculino" <?php if($sexo == 'Masculino') echo 'selected'; ?>>Masculino</option>
+        <option value="Feminino" <?php if($sexo == 'Feminino') echo 'selected'; ?>>Feminino</option>
+       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      </select> <div class="help-block with-errors"></div>
+      </div>
+      </div>
+      
+      <div class="form-group has-feedback">
+      <label for="telefone" class="col-sm-2 control-label">Telefone:<span class="required">*</span></label>
+      <div class="col-sm-10">
+      <input type="text" required pattern="[0-9]{9,12}$" placeholder="Digite somente os números..." class="form-control" id="telefone" name="telefone" data-error="Por favor, informe um número de telefone correto." value="<?php echo htmlspecialchars($telefone); ?>"/>
+      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
+      </div>
+      </div>
+
+      <div class="form-group has-feedback">
+      <label for="celular" class="col-sm-2 control-label">Celular:<span class="required">*</span></label>
+      <div class="col-sm-10">
+      <input type="text" required pattern="[0-9]{10,12}$"  placeholder="Digite somente os números..." class="form-control" id="celular" name="celular" data-error="Por favor, informe um número de celular correto." value="<?php echo htmlspecialchars($celular); ?>"/>
+      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
+      </div>
+      </div>
+
+
+      <div class="form-group has-feedback">
+      <label for="email" class="col-sm-2 control-label">Email:<span class="required">*</span></label>
+      <div class="col-sm-10">
+      <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required placeholder="" class="form-control" id="email" name="email" data-error="Por favor, informe um e-mail válido." value="<?php echo htmlspecialchars($email); ?>"/>
+      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
+      </div>
+      </div>
+
+
+      <div class="form-group has-feedback">
+      <label for="rg" class="col-sm-2 control-label">RG:<span class="required">*</span></label>
+      <div class="col-sm-10">
+      <input type="text" required pattern="[0-9]{7,9}$" placeholder="Digite somente os números..." class="form-control" id="rg" name="rg" data-error="Por favor, informe um número de RG válido." data-min-length=7 value="<?php echo htmlspecialchars($rg); ?>"/>
+       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
+      </div>
+      </div>
+
+      <div class="form-group has-feedback">
+      <label for="cpf" class="col-sm-2 control-label">CPF:<span class="cpf">*</span></label>
+      <div class="col-sm-10">
+      <input type="text" required pattern="[0-9]{11}$" placeholder="Digite somente os números..." class="form-control" id="cpf" name="cpf" data-error="Por favor, informe um número de CPF válido." value="<?php echo htmlspecialchars($cpf); ?>"/>
+       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
+      </div>
+      </div>
+
+
+      <div class="form-group has-feedback">
+      <label for="endereco" class="col-sm-2 control-label">Endereço:<span class="required">*</span></label>
+      <div class="col-sm-10">
+      <input type="text" required placeholder="" class="form-control" id="endereco"  name="endereco" data-error="Por favor, informe um nome de logradouro."value="<?php echo htmlspecialchars($endereco); ?>"/>
+      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
+      </div>
+      </div>
+
+      <!--<div class="form-group has-feedback">
+      <label for="numero_endereco" class="col-sm-2 control-label">Número:<span class="required">*</span></label>
+      <div class="col-sm-10">
+      <input type="text" required placeholder="" class="form-control" id="numero_endereco"  name="numero_endereco" data-error="Por favor, informe um número válido."value="<?php echo htmlspecialchars($numero_endereco); ?>"/>
+      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
+      </div>
+      </div>
+
+      <div class="form-group has-feedback">
+      <label for="bairro" class="col-sm-2 control-label">Bairro:<span class="required">*</span></label>
+      <div class="col-sm-10">
+      <input type="text" required placeholder="" class="form-control" id="bairro"  name="bairro" data-error="Por favor, informe um nome de bairro." value="<?php echo htmlspecialchars($bairro); ?>"/>
+      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
+      </div>
+      </div>
+
+      <div class="form-group has-feedback">
+      <label for="cidade" class="col-sm-2 control-label">Cidade:<span class="required">*</span></label>
+      <div class="col-sm-10">
+      <select id="cidade" class="form-control" data-error="Por favor, selecione uma cidade." name="cidade" required>
+        <option value="">Selecione:</option>
+        <option value="São Sebastião" <?php if($cidade == 'São Sebastião') echo 'selected'; ?>>São Sebastião</option>
+        <option value="Caraguatuba" <?php if($cidade == 'Caraguatuba') echo 'selected'; ?>>Caraguatatuba</option>
+        <option value="Ilhabela" <?php if($cidade == 'Ilhabela') echo 'selected'; ?>>Ilhabela</option>
+       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      </select> <div class="help-block with-errors"></div>
+      </div>
+      </div>
+  
+      <div class="form-group has-feedback">
+      <label for="cep" class="col-sm-2 control-label">CEP:<span class="required">*</span></label>
+      <div class="col-sm-10">
+      <input type="text" required pattern="[0-9]{8}$" data-error="Por favor, informe um número de CEP válido." placeholder="Digite somente os números..." class="form-control" id="cep" name="cep" value="<?php echo htmlspecialchars($cep); ?>"/>
+       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
+      </div>
+      </div>
+  -->
+      <div class="form-group has-feedback">
+      <label for="situacao" class="col-sm-2 control-label">Situação:<span class="required">*</span></label>
+      <div class="col-sm-10">
+      <input type="text" required data-error="Por favor, informe a situação do filiado." placeholder="" class="form-control" id="situacao" name="situacao" value="<?php echo htmlspecialchars($situacao); ?>"/>
+       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
+      </div>
+      </div>
+
+      <div class="form-group has-feedback">
+      <label for="taxa_rcs" class="col-sm-2 control-label">RCS(%):<span class="required">*</span></label>
+      <div class="col-sm-10">
+      <input type="text" required pattern="[0-9]{2}$" data-error="Por favor, informe uma porcentagem." placeholder="Digite a % (somente número)" class="form-control" id="taxa_rcs" name="taxa_rcs" value="<?php echo htmlspecialchars($taxa_rcs); ?>"/>
+       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
+      </div>
+      </div>
+
+    <br/>
+
+    <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+    <abbr title="Cadastrar Filiado"><input class="btn btn-primary" type="submit" value="Cadastrar"/></abbr>
+    <abbr title="Cancelar cadastro"><input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" /></abbr>
+
+     </div>
+
+     </form>
+     </div>
+
+      </div>
+</div>
+</br>
+<br>
 <?php
 include("inc/footer.php");
 ?>

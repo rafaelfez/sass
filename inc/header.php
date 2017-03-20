@@ -4,8 +4,14 @@
     <title><?php echo $tituloPagina; ?></title>
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-datepicker3.min.css" type="text/css">
     <script src="bootstrap/js/jquery-3.1.1.min.js" type="text/javascript"></script>
     <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="bootstrap/js/validator.min.js" type="text/javascript">></script>
+    <script src="bootstrap/js/bootstrap-datepicker.js" type="text/javascript">></script>
+    <script src="bootstrap/js/bootstrap-datepicker.min.js" type="text/javascript">></script>
+    <script src="bootstrap/locales/bootstrap-datepicker.pt-BR.min.js" type="text/javascript">></script>
+    
   </head>
 
   <body>
@@ -18,8 +24,7 @@
     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Cadastro <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="cad_fil.php">Filiado</a></li>
-          <li><a href="cad_dep.php">Dependente</a>
-          </li>
+          <li><a href="cad_dep.php">Dependente</a></li>
           <li><a href="cad_con.php">Convênio</a></li>
         </ul>
         </li>

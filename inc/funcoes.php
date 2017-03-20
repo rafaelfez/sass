@@ -17,7 +17,7 @@ function mesErro($texto){
   echo '</html>';
 }
 
-function add_arr($matricula,$nome,$telefone,$nascimento,$endereco,$rg,$cpf,$celular,$sexo,$email,$situacao,$taxa_rcs){
+function add_fil($matricula,$nome,$nascimento,$sexo,$telefone,$celular,$email,$endereco,$rg,$cpf,$situacao,$taxa_rcs){
 
   include 'conexao.php';
 

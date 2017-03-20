@@ -63,6 +63,11 @@ try{
   <div class="cad-arr">
 
     <abbr title="Sindicato dos Arrumadores de São Sebastião"><img src="img/saas-logo.png" align="center" style="width:600px; height:300px;"></abbr>
+    <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2 class="panel-title"><big>Login</big></h2>
+  </div>
+  <div class="panel-body">
     <form class="form-login" method="post" action="login.php">
       <?php
         if(isset($message)){
@@ -71,7 +76,7 @@ try{
       ?>
       <table>
         <tr>
-          <th><label for="login">Login:<span class="required"></span></label></th>
+          <th><label for="login">Usuário:<span class="required"></span></label></th>
           <td><abbr title="Insira seu login de usuário"><input type="text" name="username" class="form-control" required/></abbr></td>
         </tr>
         <tr>
@@ -81,6 +86,7 @@ try{
       </table>
       <abbr title="Entrar no sistema"><input type="submit" name="login" class="btn btn-info" value="Entrar" />
     </form>
+  </div>
   </div>
 
 <?php include("inc/footer.php"); ?>
