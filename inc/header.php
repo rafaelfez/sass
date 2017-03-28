@@ -11,10 +11,11 @@
     <script src="bootstrap/js/bootstrap-datepicker.js" type="text/javascript">></script>
     <script src="bootstrap/js/bootstrap-datepicker.min.js" type="text/javascript">></script>
     <script src="bootstrap/locales/bootstrap-datepicker.pt-BR.min.js" type="text/javascript">></script>
-    
+
   </head>
 
   <body>
+  <header>
   <nav class="navbar navbar">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -25,7 +26,7 @@
         <ul class="dropdown-menu">
           <li><a href="cad_fil.php">Filiado</a></li>
           <li><a href="cad_dep.php">Dependente</a></li>
-          <li><a href="cad_con.php">Convênio</a></li>
+          <!--<li><a href="cad_con.php">Convênio</a></li>-->
         </ul>
         </li>
       <li><a href="alertas.php">Alertas</a></li>
@@ -44,36 +45,7 @@
     </ul>
   </div>
 </nav>
-
-  <!--
-    <div class="header">
-      <div class="wrapper">
-        <nav id="menu">
-        <ul>
-          <li><a href="index.php"><abbr title="Home"><img src="img/home.png"> </a></li>
-          <li><a href="alertas.php">Alertas</a></li>
-          <li><a href="#">Alteração</a>
-            <ul>
-              <li><a href="alt_fil.php">Filiado</a></li>
-              <li><a href="alt_dep.php">Dependente</a></li>
-              <li><a href="alt_con.php">Convênio</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Cadastro</a>
-            <ul>
-              <li><a href="cad_fil.php">Filiado</a></li>
-              <li><a href="cad_dep.php">Dependente</a></li>
-              <li><a href="cad_con.php">Convênio</a></li>
-            </ul>
-          </li>
-          <li><a href="consulta.php">Consulta</a></li>
-          <li><a href="pagamento.php">Pagamento</a></li>
-          <li><a href="logout.php">Sair</a></li>
-        </ul>
-      </nav>
-    </div>
-
-    -->
+</header>
 
     <div id="content">
       <?php //verificando se esta logado

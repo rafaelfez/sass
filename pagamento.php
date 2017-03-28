@@ -36,19 +36,31 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 include("inc/header.php");
 ?>
 
-<div class="pagamento">
-  <h2 class="bg-info">Pagamento de Convênios</h2>
-  <form class="form-group" data-toggle="validator" method="post" action="pagamento.php">
-    <table>
-      <tr>
-        <th><label for="Afiliado_matricula">Matrícula:<span class="required">*</span></label></th>
-        <td><input type="text" class="form-control" id="Afiliado_matricula" name="Afiliado_matricula" required value="<?php echo htmlspecialchars($afiliado_matricula); ?>"/>
-          <div class="help-block with-errors"></div>
-        </td>
-      </tr>
-      <tr>
-        <th><label for="mes">Mês:<span class="required">*<span></label></th>
-        <td><select class="form-control"  id="mes" name="mes" required>
+<body>
+
+
+  <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2 class="panel-title"><big>Pagamento de Convênios</big></h2>
+  </div>
+  <div class="panel-body">
+
+  <form class="form-horizontal" data-toggle="validator" role="form" method="post" action="pagamento.php">
+
+
+        <div class="form-group has-feedback">
+        <label for="Afiliado_matricula" class="col-sm-2 control-label">Matrícula:<span class="required">*</span></label>
+        <div class="col-sm-2">
+        <input type="text" class="form-control  form-control-success" id="Afiliado_matricula" name="Afiliado_matricula" data-error="Por favor, informe um número de matrícula correto." pattern="[0-9]{5,7}$" required value="<?php echo htmlspecialchars($afiliado_matricula); ?>"/>
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+        </div>
+        <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group has-feedback">
+        <label for="mes" class="col-sm-2 control-label">Mês:<span class="required">*</span></label>
+        <div class="col-sm-2">
+        <select class="form-control  form-control-success"  id="mes" name="mes" data-error="Por favor, selecione o mês referente." required>
           <option value="">Selecione:</option>
           <option value="Janeiro" <?php if($mes == 'Janeiro') echo 'selected'; ?>>Janeiro</option>
           <option value="Fevereiro" <?php if($mes == 'Fevereiro') echo 'selected'; ?>>Fevereiro</option>
@@ -62,58 +74,86 @@ include("inc/header.php");
           <option value="Outubro" <?php if($mes == 'Outubro') echo 'selected'; ?>>Outubro</option>
           <option value="Novembro" <?php if($mes == 'Novembro') echo 'selected'; ?>>Novembro</option>
           <option value="Dezembro" <?php if($mes == 'Dezembro') echo 'selected'; ?>>Dezembro</option>
-        </select>
-          <div class="help-block with-errors"></div>
-        </td>
-      </tr>
-      <tr>
-        <th><label for="ano">Ano:<span class="required">*<span></label></th>
-        <td><select class="form-control" id="ano" name="ano" required>
+          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          </select>
+          </div>
+        <div class="help-block with-errors"></div>
+        </div>
+        
+        
+        <div class="form-group has-feedback">
+        <label for="ano" class="col-sm-2 control-label">Ano:<span class="required">*</span></label>
+        <div class="col-sm-2">
+        <select class="form-control  form-control-sucess" id="ano" name="ano"  required>
           <option value="2017" <?php if($ano == '2017') echo 'selected'; ?>>2017</option>
           <option value="2018" <?php if($ano == '2018') echo 'selected'; ?>>2018</option>
           <option value="2019" <?php if($ano == '2019') echo 'selected'; ?>>2019</option>
           <option value="2020" <?php if($ano == '2020') echo 'selected'; ?>>2020</option>
-        </select>
-          <div class="help-block with-errors"></div>
-        </td>
-      </tr>
+           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          </select>
+          </div>
+        <div class="help-block with-errors"></div>
+        </div>
+        
+        
   <!--  <input class="button button--primary button--topic-php" type="submit" value="Avançar" />
   </form>
   <form class="pagamento2" method="post" action="pagamento.php">-->
 
-      <tr>
-        <th><label for="bruto">Salário (R$):<span class="required">*</span></label></th>
-        <td><input type="text" class="form-control" id="bruto" name="bruto" required value="<?php echo htmlspecialchars($bruto); ?>"/>
-          <div class="help-block with-errors"></div>
-        </td>
-      </tr>
-      <tr>
-        <th><label for="unimed">Unimed (R$):<span class="required">*</span></label></th>
-        <td><input type="text" class="form-control" id="unimed" name="unimed" required value="<?php echo htmlspecialchars($unimed); ?>"/>
-          <div class="help-block with-errors"></div>
-        </td>
-        <th><label for="descontounimed">Desconto<span class="required">*<span></label></th>
-         <td><select class="form-control" id="descontounimed" name="descontounimed" required>
-           <option value="">Selecione um</option>
+        <div class="form-group has-feedback">
+        <label for="bruto" class="col-sm-2 control-label">Salário (R$):<span class="required">*</span></label>
+        <div class="col-sm-2">
+        <input type="text" class="form-control" id="bruto" name="bruto" data-error="Por favor, informe um valor correto." required value="<?php echo htmlspecialchars($bruto); ?>"/>
+          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          </div>
+        <div class="help-block with-errors"></div>
+        </div>
+        
+        <div class="form-group has-feedback">
+        <label for="unimed" class="col-sm-2 control-label">Unimed (R$):<span class="required">*</span></label>
+        <div class="col-sm-2">
+        <input type="text" class="form-control" id="unimed" name="unimed" data-error="Por favor, informe um valor correto." required value="<?php echo htmlspecialchars($unimed); ?>"/>
+          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          </div>
+        <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group has-feedback">
+        <label for="descontounimed" class="col-sm-2 control-label">Desconto:<span class="required">*</span></label>
+        <div class="col-sm-2">
+         <select class="form-control" id="descontounimed" name="descontounimed" data-error="Por favor, selecione um tipo de desconto." required>
+           <option value="">Selecione:</option>
            <option value="DAS" <?php if($descontounimed == 'DAS') echo 'selected'; ?>>DAS</option>
            <option value="RCS" <?php if($descontounimed == 'RCS') echo 'selected'; ?>>RCS</option>
-           <div class="help-block with-errors"></div>
-         </td>
-      </tr>
-      <tr>
-        <th><label for="uniodonto">Uniodonto (R$):<span class="required">*</span></label></th>
-        <td><input type="text" class="form-control" id="uniodonto" name="uniodonto" required value="<?php echo htmlspecialchars($uniodonto); ?>"/>
-          <div class="help-block with-errors"></div>
-        </td>
-        <th><label for="descontouniodonto">Desconto<span class="required">*<span></label></th>
-          <td><select class="form-control" id="descontouniodonto" name="descontouniodonto" required>
-            <option value="">Selecione um</option>
+           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          </select>
+          </div>
+        <div class="help-block with-errors"></div>
+        </div>
+         
+        <div class="form-group has-feedback"> 
+        <label for="uniodonto" class="col-sm-2 control-label">Uniodonto (R$):<span class="required">*</span></label>
+        <div class="col-sm-2">
+        <input type="text" class="form-control" id="uniodonto" name="uniodonto" data-error="Por favor, informe um valor correto." required value="<?php echo htmlspecialchars($uniodonto); ?>"/>
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+        </div>
+        <div class="help-block with-errors"></div>
+        </div>
+        
+
+        <div class="form-group has-feedback">
+        <label for="descontouniodonto" class="col-sm-2 control-label">Desconto:<span class="required">*</span></label>
+        <div class="col-sm-2">
+          <select class="form-control" id="descontouniodonto" name="descontouniodonto" data-error="Por favor, selecione um tipo de desconto." required>
+            <option value="">Selecione:</option>
             <option value="DAS" <?php if($descontouniodonto == 'DAS') echo 'selected'; ?>>DAS</option>
             <option value="RCS" <?php if($descontouniodonto == 'RCS') echo 'selected'; ?>>RCS</option>
-            <div class="help-block with-errors"></div>
-          </td>
-      </tr>
-      </table>
+            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          </select>
+          </div>
+        <div class="help-block with-errors"></div>
+        </div>
+         
       <!--
     <h2 class="bg-info">Dependentes</h2>
     <table>
@@ -157,13 +197,16 @@ include("inc/header.php");
     </table>
     -->
 
-    <br/>
+    <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
     <abrr title="Concluir registro de pagamento"><input class="btn btn-primary" type="submit" value="Concluir" /></abrr>
     <abrr title="Cancelar pagamento"><input class="btn btn-danger" type="button" value="Cancelar"  onclick="javascript: location.href='index.php';"/></abrr>
+    </div>
+     </div>
+
   </form>
-</div>
+  </div>
+  </div>
 
+  <?php include("inc/footer.php"); ?>
 
-<?php
-include("inc/footer.php");
-?>

@@ -21,20 +21,32 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 include("inc/header.php");
 ?>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2 class="panel-title"><big>Consulta</big></h2>
+  </div>
+  <div class="panel-body">
 
-<div class="cad-arr">
-  <h2 class="bg-info">Consultar</h2>
-  <form class="form-group" method="post" action="">
-    <table>
-      <tr>
-        <th><label for="matricula">Matrícula:<span class="required"></span></label></th>
-        <td><input type="text" class="form-control" id="matricula" name="matricula" required value="<?php echo htmlspecialchars($matricula); ?>"/></td>
-      </tr>
-    </table>
-    </br>
+  <form class="form-horizontal" data-toggle="validator" role="form" method="post" action="consulta.php">
+
+    <div class="form-group has-feedback">
+        <label for="matricula" class="col-sm-2 control-label">Matrícula:<span class="required">*</span></label>
+        <div class="col-sm-2">
+        <input type="text" required class="form-control  form-control-success" id="matricula" name="matricula" data-error="Por favor, informe um número de matrícula correto." pattern="[0-9]{5,7}$" value="<?php echo htmlspecialchars($matricula); ?>"/>
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+        </div>
+        <div class="help-block with-errors"></div>
+        </div>
+
+    <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
     <abrr title="Consultar Filiado"><input class="btn btn-primary" type="submit" value="Consultar"/></abrr>
     <abrr title="Cancelar Consulta"><input class="btn btn-danger" type="button" value="Cancelar"  onclick="javascript: location.href='index.php';"/></abrr>
+    </div>
+    </div>
+
   </form>
+
   <br />
   <br />
   <a href="das.php">DAS</a>
@@ -42,3 +54,6 @@ include("inc/header.php");
   <br />
   <a href="historico.php">Histórico</a>
 </div>
+</form>
+
+<?php include("inc/footer.php"); ?>

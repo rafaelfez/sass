@@ -9,20 +9,34 @@ $das1 = '';
 include("inc/header.php");
 ?>
 
-<div class="cad-arr">
-  <h2 class="bg-info">DAS</h2>
-  <form class="form-group" method="post" action="das.php">
-    <table>
-      <tr>
-        <th><label for="das">DAS do Sindicato:<span class="required"></span></label></th>
-        <td><input type="text" class="form-control" id="das" name="das" disabled="disabled" value="<?php echo get_das(); ?>"/></td>
-      </tr>
-    </table>
-    <br />
+
+<div class="panel panel-primary">
+<div class="panel-heading">
+    <h2 class="panel-title"><big>DAS</big></h2>
+  </div>
+<div class="panel-body">
+
+  <form class="form-horizontal" data-toggle="validator" method="post"  role="form" action="das.php">
+
+<div class="form-group">
+<label for="das" class="col-sm-2 control-label">DAS do Sindicato:<span class="required"></span></label>
+<div class="col-sm-3">
+<input type="text" class="form-control" id="das" name="das" disabled="disabled" value="<?php echo get_das(); ?>"/>
+       </div>
+      <div class="help-block with-errors"></div>
+      </div>
+
+
   </form>
 </div>
-<div class="form-container">
-  <h2 class="bg-info">Transações</h2>
+</div>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2 class="panel-title"><big>Transações</big></h2>
+  </div>
+  <div class="panel-body">
+
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
@@ -43,4 +57,5 @@ include("inc/header.php");
     </ul>
     </tbody>
   </table>
+</div>
 </div>

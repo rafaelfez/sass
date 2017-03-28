@@ -47,7 +47,8 @@ try{
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
 
-  <body class>
+
+
 
 <nav class="navbar navbar">
   <div class="container-fluid">
@@ -60,9 +61,10 @@ try{
   </div>
 </nav>
 
+<body>
   <div class="login">
 
-    <abbr title="Sindicato dos Arrumadores de São Sebastião"><img src="img/saas-logo.png" align="center" style="width:600px; height:300px;"></abbr>
+    <abbr title="Sindicato dos Arrumadores de São Sebastião"><img src="img/saas-logo.png" align="center" style="width:600px; height:250px;"></abbr>
     <br>
     <br>
     <div class="panel panel-primary">
@@ -70,26 +72,51 @@ try{
     <h2 class="panel-title"><big>Login</big></h2>
   </div>
   <div class="panel-body">
-    <form class="form-login" method="post" action="login.php">
+    <form class="form-login  form-horizontal" method="post" action="login.php">
       <?php
         if(isset($message)){
           echo $message;
         }
       ?>
-      <table>
-        <tr>
-          <th><label for="login">Usuário:<span class="required"></span></label></th>
-          <td><abbr title="Insira seu login de usuário"><input type="text" name="username" class="form-control" required/></abbr></td>
-        </tr>
-        <tr>
-          <th><label for="senha">Senha:<span class="required"></span></label></th>
-          <td><abbr title="Insira sua senha"><input type="password" name="password" class="form-control" required /></abbr></td>
-        </tr>
-      </table>
+          <div class="form-group">
+          <label for="login" class="col-sm-2 control-label">Usuário:<span class="required"></span></label>
+          <div class="col-sm-10">
+          <abbr title="Insira seu login de usuário"><input type="text" name="username" class="form-control" required/></abbr>
+          </div>
+          </div>
+
+          <div class="form-group">
+          <label for="senha" class="col-sm-2 control-label">Senha:<span class="required"></span></label>
+          <div class="col-sm-10">
+          <abbr title="Insira sua senha"><input type="password" name="password" class="form-control" required /></abbr>
+          </div>
+          </div>
+        
+      <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">  
       <abbr title="Entrar no sistema"><input type="submit" name="login" class="btn btn-info" value="Entrar" />
+      </abbr>
+      </div>
+      </div>
+
     </form>
   </div>
   </div>
 </div>
 
-<?php include("inc/footer.php"); ?>
+</div>
+  
+  
+
+  </body>
+
+<footer>
+    <div class="wrapper">
+      <p><?php echo date("j F Y - "); ?>Sistema SASS</p>
+    </div>
+  </footer>
+
+</html>
+
+
+<!-- Verificar estrutura HTML das páginas -->
