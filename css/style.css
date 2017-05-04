@@ -18,6 +18,12 @@ text-align: center;
 width: 100%;
 }
 
+th, td {
+  
+    text-align: right;
+}
+
+
 
 #menu ul {
 	font-family: calibri;
@@ -194,4 +200,3 @@ width: 100%;
   min-height:100%;
   position:relative;
 }
-

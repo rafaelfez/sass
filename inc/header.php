@@ -4,13 +4,9 @@
     <title><?php echo $tituloPagina; ?></title>
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap-datepicker3.min.css" type="text/css">
     <script src="bootstrap/js/jquery-3.1.1.min.js" type="text/javascript"></script>
     <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="bootstrap/js/validator.min.js" type="text/javascript">></script>
-    <script src="bootstrap/js/bootstrap-datepicker.js" type="text/javascript">></script>
-    <script src="bootstrap/js/bootstrap-datepicker.min.js" type="text/javascript">></script>
-    <script src="bootstrap/locales/bootstrap-datepicker.pt-BR.min.js" type="text/javascript">></script>
 
   </head>
 
@@ -30,12 +26,20 @@
         </ul>
         </li>
       <li><a href="alertas.php">Alertas</a></li>
-      <li><a href="consulta.php">Consulta</a></li>
+
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Consulta <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+          <li><a href="consulta.php">Filiado</a></li>
+          <li><a href="das.php">DAS / Transações</a></li>
+          <li><a href="historico.php">Históricos</a></li>
+        </ul>
+        </li>
+
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Pagamento <span class="caret"></span></a>
       <ul class="dropdown-menu">
           <li><a href="pagamento.php">Convênios</a></li>
           <li><a href="adicional.php">Fluxo Adicional</a></li>
-          <li><a href="encargos.php">Encargos Sociais</a></li>
+          <!--<li><a href="encargos.php">Encargos Sociais</a></li>-->
         </ul>
         </li>
     </ul>
