@@ -76,24 +76,37 @@ function add_fil($matricula, $nome, $telefone, $nascimento, $rg, $cpf, $celular,
 }
 
 
-function add_dep($afiliado_matricula,$nome,$telefone,$nascimento,$endereco,$rg,$cpf,$celular,$email,$sexo,$parentesco){
+function add_dep($afiliado_matricula, $nome, $telefone, $nascimento, $rg, $cpf, $celular, $sexo, $email,
+  $eleitor, $civil, $parentesco, $principal, $endcep, $endrua, $endnum, $endbairro, $endcidade, $enduf){
+
   include 'conexao.php';
 
-  $sql = "INSERT INTO dependente(cpf,nome,telefone,email,nascimento,endereco,rg,celular,sexo,Afiliado_matricula,parentesco) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+  $sql = "INSERT INTO dependente(Afiliado_matricula, nome, telefone, nascimento, rg, cpf, celular, sexo, email,"
+    ."eleitor, civil, parentesco, principal, endcep, endrua, endnum, endbairro, endcidade, enduf)"
+    ." VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
   try{
     if(get_filiado($afiliado_matricula)==true){
       $resultado = $db->prepare($sql);
-      $resultado->bindValue(1, $cpf, PDO::PARAM_INT);
+      $resultado->bindValue(1, $afiliado_matricula, PDO::PARAM_INT);
       $resultado->bindValue(2, $nome, PDO::PARAM_STR);
       $resultado->bindValue(3, $telefone, PDO::PARAM_INT);
-      $resultado->bindValue(4, $email, PDO::PARAM_INT);
-      $resultado->bindValue(5, $nascimento, PDO::PARAM_STR);
-      $resultado->bindValue(6, $endereco, PDO::PARAM_STR);
-      $resultado->bindValue(7, $rg, PDO::PARAM_INT);
-      $resultado->bindValue(8, $celular, PDO::PARAM_INT);
-      $resultado->bindValue(9, $sexo, PDO::PARAM_STR);
-      $resultado->bindValue(10, $afiliado_matricula, PDO::PARAM_INT);
-      $resultado->bindValue(11, $parentesco, PDO::PARAM_STR);
+      $resultado->bindValue(4, $nascimento, PDO::PARAM_STR);
+      $resultado->bindValue(5, $rg, PDO::PARAM_INT);
+      $resultado->bindValue(6, $cpf, PDO::PARAM_INT);
+      $resultado->bindValue(7, $celular, PDO::PARAM_INT);
+      $resultado->bindValue(8, $sexo, PDO::PARAM_STR);
+      $resultado->bindValue(9, $email, PDO::PARAM_STR);
+      $resultado->bindValue(10, $eleitor, PDO::PARAM_INT);
+      $resultado->bindValue(11, $civil, PDO::PARAM_STR);
+      $resultado->bindValue(12, $parentesco, PDO::PARAM_STR);
+      $resultado->bindValue(13, $principal, PDO::PARAM_INT);
+      $resultado->bindValue(14, $endcep, PDO::PARAM_INT);
+      $resultado->bindValue(15, $endrua, PDO::PARAM_STR);
+      $resultado->bindValue(16, $endnum, PDO::PARAM_INT);
+      $resultado->bindValue(17, $endbairro, PDO::PARAM_STR);
+      $resultado->bindValue(18, $endcidade, PDO::PARAM_STR);
+      $resultado->bindValue(19, $enduf, PDO::PARAM_STR);
       $resultado->execute();
     }else{
       mesErro('Matrícula não cadastrada. Por favor, verifique o número e tente novamente.');
@@ -392,7 +405,7 @@ function get_pagamentos_das(){
 function get_filiado($matricula){
     include 'conexao.php';
 
-    $sql = 'SELECT * FROM afiliado WHERE matricula = ?';
+    $sql = 'SELECT * FROM filiado WHERE matricula = ?';
 
     try {
         $results = $db->prepare($sql);

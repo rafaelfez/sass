@@ -70,8 +70,8 @@ include("inc/header.php");
 
       <div class="form-group has-feedback">
         <label class="col-sm-2 control-label" for="matricula">Matrícula: <span class="required">*</span></label>
-        <div class="col-sm-2">
-          <input class="form-control form-control-success" data-error="Por favor, informe um número de matrícula correto." id="matricula" name="matricula" pattern="[0-9]{8}$" required="" type="text" value="<?php echo htmlspecialchars($matricula); ?>"> <span aria-hidden="true" class="glyphicon form-control-feedback"></span>
+        <div class="col-sm-4">
+          <input class="form-control form-control-success" placeholder="8 digitos" data-error="Por favor, informe um número de matrícula correto." id="matricula" name="matricula" pattern="[0-9]{8}$" required="" type="text" value="<?php echo htmlspecialchars($matricula); ?>"> <span aria-hidden="true" class="glyphicon form-control-feedback"></span>
         </div>
         <div class="help-block with-errors">
         </div>
@@ -91,8 +91,8 @@ include("inc/header.php");
         Email: <span class="required">
         * </span>
         </label>
-        <div class="col-sm-3">
-          <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required placeholder="" class="form-control" id="email" name="email" data-error="Por favor, informe um e-mail válido." value="<?php echo htmlspecialchars($email); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
+        <div class="col-sm-4">
+          <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required placeholder="exemplo@sass.com" class="form-control" id="email" name="email" data-error="Por favor, informe um e-mail válido." value="<?php echo htmlspecialchars($email); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
           </span>
         </div>
         <div class="help-block with-errors">
@@ -104,7 +104,7 @@ include("inc/header.php");
         RG: <span class="required">
         * </span>
         </label>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <input type="text" required pattern="[0-9]{7,9}$" placeholder="Digite somente os números..." class="form-control" id="rg" name="rg" data-error="Por favor, informe um número de RG válido." data-min-length=7 value="<?php echo htmlspecialchars($rg); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
           </span>
         </div>
@@ -117,7 +117,7 @@ include("inc/header.php");
         CPF: <span class="cpf">
         * </span>
         </label>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <input type="text" required pattern="[0-9]{11}$" placeholder="Digite somente os números..." class="form-control" id="cpf" name="cpf" data-error="Por favor, informe um número de CPF válido." value="<?php echo htmlspecialchars($cpf); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
           </span>
         </div>
@@ -130,7 +130,7 @@ include("inc/header.php");
         Celular: <span class="required">
         * </span>
         </label>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <input type="text" required pattern="[0-9]{10,12}$" placeholder="Digite somente os números..." class="form-control" id="celular" name="celular" data-error="Por favor, informe um número de celular correto." value="<?php echo htmlspecialchars($celular); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
           </span>
         </div>
@@ -143,7 +143,7 @@ include("inc/header.php");
         Telefone: <span class="required">
         * </span>
         </label>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <input type="text" required pattern="[0-9]{9,12}$" placeholder="Digite somente os números..." class="form-control" id="telefone" name="telefone" data-error="Por favor, informe um número de telefone correto." value="<?php echo htmlspecialchars($telefone); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
           </span>
         </div>
@@ -156,10 +156,8 @@ include("inc/header.php");
         Sexo: <span class="required">
         * </span>
         </label>
-        <div class="col-sm-2">
+        <div class="col-sm-4">
           <select id="sexo" class="form-control" data-error="Por favor, selecione o sexo." name="sexo" required>
-            <option value="">
-            Selecione: </option>
             <option value="Masculino" <?php if($sexo=='Masculino' ) echo 'selected'; ?>
             >Masculino </option>
             <option value="Feminino" <?php if($sexo=='Feminino' ) echo 'selected'; ?>
@@ -177,7 +175,7 @@ include("inc/header.php");
       RCS(%): <span class="required">
       * </span>
       </label>
-      <div class="col-sm-3">
+      <div class="col-sm-4">
         <input type="text" required pattern="[0-9]{1,2}$" data-error="Por favor, informe uma porcentagem." placeholder="Digite a % (somente número)" class="form-control" id="taxa_rcs" name="taxa_rcs" value="<?php echo htmlspecialchars($taxa_rcs); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
         </span>
       </div>
@@ -208,7 +206,7 @@ include("inc/header.php");
         Data de Nascimento: <span class="required">
         * </span>
         </label>
-        <div class="col-sm-2">
+        <div class="col-sm-4">
           <input type="text" required pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}$" placeholder="dd/mm/aaaa" class="form-control datepicker" id="nascimento" name="nascimento" data-error="Por favor, informe uma data de nascimento correta." value="<?php echo htmlspecialchars($nascimento);?>"/><span class="glyphicon form-control-feedback" aria-hidden="true">
           </span>
         </div>
@@ -221,7 +219,7 @@ include("inc/header.php");
         PIS: <span class="required">
         * </span>
         </label>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <input type="text" required pattern="[0-9]{7,9}$" placeholder="Digite somente os números..." class="form-control" id="pis" name="pis" data-error="Por favor, informe um número de PIS válido." data-min-length=7 value="<?php echo htmlspecialchars($pis); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
           </span>
         </div>
@@ -234,7 +232,7 @@ include("inc/header.php");
         Carteira de Trabalho: <span class="required">
         * </span>
         </label>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <input type="text" required pattern="[0-9]{7,9}$" placeholder="Digite somente os números..." class="form-control" id="carteiratrab" name="carteiratrab" data-error="Por favor, informe um número de Carteira de Trabalho válido." data-min-length=7 value="<?php echo htmlspecialchars($carteiratrab); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
           </span>
         </div>
@@ -247,7 +245,7 @@ include("inc/header.php");
         Título de Eleitor: <span class="required">
         * </span>
         </label>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <input type="text" required pattern="[0-9]{7,9}$" placeholder="Digite somente os números..." class="form-control" id="eleitor" name="eleitor" data-error="Por favor, informe um número de Título de Eleitor válido." data-min-length=7 value="<?php echo htmlspecialchars($eleitor); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
           </span>
         </div>
@@ -258,7 +256,7 @@ include("inc/header.php");
       <div class="form-group has-feedback">
         <label class="col-sm-2 control-label" for="nome">Banco: <span class="required">*</span></label>
         <div class="col-sm-4">
-          <input class="form-control" data-error="Por favor, informe um nome de banco correto." id="banco" name="banco" placeholder="" required="" type="text" value="<?php echo htmlspecialchars($banco); ?>"> <span aria-hidden="true" class="glyphicon form-control-feedback"></span>
+          <input class="form-control" placeholder="Nome do banco" data-error="Por favor, informe um nome de banco correto." id="banco" name="banco" placeholder="" required="" type="text" value="<?php echo htmlspecialchars($banco); ?>"> <span aria-hidden="true" class="glyphicon form-control-feedback"></span>
         </div>
         <div class="help-block with-errors">
         </div>
@@ -269,7 +267,7 @@ include("inc/header.php");
         Agência: <span class="required">
         * </span>
         </label>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <input type="text" required pattern="[0-9]{3,9}$" placeholder="Digite somente os números..." class="form-control" id="agencia" name="agencia" data-error="Por favor, informe um número de Agência válido." data-min-length=7 value="<?php echo htmlspecialchars($agencia); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
           </span>
         </div>
@@ -282,7 +280,7 @@ include("inc/header.php");
         Conta: <span class="required">
         * </span>
         </label>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <input type="text" required pattern="[0-9]{7,9}$" placeholder="Digite somente os números..." class="form-control" id="conta" name="conta" data-error="Por favor, informe um número de conta válido." data-min-length=7 value="<?php echo htmlspecialchars($conta); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
           </span>
         </div>
@@ -295,7 +293,7 @@ include("inc/header.php");
         Digíto: <span class="required">
         * </span>
         </label>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <input type="text" required pattern="[0-9]{1}$" placeholder="Digite somente um número..." class="form-control" id="digito" name="digito" data-error="Por favor, informe um digito válido." data-min-length=7 value="<?php echo htmlspecialchars($digito); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
           </span>
         </div>
@@ -306,7 +304,7 @@ include("inc/header.php");
       <div class="form-group has-feedback">
         <label for="civil" class="col-sm-2 control-label">Estado Civil:<span class="required">*</span>
         </label>
-        <div class="col-sm-2">
+        <div class="col-sm-4">
           <select class="form-control" id="civil" name="civil" data-error="Por favor, selecione estado civil." required>
             <option value="">Selecione:</option>
             <option value="SOLTEIRO" <?php if($civil=='SOLTEIRO') echo 'selected'; ?>>Solteiro</option>
@@ -324,7 +322,7 @@ include("inc/header.php");
       <div class="form-group has-feedback">
         <label for="escolaridade" class="col-sm-2 control-label">Escolaridade:<span class="required">*</span>
         </label>
-        <div class="col-sm-2">
+        <div class="col-sm-4">
           <select class="form-control" id="escolaridade" name="escolaridade" data-error="Por favor, selecione uma escolaridade." required>
             <option value="">Selecione:</option>
             <option value="FUNDAMENTAL" <?php if($escolaridade=='FUNDAMENTAL') echo 'selected'; ?>>Ensino Fundamental</option>
@@ -343,7 +341,7 @@ include("inc/header.php");
         CNH Número: <span class="required">
         * </span>
         </label>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <input type="text" required pattern="[0-9]{7,9}$" placeholder="Digite somente os números..." class="form-control" id="cnhnum" name="cnhnum" data-error="Por favor, informe um número de cnh válido." data-min-length=7 value="<?php echo htmlspecialchars($cnhnum); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
           </span>
         </div>
@@ -354,7 +352,7 @@ include("inc/header.php");
       <div class="form-group has-feedback">
         <label for="cnhtipo" class="col-sm-2 control-label">CNH Tipo:<span class="required">*</span>
         </label>
-        <div class="col-sm-2">
+        <div class="col-sm-4">
           <select class="form-control" id="cnhtipo" name="cnhtipo" data-error="Por favor, selecione um tipo de CNH." required>
             <option value="">Selecione:</option>
             <option value="A" <?php if($cnhtipo=='A') echo 'selected'; ?>>A</option>
@@ -390,7 +388,7 @@ include("inc/header.php");
         CNH Validade: <span class="required">
         * </span>
         </label>
-        <div class="col-sm-2">
+        <div class="col-sm-4">
           <input type="text" required pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}$" placeholder="dd/mm/aaaa" class="form-control datepicker" id="cnhvalidade" name="cnhvalidade" data-error="Por favor, informe uma data de validade correta." value="<?php echo htmlspecialchars($cnhvalidade);?>"/><span class="glyphicon form-control-feedback" aria-hidden="true">
           </span>
         </div>
@@ -400,7 +398,7 @@ include("inc/header.php");
 
       <div class="form-group has-feedback">
       <label for="endcep" class="col-sm-2 control-label">CEP:<span class="required">*</span></label>
-      <div class="col-sm-10">
+      <div class="col-sm-4">
       <input type="text" required pattern="[0-9]{8}$" data-error="Por favor, informe um número de CEP válido." placeholder="Digite somente os números..." class="form-control" id="endcep" name="endcep" value="<?php echo htmlspecialchars($endcep); ?>"/>
       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
       <div class="help-block with-errors"></div>
@@ -413,7 +411,7 @@ include("inc/header.php");
         Rua: <span class="required">
         * </span>
         </label>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <input type="text" required placeholder="" class="form-control" id="endrua" name="endrua" data-error="Por favor, informe um nome de logradouro." value="<?php echo htmlspecialchars($endrua); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
           </span>
         </div>
@@ -423,8 +421,8 @@ include("inc/header.php");
 
       <div class="form-group has-feedback">
       <label for="endnum" class="col-sm-2 control-label">Número:<span class="required">*</span></label>
-      <div class="col-sm-10">
-      <input type="text" required placeholder="" class="form-control" id="endnum"  name="endnum" data-error="Por favor, informe um número válido."value="<?php echo htmlspecialchars($endnum); ?>"/>
+      <div class="col-sm-4">
+      <input type="text" required class="form-control" id="endnum"  name="endnum" data-error="Por favor, informe um número válido."value="<?php echo htmlspecialchars($endnum); ?>"/>
       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
       <div class="help-block with-errors"></div>
       </div>
@@ -432,7 +430,7 @@ include("inc/header.php");
 
       <div class="form-group has-feedback">
       <label for="endbairro" class="col-sm-2 control-label">Bairro:<span class="required">*</span></label>
-      <div class="col-sm-10">
+      <div class="col-sm-4">
       <input type="text" required placeholder="" class="form-control" id="endbairro"  name="endbairro" data-error="Por favor, informe um nome de bairro." value="<?php echo htmlspecialchars($endbairro); ?>"/>
       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
       <div class="help-block with-errors"></div>
@@ -441,12 +439,15 @@ include("inc/header.php");
 
       <div class="form-group has-feedback">
       <label for="endcidade" class="col-sm-2 control-label">Cidade:<span class="required">*</span></label>
-      <div class="col-sm-10">
+      <div class="col-sm-4">
       <select id="cidade" class="form-control" data-error="Por favor, selecione uma cidade." name="endcidade" required>
-      <option value="">Selecione:</option>
       <option value="São Sebastião" <?php if($endcidade == 'São Sebastião') echo 'selected'; ?>>São Sebastião</option>
       <option value="Caraguatuba" <?php if($endcidade == 'Caraguatuba') echo 'selected'; ?>>Caraguatatuba</option>
       <option value="Ilhabela" <?php if($endcidade == 'Ilhabela') echo 'selected'; ?>>Ilhabela</option>
+      <option value="Paraibuna" <?php if($endcidade == 'Paraibuna') echo 'selected'; ?>>Paraibuna</option>
+      <option value="São José dos Campos" <?php if($endcidade == 'São José dos Campos') echo 'selected'; ?>>São José dos Campos</option>
+      <option value="São Paulo" <?php if($endcidade == 'São Paulo') echo 'selected'; ?>>São Paulo</option>
+      <option value="Tabauté" <?php if($endcidade == 'Tabauté') echo 'selected'; ?>>Taubaté</option>
       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
       </select> <div class="help-block with-errors"></div>
       </div>
@@ -454,10 +455,11 @@ include("inc/header.php");
 
       <div class="form-group has-feedback">
       <label for="enduf" class="col-sm-2 control-label">UF:<span class="required">*</span></label>
-      <div class="col-sm-10">
-      <input type="text" required pattern="[0-9]{8}$" data-error="Por favor, informe uma UF válido." placeholder="Digite somente os letras..." class="form-control" id="enduf" name="enduf" value="<?php echo htmlspecialchars($enduf); ?>"/>
+      <div class="col-sm-4">
+      <select id="enduf" class="form-control" data-error="Por favor, selecione uma UF." name="enduf" required>
+      <option value="SP" <?php if($enduf == 'SP') echo 'selected'; ?>>SP</option>
       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-      <div class="help-block with-errors"></div>
+      </select> <div class="help-block with-errors"></div>
       </div>
       </div>
 
