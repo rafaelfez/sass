@@ -141,24 +141,44 @@ function add_con($cnpj,$nome,$categoria, $empresa, $mensalidade, $desconto, $DAS
   return true;
 }
 
-function alterarFiliado($matricula,$nome,$nascimento,$endereco,$sexo,$telefone,$celular,$rg,$cpf,$email,$taxa_rcs){
+function alterarFiliado($matricula, $nome, $telefone, $nascimento, $rg, $cpf, $celular,
+  $sexo, $email, $taxa_rcs, $pis, $carteiratrab, $eleitor, $banco, $agencia, $conta, $digito, $civil, $escolaridade,
+  $cnhnum, $cnhtipo, $cnhvalidade, $endcep, $endrua, $endnum, $endbairro, $endcidade, $enduf){
+
   include 'conexao.php';
 
-  $sql = "UPDATE filiado SET nome = ?, telefone = ?, nascimento = ?, endereco = ?, rg = ?, cpf = ?, celular = ?, sexo = ?, email = ?, taxa_rcs = ? WHERE matricula = ?";
+  $sql = "UPDATE filiado SET nome = ?, telefone = ?, nascimento = ?, rg = ?, cpf = ?, celular = ?, sexo = ?, email = ?, taxa_rcs = ?, pis = ?, carteiratrab = ?, eleitor = ?, banco = ?, agencia = ?, conta = ?, digito = ?, civil = ?, escolaridade = ?, cnhnum = ?, cnhtipo = ?, cnhvalidade = ?, endcep = ?, endrua = ?, endnum = ?, endbairro = ?, endcidade = ?, enduf = ? WHERE matricula = ?";
 
   try {
     $resultado = $db->prepare($sql);
     $resultado->bindValue(1, $nome, PDO::PARAM_STR);
     $resultado->bindValue(2, $telefone, PDO::PARAM_INT);
     $resultado->bindValue(3, $nascimento, PDO::PARAM_STR);
-    $resultado->bindValue(4, $endereco, PDO::PARAM_STR);
-    $resultado->bindValue(5, $rg, PDO::PARAM_INT);
-    $resultado->bindValue(6, $cpf, PDO::PARAM_INT);
-    $resultado->bindValue(7, $celular, PDO::PARAM_INT);
-    $resultado->bindValue(8, $sexo, PDO::PARAM_STR);
-    $resultado->bindValue(9, $email, PDO::PARAM_INT);
-    $resultado->bindValue(10, $taxa_rcs, PDO::PARAM_INT);
-    $resultado->bindValue(11, $matricula, PDO::PARAM_INT);
+    $resultado->bindValue(4, $rg, PDO::PARAM_INT);
+    $resultado->bindValue(5, $cpf, PDO::PARAM_INT);
+    $resultado->bindValue(6, $celular, PDO::PARAM_INT);
+    $resultado->bindValue(7, $sexo, PDO::PARAM_STR);
+    $resultado->bindValue(8, $email, PDO::PARAM_INT);
+    $resultado->bindValue(9, $taxa_rcs, PDO::PARAM_INT);
+    $resultado->bindValue(10, $pis, PDO::PARAM_INT);
+    $resultado->bindValue(11, $carteiratrab, PDO::PARAM_INT);
+    $resultado->bindValue(12, $eleitor, PDO::PARAM_INT);
+    $resultado->bindValue(13, $banco, PDO::PARAM_STR);
+    $resultado->bindValue(14, $agencia, PDO::PARAM_INT);
+    $resultado->bindValue(15, $conta, PDO::PARAM_INT);
+    $resultado->bindValue(16, $digito, PDO::PARAM_INT);
+    $resultado->bindValue(17, $civil, PDO::PARAM_STR);
+    $resultado->bindValue(18, $escolaridade, PDO::PARAM_STR);
+    $resultado->bindValue(19, $cnhnum, PDO::PARAM_INT);
+    $resultado->bindValue(20, $cnhtipo, PDO::PARAM_STR);
+    $resultado->bindValue(21, $cnhvalidade, PDO::PARAM_STR);
+    $resultado->bindValue(22, $endcep, PDO::PARAM_INT);
+    $resultado->bindValue(23, $endrua, PDO::PARAM_STR);
+    $resultado->bindValue(24, $endnum, PDO::PARAM_INT);
+    $resultado->bindValue(25, $endbairro, PDO::PARAM_STR);
+    $resultado->bindValue(26, $endcidade, PDO::PARAM_STR);
+    $resultado->bindValue(27, $enduf, PDO::PARAM_STR);
+    $resultado->bindValue(28, $matricula, PDO::PARAM_INT);
     $resultado->execute();
   } catch (Exception $e) {
     echo "Error!: " . $e->getMessage() . "<br />";
@@ -167,24 +187,33 @@ function alterarFiliado($matricula,$nome,$nascimento,$endereco,$sexo,$telefone,$
   return true;
 }
 
-function alterarDependente($afiliado_matricula,$nome,$telefone,$nascimento,$endereco,$rg,$cpf,$celular,$email,$sexo,$parentesco){
+function alterarDependente($afiliado_matricula, $nome, $telefone, $nascimento, $rg, $cpf, $celular, $sexo, $email,
+  $eleitor, $civil, $parentesco, $principal, $endcep, $endrua, $endnum, $endbairro, $endcidade, $enduf){
   include 'conexao.php';
 
-  $sql = "UPDATE dependente SET nome = ?, telefone = ?, email = ?, nascimento = ?, endereco = ?, rg = ?, celular = ?, sexo = ?, Afiliado_matricula = ?, parentesco = ? WHERE cpf = ?";
+  $sql = "UPDATE dependente SET Afiliado_matricula = ?, nome = ?, telefone = ?, nascimento = ?, rg = ?, celular = ?, sexo = ?, email = ?, eleitor = ?, civil = ?, parentesco = ?, principal = ?, endcep = ?, endrua = ?, endnum = ?, endbairro = ?, endcidade = ?, enduf = ? WHERE cpf = ?";
 
   try{
   	$resultado = $db->prepare($sql);
-    $resultado->bindValue(1, $nome, PDO::PARAM_STR);
-    $resultado->bindValue(2, $telefone, PDO::PARAM_INT);
-    $resultado->bindValue(3, $email, PDO::PARAM_INT);
+    $resultado->bindValue(1, $afiliado_matricula, PDO::PARAM_INT);
+    $resultado->bindValue(2, $nome, PDO::PARAM_STR);
+    $resultado->bindValue(3, $telefone, PDO::PARAM_INT);
     $resultado->bindValue(4, $nascimento, PDO::PARAM_STR);
-    $resultado->bindValue(5, $endereco, PDO::PARAM_STR);
-    $resultado->bindValue(6, $rg, PDO::PARAM_INT);
-    $resultado->bindValue(7, $celular, PDO::PARAM_INT);
-    $resultado->bindValue(8, $sexo, PDO::PARAM_STR);
-  	$resultado->bindValue(9, $afiliado_matricula, PDO::PARAM_INT);
-  	$resultado->bindValue(10, $parentesco, PDO::PARAM_STR);
-    $resultado->bindValue(11, $cpf, PDO::PARAM_INT);
+    $resultado->bindValue(5, $rg, PDO::PARAM_INT);
+    $resultado->bindValue(6, $celular, PDO::PARAM_INT);
+    $resultado->bindValue(7, $sexo, PDO::PARAM_STR);
+    $resultado->bindValue(8, $email, PDO::PARAM_STR);
+    $resultado->bindValue(9, $eleitor, PDO::PARAM_INT);
+    $resultado->bindValue(10, $civil, PDO::PARAM_STR);
+    $resultado->bindValue(11, $parentesco, PDO::PARAM_STR);
+    $resultado->bindValue(12, $principal, PDO::PARAM_INT);
+    $resultado->bindValue(13, $endcep, PDO::PARAM_INT);
+    $resultado->bindValue(14, $endrua, PDO::PARAM_STR);
+    $resultado->bindValue(15, $endnum, PDO::PARAM_INT);
+    $resultado->bindValue(16, $endbairro, PDO::PARAM_STR);
+    $resultado->bindValue(17, $endcidade, PDO::PARAM_STR);
+    $resultado->bindValue(18, $enduf, PDO::PARAM_STR);
+    $resultado->bindValue(19, $cpf, PDO::PARAM_INT);
     $resultado->execute();
   } catch (Exception $e) {
     echo "Error!: " . $e->getMessage() . "<br />";
@@ -405,7 +434,7 @@ function get_pagamentos_das(){
 function get_filiado($matricula){
     include 'conexao.php';
 
-    $sql = 'SELECT * FROM filiado WHERE matricula = ?';
+    $sql = 'SELECT matricula,nome,telefone,nascimento,rg,cpf,celular,sexo,email,taxa_rcs, pis, carteiratrab, eleitor, banco, agencia, conta, digito, civil, escolaridade, cnhnum, cnhtipo, cnhvalidade, endcep, endrua, endnum, endbairro, endcidade, enduf FROM filiado WHERE matricula = ?';
 
     try {
         $results = $db->prepare($sql);
@@ -442,7 +471,7 @@ function lista_filiado($matricula){
 function get_dependente($cpf) {
   include 'conexao.php';
 
-  $sql = 'SELECT * FROM dependente WHERE cpf = ?';
+  $sql = 'SELECT Afiliado_matricula, nome, telefone, nascimento, rg, cpf, celular, sexo, email, eleitor, civil, parentesco, principal, endcep, endrua, endnum, endbairro, endcidade, enduf FROM dependente WHERE cpf = ?';
 
   try {
       $results = $db->prepare($sql);

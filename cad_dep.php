@@ -158,7 +158,7 @@ include("inc/header.php");
         * </span>
         </label>
         <div class="col-sm-4">
-          <input type="text" required pattern="[0-9]{9,12}$" placeholder="Digite somente os números..." class="form-control" id="telefone" name="telefone" data-error="Por favor, informe um número de telefone correto." value="<?php echo htmlspecialchars($telefone); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
+          <input type="text" required pattern="[0-9]{8,12}$" placeholder="Digite somente os números..." class="form-control" id="telefone" name="telefone" data-error="Por favor, informe um número de telefone correto." value="<?php echo htmlspecialchars($telefone); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
           </span>
         </div>
         <div class="help-block with-errors">
