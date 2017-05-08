@@ -269,18 +269,33 @@ function get_convenio() {
 }
 
 
-function pagamento($afiliado_matricula,$taxa_rcs, $bruto, $unimed, $uniodonto, $rcs, $das, $mes, $ano, $descontounimed, $descontouniodonto){
+function pagamentoFiliado($afiliado_matricula, $ano, $mes, $das, $rcs, $unimed, $uniodonto){
+
   include 'conexao.php';
+
+  $das = $das - $unimed -$uniodonto;
 
   if(get_filiado($afiliado_matricula)==true){
       if(unico($afiliado_matricula, $mes, $ano)==false){
         try {
-          $statement = $db->query("SELECT taxa_rcs FROM afiliado WHERE matricula = $afiliado_matricula");
-          $result = $statement->fetch();
-          $taxa_rcs = $result[0];
+
+            $query = "INSERT INTO pagamentofil(Afiliado_matricula, ano, mes, das, rcs, unimed, uniodonto) VALUES(?,?,?,?,?,?,?)";
+
+            $resultado = $db->prepare($query);
+            $resultado->bindValue(1, $afiliado_matricula, PDO::PARAM_INT);
+            $resultado->bindValue(2, $ano, PDO::PARAM_INT);
+            $resultado->bindValue(3, $mes, PDO::PARAM_STR);
+            $resultado->bindValue(4, $das, PDO::PARAM_STR);
+            $resultado->bindValue(5, $rcs, PDO::PARAM_STR);
+            $resultado->bindValue(6, $unimed, PDO::PARAM_STR);
+            $resultado->bindValue(7, $uniodonto, PDO::PARAM_STR);
+            $resultado->execute();
+
+            return true;
+
         } catch (Exception $e) {
             echo "Error!: " . $e->getMessage() . "<br />";
-            return array();
+            return false;
         }
     }else{
       mesErro('Já existe um pagamento para este Filiado neste período.');
@@ -291,60 +306,6 @@ function pagamento($afiliado_matricula,$taxa_rcs, $bruto, $unimed, $uniodonto, $
     return false;
   }
 
-  $rcs = ($bruto*$taxa_rcs)/100;
-  $salario = $bruto - $rcs;
-  $das = $salario * 0.1;
-  $salario = $salario - $das;
-
-  if($descontounimed == 'DAS'){
-      $das = $das - $unimed;
-  }elseif ($descontounimed == 'RCS') {
-      $rcs = $rcs - $unimed;
-  }
-
-  if($descontouniodonto == 'DAS'){
-      $das = $das - $uniodonto;
-  }elseif ($descontouniodonto == 'RCS') {
-      $rcs = $rcs - $uniodonto;
-  }
-
-  if($rcs>0){
-    $salario = $salario+$rcs;
-    $devendo = 0;
-  }else{
-    $devendo = abs($rcs);
-    $rcs = 0;
-  }
-
-  if($das<0){
-    $devendo = $devendo + abs($das);
-    $das=0;
-  }
-
-
-  $query1 = "INSERT INTO folhadepagamento(bruto, salario, das, rcs, taxa_rcs, devendo, mes, ano, Afiliado_matricula, unimed, uniodonto) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-
-  if($bruto>=0){
-    try {
-      $resultado = $db->prepare($query1);
-      $resultado->bindValue(1, $bruto, PDO::PARAM_INT);
-      $resultado->bindValue(2, $salario, PDO::PARAM_STR);
-      $resultado->bindValue(3, $das, PDO::PARAM_STR);
-      $resultado->bindValue(4, $rcs, PDO::PARAM_INT);
-      $resultado->bindValue(5, $taxa_rcs, PDO::PARAM_INT);
-      $resultado->bindValue(6, $devendo, PDO::PARAM_INT);
-      $resultado->bindValue(7, $mes, PDO::PARAM_STR);
-      $resultado->bindValue(8, $ano, PDO::PARAM_INT);
-      $resultado->bindValue(9, $afiliado_matricula, PDO::PARAM_INT);
-      $resultado->bindValue(10, $unimed, PDO::PARAM_INT);
-      $resultado->bindValue(11, $uniodonto, PDO::PARAM_INT);
-      $resultado->execute();
-    } catch (Exception $e) {
-      echo "Error!: " . $e->getMessage() . "<br />";
-      return false;
-    }
-  }
-  return "Bruto:" . $bruto . " Salario:" .$salario. " RCS:" . $rcs . " DAS:" . $das . " Devendo:" . $devendo . " Desc Unimed:" . $descontounimed . " Desc Uniodonto:" . $descontouniodonto;
 }
 
 function unico($matricula, $mes, $ano){
@@ -352,7 +313,7 @@ function unico($matricula, $mes, $ano){
 
     include 'conexao.php';
 
-    $sql = "SELECT * FROM folhadepagamento WHERE Afiliado_matricula = $matricula AND mes='$mes' AND ano='$ano'";
+    $sql = "SELECT * FROM pagamentofil WHERE Afiliado_matricula = $matricula AND mes='$mes' AND ano='$ano'";
 
     try {
         $results = $db->prepare($sql);
