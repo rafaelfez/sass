@@ -4,15 +4,16 @@ require 'inc/funcoes.php';
 
 $tituloPagina = "Alteração de Dependente";
 
-$afiliado_matricula = $nome = $telefone = $nascimento = $rg = $cpf = $celular = $sexo = $email = $eleitor = $civil
+$id = $afiliado_matricula = $nome = $telefone = $nascimento = $rg = $cpf = $celular = $sexo = $email = $eleitor = $civil
 = $parentesco = $principal = $endcep = $endrua = $endnum = $endbairro = $endcidade = $enduf = $message = "";
 
 if (isset($_GET['cpf'])) {
-    list($afiliado_matricula, $nome, $telefone, $nascimento, $rg, $cpf, $celular, $sexo, $email,
+    list($id, $afiliado_matricula, $nome, $telefone, $nascimento, $rg, $cpf, $celular, $sexo, $email,
       $eleitor, $civil, $parentesco, $principal, $endcep, $endrua, $endnum, $endbairro, $endcidade, $enduf) = get_dependente(filter_input(INPUT_GET, 'cpf', FILTER_SANITIZE_NUMBER_INT));
 }
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+  $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
   $afiliado_matricula = filter_input(INPUT_POST, 'afiliado_matricula', FILTER_SANITIZE_NUMBER_INT);
   $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
   $parentesco = filter_input(INPUT_POST, 'parentesco', FILTER_SANITIZE_STRING);
@@ -52,7 +53,7 @@ try{
     if(empty($afiliado_matricula) || empty($nome) || empty($telefone) || empty($nascimento) || empty($rg) || empty($cpf) || empty($celular) || empty($sexo) || empty($email) || empty($parentesco)){
     $message = mesAlerta("Por favor insira todos os campos.");
   }else{
-    if(alterarDependente($afiliado_matricula, $nome, $telefone, $nascimento, $rg, $cpf, $celular, $sexo, $email, $eleitor, $civil, $parentesco, $principal, $endcep, $endrua, $endnum, $endbairro, $endcidade, $enduf)){
+    if(alterarDependente($id, $afiliado_matricula, $nome, $telefone, $nascimento, $rg, $cpf, $celular, $sexo, $email, $eleitor, $civil, $parentesco, $principal, $endcep, $endrua, $endnum, $endbairro, $endcidade, $enduf)){
       $message = mesSucesso("Dados do Dependente alterados com sucesso!");
     }else{
       $message = mesFalha("Não foi possível alterar.");
@@ -66,14 +67,27 @@ try{
          getMessage(); exit;} if(isset($message)){ echo $message; } ?>
 
         <form class="form-horizontal" data-toggle="validator" method="post" role="form" action="alt_dep.php">
-
+		
+		  <div class="form-group has-feedback">
+            <label for="id" class="col-sm-2 control-label">
+            Id: <span class="id">
+            * </span>
+            </label>
+            <div class="col-sm-4">
+              <input type="text" readonly="true" required pattern="[0-9]{11}$" placeholder="Digite somente os números..." class="form-control" id="id" name="id" data-error="Por favor, informe um número de Id válido." value="<?php echo htmlspecialchars($id); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
+              </span>
+            </div>
+            <div class="help-block with-errors">
+            </div>
+          </div>
+		
           <div class="form-group has-feedback">
             <label for="cpf" class="col-sm-2 control-label">
             CPF: <span class="cpf">
             * </span>
             </label>
             <div class="col-sm-4">
-              <input type="text" readonly="true" required pattern="[0-9]{11}$" placeholder="Digite somente os números..." class="form-control" id="cpf" name="cpf" data-error="Por favor, informe um número de CPF válido." value="<?php echo htmlspecialchars($cpf); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
+              <input type="text" required pattern="[0-9]{11}$" placeholder="Digite somente os números..." class="form-control" id="cpf" name="cpf" data-error="Por favor, informe um número de CPF válido." value="<?php echo htmlspecialchars($cpf); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true">
               </span>
             </div>
             <div class="help-block with-errors">

@@ -187,11 +187,11 @@ function alterarFiliado($matricula, $nome, $telefone, $nascimento, $rg, $cpf, $c
   return true;
 }
 
-function alterarDependente($afiliado_matricula, $nome, $telefone, $nascimento, $rg, $cpf, $celular, $sexo, $email,
+function alterarDependente($id, $afiliado_matricula, $nome, $telefone, $nascimento, $rg, $cpf, $celular, $sexo, $email,
   $eleitor, $civil, $parentesco, $principal, $endcep, $endrua, $endnum, $endbairro, $endcidade, $enduf){
   include 'conexao.php';
 
-  $sql = "UPDATE dependente SET Afiliado_matricula = ?, nome = ?, telefone = ?, nascimento = ?, rg = ?, celular = ?, sexo = ?, email = ?, eleitor = ?, civil = ?, parentesco = ?, principal = ?, endcep = ?, endrua = ?, endnum = ?, endbairro = ?, endcidade = ?, enduf = ? WHERE cpf = ?";
+  $sql = "UPDATE dependente SET Afiliado_matricula = ?, nome = ?, telefone = ?, nascimento = ?, rg = ?, cpf = ?, celular = ?, sexo = ?, email = ?, eleitor = ?, civil = ?, parentesco = ?, principal = ?, endcep = ?, endrua = ?, endnum = ?, endbairro = ?, endcidade = ?, enduf = ? WHERE idDependente = ?";
 
   try{
   	$resultado = $db->prepare($sql);
@@ -200,20 +200,21 @@ function alterarDependente($afiliado_matricula, $nome, $telefone, $nascimento, $
     $resultado->bindValue(3, $telefone, PDO::PARAM_INT);
     $resultado->bindValue(4, $nascimento, PDO::PARAM_STR);
     $resultado->bindValue(5, $rg, PDO::PARAM_INT);
-    $resultado->bindValue(6, $celular, PDO::PARAM_INT);
-    $resultado->bindValue(7, $sexo, PDO::PARAM_STR);
-    $resultado->bindValue(8, $email, PDO::PARAM_STR);
-    $resultado->bindValue(9, $eleitor, PDO::PARAM_INT);
-    $resultado->bindValue(10, $civil, PDO::PARAM_STR);
-    $resultado->bindValue(11, $parentesco, PDO::PARAM_STR);
-    $resultado->bindValue(12, $principal, PDO::PARAM_INT);
-    $resultado->bindValue(13, $endcep, PDO::PARAM_INT);
-    $resultado->bindValue(14, $endrua, PDO::PARAM_STR);
-    $resultado->bindValue(15, $endnum, PDO::PARAM_INT);
-    $resultado->bindValue(16, $endbairro, PDO::PARAM_STR);
-    $resultado->bindValue(17, $endcidade, PDO::PARAM_STR);
-    $resultado->bindValue(18, $enduf, PDO::PARAM_STR);
-    $resultado->bindValue(19, $cpf, PDO::PARAM_INT);
+	$resultado->bindValue(6, $cpf, PDO::PARAM_INT);
+    $resultado->bindValue(7, $celular, PDO::PARAM_INT);
+    $resultado->bindValue(8, $sexo, PDO::PARAM_STR);
+    $resultado->bindValue(9, $email, PDO::PARAM_STR);
+    $resultado->bindValue(10, $eleitor, PDO::PARAM_INT);
+    $resultado->bindValue(11, $civil, PDO::PARAM_STR);
+    $resultado->bindValue(12, $parentesco, PDO::PARAM_STR);
+    $resultado->bindValue(13, $principal, PDO::PARAM_INT);
+    $resultado->bindValue(14, $endcep, PDO::PARAM_INT);
+    $resultado->bindValue(15, $endrua, PDO::PARAM_STR);
+    $resultado->bindValue(16, $endnum, PDO::PARAM_INT);
+    $resultado->bindValue(17, $endbairro, PDO::PARAM_STR);
+    $resultado->bindValue(18, $endcidade, PDO::PARAM_STR);
+    $resultado->bindValue(19, $enduf, PDO::PARAM_STR);
+    $resultado->bindValue(20, $id, PDO::PARAM_INT);
     $resultado->execute();
   } catch (Exception $e) {
     echo "Error!: " . $e->getMessage() . "<br />";
@@ -328,6 +329,61 @@ function unico($matricula, $mes, $ano){
     return $results->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function pagamentoDependente($afiliado_matricula, $ano, $mes, $unimed, $uniodonto){
+
+  include 'conexao.php';
+
+  if(get_dependente($cpf)==true){
+      if(unicoDep($cpf, $mes, $ano)==false){
+        try {
+
+            $query = "INSERT INTO pagamentofil(Afiliado_matricula, ano, mes, unimed, uniodonto) VALUES(?,?,?,?,?)";
+
+            $resultado = $db->prepare($query);
+            $resultado->bindValue(1, $afiliado_matricula, PDO::PARAM_INT);
+            $resultado->bindValue(2, $ano, PDO::PARAM_INT);
+            $resultado->bindValue(3, $mes, PDO::PARAM_STR);
+            $resultado->bindValue(4, $unimed, PDO::PARAM_STR);
+            $resultado->bindValue(5, $uniodonto, PDO::PARAM_STR);
+            $resultado->execute();
+
+            return true;
+
+        } catch (Exception $e) {
+            echo "Error!: " . $e->getMessage() . "<br />";
+            return false;
+        }
+    }else{
+      mesErro('Já existe um pagamento para este Dependente neste período.');
+      return false;
+    }
+  }else{
+    mesErro('CPF não cadastrado. Por favor, verifique o número e tente novamente.');
+    return false;
+  }
+}
+
+function unicoDep($cpf, $mes, $ano){
+  //função para não haver dois ou mais pagamentos no mesmo periodo da mesma pessoa
+
+    include 'conexao.php';
+
+    $sql = "SELECT * FROM pagamentodep WHERE cpf = $cpf AND mes='$mes' AND ano='$ano'";
+
+    try {
+        $results = $db->prepare($sql);
+        $results->bindValue(1, $cpf, PDO::PARAM_INT);
+        $results->bindValue(2, $mes, PDO::PARAM_STR);
+        $results->bindValue(3, $ano, PDO::PARAM_STR);
+        $results->execute();
+    } catch (Exception $e) {
+        echo "Error!: " . $e->getMessage() . "<br />";
+        return false;
+    }
+    return $results->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
 function adicional($afiliado_matricula, $mes, $ano, $adicional){
 
   include 'conexao.php';
@@ -432,7 +488,7 @@ function lista_filiado($matricula){
 function get_dependente($cpf) {
   include 'conexao.php';
 
-  $sql = 'SELECT Afiliado_matricula, nome, telefone, nascimento, rg, cpf, celular, sexo, email, eleitor, civil, parentesco, principal, endcep, endrua, endnum, endbairro, endcidade, enduf FROM dependente WHERE cpf = ?';
+  $sql = 'SELECT idDependente, Afiliado_matricula, nome, telefone, nascimento, rg, cpf, celular, sexo, email, eleitor, civil, parentesco, principal, endcep, endrua, endnum, endbairro, endcidade, enduf FROM dependente WHERE cpf = ?';
 
   try {
       $results = $db->prepare($sql);
@@ -448,11 +504,9 @@ function get_dependente($cpf) {
 function lista_dependente($matricula){
   include 'conexao.php';
 
-  if($matricula==''){
-    $sql = 'SELECT nome, nascimento, sexo, telefone, celular, email, rg, cpf, endereco, parentesco, Afiliado_matricula FROM dependente';
-  }else{
-    $sql = 'SELECT nome, nascimento, sexo, telefone, celular, email, rg, cpf, endereco, parentesco, Afiliado_matricula FROM dependente WHERE Afiliado_matricula = ?';
-  }
+
+    $sql = 'SELECT nome, nascimento, sexo, telefone, celular, email, rg, cpf, parentesco, Afiliado_matricula FROM dependente WHERE Afiliado_matricula = ?';
+
 
   try {
       $results = $db->prepare($sql);
