@@ -7,9 +7,9 @@ $tituloPagina = "Alteração de Dependente";
 $id = $afiliado_matricula = $nome = $telefone = $nascimento = $rg = $cpf = $celular = $sexo = $email = $eleitor = $civil
 = $parentesco = $principal = $endcep = $endrua = $endnum = $endbairro = $endcidade = $enduf = $message = "";
 
-if (isset($_GET['cpf'])) {
+if (isset($_GET['id'])) {
     list($id, $afiliado_matricula, $nome, $telefone, $nascimento, $rg, $cpf, $celular, $sexo, $email,
-      $eleitor, $civil, $parentesco, $principal, $endcep, $endrua, $endnum, $endbairro, $endcidade, $enduf) = get_dependente(filter_input(INPUT_GET, 'cpf', FILTER_SANITIZE_NUMBER_INT));
+      $eleitor, $civil, $parentesco, $principal, $endcep, $endrua, $endnum, $endbairro, $endcidade, $enduf) = get_dependente(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
 }
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -67,7 +67,7 @@ try{
          getMessage(); exit;} if(isset($message)){ echo $message; } ?>
 
         <form class="form-horizontal" data-toggle="validator" method="post" role="form" action="alt_dep.php">
-		
+
 		  <div class="form-group has-feedback">
             <label for="id" class="col-sm-2 control-label">
             Id: <span class="id">
@@ -80,7 +80,7 @@ try{
             <div class="help-block with-errors">
             </div>
           </div>
-		
+
           <div class="form-group has-feedback">
             <label for="cpf" class="col-sm-2 control-label">
             CPF: <span class="cpf">

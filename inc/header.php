@@ -38,6 +38,7 @@
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Pagamento <span class="caret"></span></a>
       <ul class="dropdown-menu">
           <li><a href="pagamentofil.php">Filiado</a></li>
+          <li><a href="pagamentodep.php">Dependente</a></li>
           <li><a href="adicional.php">Fluxo Adicional</a></li>
           <!--<li><a href="encargos.php">Encargos Sociais</a></li>-->
         </ul>
