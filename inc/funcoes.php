@@ -337,35 +337,69 @@ function pagamentoDependente($matricula, $id, $nome, $ano, $mes, $unimed, $uniod
       return array();
   }
 
-    if(get_filiado($id)){
-      if(unicoDep($id, $mes, $ano)==false){
-        try {
-            $query = "INSERT INTO pagamentodep(Afiliado_matricula, idDependente, nome, mes, ano, unimed, uniodonto) VALUES(?,?,?,?,?,?,?)";
+    if(get_dependente($id)){
+      if(unico($matricula, $mes, $ano)){
+        if(unicoDep($id, $mes, $ano)==false){
+          try {
+              try {
 
-            $resultado = $db->prepare($query);
-            $resultado->bindValue(1, $matricula, PDO::PARAM_INT);
-            $resultado->bindValue(2, $id, PDO::PARAM_INT);
-            $resultado->bindValue(3, $nome, PDO::PARAM_STR);
-            $resultado->bindValue(4, $mes, PDO::PARAM_STR);
-            $resultado->bindValue(5, $ano, PDO::PARAM_INT);
-            $resultado->bindValue(6, $unimed, PDO::PARAM_STR);
-            $resultado->bindValue(7, $uniodonto, PDO::PARAM_STR);
-            $resultado->execute();
+                if(principal($id)){
+                  $query = "UPDATE pagamentofil SET das = das-$unimed-$uniodonto WHERE Afiliado_matricula=$matricula AND mes='$mes' AND ano=$ano";
 
-            return true;
+                  $resultado = $db->prepare($query);
+                  $resultado->bindValue(1, $unimed, PDO::PARAM_STR);
+                  $resultado->bindValue(2, $uniodonto, PDO::PARAM_STR);
+                  $resultado->bindValue(3, $matricula, PDO::PARAM_INT);
+                  $resultado->bindValue(4, $mes, PDO::PARAM_STR);
+                  $resultado->bindValue(5, $ano, PDO::PARAM_INT);
+                  $resultado->execute();
 
-        } catch (Exception $e) {
-            echo "Error!: " . $e->getMessage() . "<br />";
-            return false;
-        }
+                }else{
+                  $query = "UPDATE pagamentofil SET rcs = rcs-$unimed-$uniodonto WHERE Afiliado_matricula=$matricula AND mes='$mes' AND ano=$ano";
+
+                  $resultado = $db->prepare($query);
+                  $resultado->bindValue(1, $unimed, PDO::PARAM_STR);
+                  $resultado->bindValue(2, $uniodonto, PDO::PARAM_STR);
+                  $resultado->bindValue(3, $matricula, PDO::PARAM_INT);
+                  $resultado->bindValue(4, $mes, PDO::PARAM_STR);
+                  $resultado->bindValue(5, $ano, PDO::PARAM_INT);
+                  $resultado->execute();
+
+                }
+              } catch (Exception $e) {
+                echo "Error!: " . $e->getMessage() . "<br />";
+                return false;
+              }
+
+              $query = "INSERT INTO pagamentodep(Afiliado_matricula, idDependente, nome, mes, ano, unimed, uniodonto) VALUES(?,?,?,?,?,?,?)";
+
+              $resultado = $db->prepare($query);
+              $resultado->bindValue(1, $matricula, PDO::PARAM_INT);
+              $resultado->bindValue(2, $id, PDO::PARAM_INT);
+              $resultado->bindValue(3, $nome, PDO::PARAM_STR);
+              $resultado->bindValue(4, $mes, PDO::PARAM_STR);
+              $resultado->bindValue(5, $ano, PDO::PARAM_INT);
+              $resultado->bindValue(6, $unimed, PDO::PARAM_STR);
+              $resultado->bindValue(7, $uniodonto, PDO::PARAM_STR);
+              $resultado->execute();
+
+              return true;
+
+          } catch (Exception $e) {
+              echo "Error!: " . $e->getMessage() . "<br />";
+              return false;
+          }
+      }else{
+        mesErro('Já existe um pagamento para este Dependente neste período.');
+        return false;
+      }
+      }else{
+        mesErro('Não há pagamento cadastrado do Filiado neste período.');
+        return false;
+      }
     }else{
-      mesErro('Já existe um pagamento para este Dependente neste período.');
-      return false;
+      mesErro('Dependente não encontrado');
     }
-  }else{
-    mesErro('Dependente não encontrado');
-  }
-
 
 }
 
@@ -389,6 +423,24 @@ function unicoDep($id, $mes, $ano){
     return $results->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function principal($id){
+
+  include 'conexao.php';
+
+  try {
+    $statement = $db->query("SELECT principal FROM dependente WHERE idDependente = $id");
+    $result = $statement->fetch();
+    $principal = $result[0];
+
+    if($principal==1){
+      return true;
+    }
+  } catch (Exception $e) {
+    echo "Error!: " . $e->getMessage() . "<br />";
+    return false;
+  }
+
+}
 
 function adicional($afiliado_matricula, $mes, $ano, $adicional){
 
