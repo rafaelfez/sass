@@ -579,7 +579,23 @@ function lista_dependente($matricula){
 function get_pagamentos($id){
   include 'conexao.php';
 
-  $sql = 'SELECT Afiliado_matricula, ano, mes, bruto, unimed, uniodonto, adicional, das, rcs, salario, devendo, idPagamento FROM folhadepagamento WHERE idPagamento = ?';
+  $sql = 'SELECT Afiliado_matricula, ano, mes, unimed, uniodonto, das, rcs, idPagamento FROM pagamentofil WHERE idPagamento = ?';
+
+  try {
+      $results = $db->prepare($sql);
+      $results->bindValue(1, $id, PDO::PARAM_INT);
+      $results->execute();
+  } catch (Exception $e) {
+      echo "Error!: " . $e->getMessage() . "<br />";
+      return false;
+  }
+  return $results->fetch();
+}
+
+function get_pagamentos_dep($id){
+  include 'conexao.php';
+
+  $sql = 'SELECT Afiliado_matricula, ano, mes, unimed, uniodonto, idPagamento FROM pagamentodep WHERE idPagamento = ?';
 
   try {
       $results = $db->prepare($sql);
@@ -612,32 +628,83 @@ function listaPagamentos($matricula){
   return $results->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function alterarPagamento($Afiliado_matricula, $ano, $mes, $bruto, $unimed, $uniodonto, $adicional, $das, $rcs, $salario, $devendo, $idPagamento) {
+function alterarPagamentoFil($afiliado_matricula, $ano, $mes, $unimed, $uniodonto, $das, $rcs, $id) {
   include 'conexao.php';
 
 
-  $sql = "UPDATE folhadepagamento SET Afiliado_matricula = ?, ano = ?, mes = ?, bruto = ?, unimed = ?, uniodonto = ?, adicional = ?, das = ?, rcs = ?, salario = ?, devendo = ? WHERE idPagamento = ?";
+  $sql = "UPDATE pagamentofil SET Afiliado_matricula = ?, ano = ?, mes = ?, unimed = ?, uniodonto = ?, das = ?, rcs = ? WHERE idPagamento = ?";
 
   try {
     $resultado = $db->prepare($sql);
-    $resultado->bindValue(1, $Afiliado_matricula, PDO::PARAM_INT);
+    $resultado->bindValue(1, $afiliado_matricula, PDO::PARAM_INT);
     $resultado->bindValue(2, $ano, PDO::PARAM_INT);
     $resultado->bindValue(3, $mes, PDO::PARAM_STR);
-    $resultado->bindValue(4, $bruto, PDO::PARAM_INT);
-    $resultado->bindValue(5, $unimed, PDO::PARAM_INT);
-    $resultado->bindValue(6, $uniodonto, PDO::PARAM_INT);
-    $resultado->bindValue(7, $adicional, PDO::PARAM_INT);
-    $resultado->bindValue(8, $das, PDO::PARAM_STR);
-    $resultado->bindValue(9, $rcs, PDO::PARAM_INT);
-    $resultado->bindValue(10, $salario, PDO::PARAM_INT);
-    $resultado->bindValue(11, $devendo, PDO::PARAM_INT);
-    $resultado->bindValue(12, $idPagamento, PDO::PARAM_INT);
+    $resultado->bindValue(4, $unimed, PDO::PARAM_INT);
+    $resultado->bindValue(5, $uniodonto, PDO::PARAM_INT);
+    $resultado->bindValue(6, $das, PDO::PARAM_STR);
+    $resultado->bindValue(7, $rcs, PDO::PARAM_STR);
+    $resultado->bindValue(8, $id, PDO::PARAM_INT);
     $resultado->execute();
+
+    return true;
   } catch (Exception $e) {
     echo "Error!: " . $e->getMessage() . "<br />";
     return false;
   }
-  return true;
+}
+
+function alterarPagamentoDep($afiliado_matricula, $ano, $mes, $unimed, $uniodonto, $id) {
+  include 'conexao.php';
+
+
+  $sql = "UPDATE pagamentodep SET Afiliado_matricula = ?, ano = ?, mes = ?, unimed = ?, uniodonto = ? WHERE idPagamento = ?";
+
+  try {
+
+    try {
+
+      if(principal($id)){
+        $query = "UPDATE pagamentofil SET das = das-$unimed-$uniodonto WHERE Afiliado_matricula=$matricula AND mes='$mes' AND ano=$ano";
+
+        $resultado = $db->prepare($query);
+        $resultado->bindValue(1, $unimed, PDO::PARAM_STR);
+        $resultado->bindValue(2, $uniodonto, PDO::PARAM_STR);
+        $resultado->bindValue(3, $afiliado_matricula, PDO::PARAM_INT);
+        $resultado->bindValue(4, $mes, PDO::PARAM_STR);
+        $resultado->bindValue(5, $ano, PDO::PARAM_INT);
+        $resultado->execute();
+
+      }else{
+        $query = "UPDATE pagamentofil SET rcs = rcs-$unimed-$uniodonto WHERE Afiliado_matricula=$afiliado_matricula AND mes='$mes' AND ano=$ano";
+
+        $resultado = $db->prepare($query);
+        $resultado->bindValue(1, $unimed, PDO::PARAM_STR);
+        $resultado->bindValue(2, $uniodonto, PDO::PARAM_STR);
+        $resultado->bindValue(3, $afiliado_matricula, PDO::PARAM_INT);
+        $resultado->bindValue(4, $mes, PDO::PARAM_STR);
+        $resultado->bindValue(5, $ano, PDO::PARAM_INT);
+        $resultado->execute();
+
+      }
+    } catch (Exception $e) {
+      echo "Error!: " . $e->getMessage() . "<br />";
+      return false;
+    }
+
+    $resultado = $db->prepare($sql);
+    $resultado->bindValue(1, $afiliado_matricula, PDO::PARAM_INT);
+    $resultado->bindValue(2, $ano, PDO::PARAM_INT);
+    $resultado->bindValue(3, $mes, PDO::PARAM_STR);
+    $resultado->bindValue(4, $unimed, PDO::PARAM_INT);
+    $resultado->bindValue(5, $uniodonto, PDO::PARAM_INT);
+    $resultado->bindValue(6, $id, PDO::PARAM_INT);
+    $resultado->execute();
+
+    return true;
+  } catch (Exception $e) {
+    echo "Error!: " . $e->getMessage() . "<br />";
+    return false;
+  }
 
 }
 
