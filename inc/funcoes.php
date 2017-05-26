@@ -442,42 +442,137 @@ function principal($id){
 
 }
 
-function adicional($afiliado_matricula, $mes, $ano, $adicional){
+function adicional($id, $das, $rcs, $adicional, $desconto){
 
   include 'conexao.php';
 
-  try {
-    if(get_filiado($afiliado_matricula)==true){
-      $statement = $db->query("SELECT devendo FROM folhadepagamento WHERE Afiliado_matricula = $afiliado_matricula AND ano= '$ano' AND mes='$mes'");
-      $result = $statement->fetch();
-      $devendo = $result[0];
-    }else{
-      mesErro('Matrícula não cadastrada. Por favor, verifique o número e tente novamente.');
-      return false;
-    }
-  } catch (Exception $e) {
-      echo "Error!: " . $e->getMessage() . "<br />";
-      return array();
-  }
+  if($das<0 && $rcs>0){
+    $divida = $das;
+    if($desconto=="DINHEIRO"){
+      if($divida==($adicional*(-1))){
+        $query = "UPDATE pagamentofil SET das=0, desconto=?, adicional=? WHERE idPagamento=?";
+        try{
+          $resultado = $db->prepare($query);
+          $resultado->bindValue(1, $desconto, PDO::PARAM_STR);
+          $resultado->bindValue(2, $adicional, PDO::PARAM_STR);
+          $resultado->bindValue(3, $id, PDO::PARAM_INT);
+          $resultado->execute();
 
-  if($adicional==$devendo){
-    $query = "UPDATE folhadepagamento SET adicional=?, devendo=0 WHERE Afiliado_matricula=? AND ano=? AND mes=?";
-    try {
-        $resultado = $db->prepare($query);
-        $resultado->bindValue(1, $adicional, PDO::PARAM_INT);
-        $resultado->bindValue(2, $afiliado_matricula, PDO::PARAM_INT);
-        $resultado->bindValue(3, $ano, PDO::PARAM_INT);
-        $resultado->bindValue(4, $mes, PDO::PARAM_STR);;
-        $resultado->execute();
-      } catch (Exception $e) {
-        echo "Error!: " . $e->getMessage() . "<br />";
+          return true;
+        } catch (Exception $e) {
+          echo "Error!: " . $e->getMessage() . "<br />";
+          return false;
+        }
+      }else{
+        mesErro('A dívida nao é igual ao adicional');
         return false;
       }
-    }else{
-      mesErro('Adicional diferente do valor Devendo');
+    }elseif($desconto=="RCS"){
+      if($divida==($adicional*(-1))){
+        $query = "UPDATE pagamentofil SET das=0, desconto=?, adicional=?, rcs=? WHERE idPagamento=?";
+        try{
+          $resultado = $db->prepare($query);
+          $resultado->bindValue(1, $desconto, PDO::PARAM_STR);
+          $resultado->bindValue(2, $adicional, PDO::PARAM_STR);
+          $resultado->bindValue(3, $rcs+$divida, PDO::PARAM_STR);
+          $resultado->bindValue(4, $id, PDO::PARAM_INT);
+          $resultado->execute();
+          return true;
+        } catch (Exception $e) {
+          echo "Error!: " . $e->getMessage() . "<br />";
+          return false;
+        }
+      }else{
+        mesErro('A dívida nao é igual ao adicional');
+        return false;
+      }
+    }elseif($desconto=="DAS"){
+      mesErro('O DAS já está negativo');
       return false;
     }
-    return true;
+  }
+
+  if($das>0 && $rcs<0){
+    $divida = $rcs;
+    if($desconto=="DINHEIRO"){
+      if($divida==($adicional*(-1))){
+        $query = "UPDATE pagamentofil SET rcs=0, desconto=?, adicional=? WHERE idPagamento=?";
+        try{
+          $resultado = $db->prepare($query);
+          $resultado->bindValue(1, $desconto, PDO::PARAM_STR);
+          $resultado->bindValue(2, $adicional, PDO::PARAM_STR);
+          $resultado->bindValue(3, $id, PDO::PARAM_INT);
+          $resultado->execute();
+
+          return true;
+        } catch (Exception $e) {
+          echo "Error!: " . $e->getMessage() . "<br />";
+          return false;
+        }
+      }else{
+        mesErro('A dívida nao é igual ao adicional');
+        return false;
+      }
+    }elseif($desconto=="DAS"){
+      if($divida==($adicional*(-1))){
+        $query = "UPDATE pagamentofil SET rcs=0, desconto=?, adicional=?, das=? WHERE idPagamento=?";
+        try{
+          $resultado = $db->prepare($query);
+          $resultado->bindValue(1, $desconto, PDO::PARAM_STR);
+          $resultado->bindValue(2, $adicional, PDO::PARAM_STR);
+          $resultado->bindValue(3, $das+$divida, PDO::PARAM_STR);
+          $resultado->bindValue(4, $id, PDO::PARAM_INT);
+          $resultado->execute();
+          return true;
+        } catch (Exception $e) {
+          echo "Error!: " . $e->getMessage() . "<br />";
+          return false;
+        }
+      }else{
+        mesErro('A dívida nao é igual ao adicional');
+        return false;
+      }
+    }elseif($desconto=="RCS"){
+      mesErro('O RCS já está negativo');
+      return false;
+    }
+  }
+
+  if($das<0 && $rcs<0){
+    $divida = $das + $rcs;
+    if($desconto=="DINHEIRO"){
+      if($divida==($adicional*(-1))){
+        $query = "UPDATE pagamentofil SET das=0, rcs=0, desconto=?, adicional=? WHERE idPagamento=?";
+        try{
+          $resultado = $db->prepare($query);
+          $resultado->bindValue(1, $desconto, PDO::PARAM_STR);
+          $resultado->bindValue(2, $adicional, PDO::PARAM_STR);
+          $resultado->bindValue(3, $id, PDO::PARAM_INT);
+          $resultado->execute();
+
+          return true;
+        } catch (Exception $e) {
+          echo "Error!: " . $e->getMessage() . "<br />";
+          return false;
+        }
+      }else{
+        mesErro('A dívida nao é igual ao adicional');
+        return false;
+      }
+    }elseif($desconto=="DAS"){
+      mesErro('O DAS já está negativo');
+      return false;
+    }elseif($desconto=="RCS"){
+      mesErro('O RCS já está negativo');
+      return false;
+    }
+  }
+
+  if($das>=0 && $rcs>=0){
+    mesErro('DAS e RCS estão positivos, não há o que adicionar.');
+    return false;
+  }
+
 }
 
 function get_das(){
@@ -816,4 +911,22 @@ function alterarEncargo($afiliado_matricula, $mes, $ano, $decimoterceiro, $refei
       return false;
     }
   return true;
+}
+
+function get_pag($matricula, $ano, $mes){
+
+  include 'conexao.php';
+
+  try {
+    $statement = $db->query("SELECT idPagamento FROM pagamentofil WHERE Afiliado_matricula=$matricula and ano=$ano and mes='$mes'");
+    $result = $statement->fetch();
+    $id = $result[0];
+
+    return $id;
+
+  } catch (Exception $e) {
+    echo "Error!: " . $e->getMessage() . "<br />";
+    return false;
+  }
+
 }
