@@ -1,6 +1,6 @@
-<?php require( "inc/funcoes.php"); 
-$tituloPagina="Histórico"; 
-$matricula=''; 
+<?php require( "inc/funcoes.php");
+$tituloPagina="Histórico";
+$matricula='';
 include( "inc/header.php"); ?>
 
 
@@ -45,7 +45,7 @@ include( "inc/header.php"); ?>
                 <ul>
                     <?php foreach(lista_dependente($matricula) as $item){ echo
                         "<li>
-                    <a href='alt_dep.php?cpf=" .$item['cpf'] . "'>". "Matricula: " . $item['Afiliado_matricula'] . " - Nome: " . $item['nome'] . " - Parentesco: " . $item['parentesco'] . "</a>"; echo "</li>
+                    <a href='alt_dep.php?id=" .$item['idDependente'] . "'>". "Matricula: " . $item['Afiliado_matricula'] . " - Nome: " . $item['nome'] . " - Parentesco: " . $item['parentesco'] . "</a>"; echo "</li>
                      "; } ?>
                 </ul>
             </div>
@@ -64,7 +64,7 @@ include( "inc/header.php"); ?>
                 <ul>
                     <?php foreach(listaPagamentos($matricula) as $item){ echo
                         "<li>
-                    <a href='alt_pag.php?id=" .$item['idPagamento'] . "'>". "Matricula: " . $item['Afiliado_matricula'] . " - Salário: " . $item['salario'] . " - Mês: " .$item['mes'] . " - Ano: " .$item['ano'] . "</a>"; echo "</li>
+                    <a href='alt_pag.php?id=" .$item['idPagamento'] . "'>". "Matricula: " . $item['Afiliado_matricula'] . " - Mês: " .$item['mes'] . " - Ano: " .$item['ano'] . "</a>"; echo "</li>
                      "; } ?>
                 </ul>
             </div>

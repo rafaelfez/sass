@@ -579,11 +579,11 @@ function get_das(){
   include 'conexao.php';
 
   try {
-    $statement = $db->query("SELECT SUM(das) from folhadepagamento");
+    $statement = $db->query("SELECT SUM(das) from pagamentofil");
     $result = $statement->fetch();
     $das = $result[0];
   } catch (Exception $e) {
-    echo "Error!: " . $e->getr() . "<br />";
+    echo "Error!: " . $e->getMessage() . "<br />";
     return false;
   }
   return $das;
@@ -593,7 +593,7 @@ function get_pagamentos_das(){
   include 'conexao.php';
 
   try {
-    return $db->query("SELECT idPagamento, Afiliado_matricula, salario, mes, ano, das FROM folhadepagamento");
+    return $db->query("SELECT idPagamento, Afiliado_matricula, mes, ano, das FROM pagamentofil");
   } catch (Exception $e) {
     echo "Error!: " . $e->getMessage() . "<br />";
     return false;
@@ -655,9 +655,11 @@ function get_dependente($id) {
 function lista_dependente($matricula){
   include 'conexao.php';
 
-
-    $sql = 'SELECT nome, nascimento, sexo, telefone, celular, email, rg, cpf, parentesco, Afiliado_matricula FROM dependente WHERE Afiliado_matricula = ?';
-
+    if($matricula==''){
+      $sql = 'SELECT idDependente, cpf, Afiliado_matricula, nome, parentesco FROM dependente';
+    }else{
+      $sql = 'SELECT nome, nascimento, sexo, telefone, celular, email, rg, cpf, parentesco, Afiliado_matricula FROM dependente WHERE Afiliado_matricula = ?';
+    }
 
   try {
       $results = $db->prepare($sql);
@@ -707,9 +709,9 @@ function listaPagamentos($matricula){
   include 'conexao.php';
 
   if($matricula==''){
-    $sql = 'SELECT Afiliado_matricula, ano, mes, bruto, unimed, uniodonto, adicional, das, rcs, salario, devendo, idPagamento FROM folhadepagamento';
+    $sql = 'SELECT Afiliado_matricula, ano, mes, unimed, uniodonto, adicional, das, rcs, idPagamento FROM pagamentofil';
   }else{
-    $sql = 'SELECT Afiliado_matricula, ano, mes, bruto, unimed, uniodonto, adicional, das, rcs, salario, devendo, idPagamento FROM folhadepagamento WHERE Afiliado_matricula = ?';
+    $sql = 'SELECT Afiliado_matricula, ano, mes, unimed, uniodonto, adicional, das, rcs, idPagamento FROM pagamentofil WHERE Afiliado_matricula = ?';
   }
 
   try {
