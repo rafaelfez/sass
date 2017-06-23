@@ -932,3 +932,20 @@ function get_pag($matricula, $ano, $mes){
   }
 
 }
+
+function get_das_total($de,$ate){
+  include 'conexao.php';
+
+  $sql = "SELECT das, Afiliado_matricula, ano, mes, unimed, uniodonto, data FROM pagamentofil WHERE data BETWEEN '$de%' AND '$ate%'";
+
+  try {
+      $results = $db->prepare($sql);
+      $results->bindValue(1, $de, PDO::PARAM_STR);
+      $results->bindValue(2, $ate, PDO::PARAM_STR);
+      $results->execute();
+  } catch (Exception $e) {
+      echo "Error!: " . $e->getMessage() . "<br />";
+      return false;
+  }
+  return $results->fetchAll();
+}
