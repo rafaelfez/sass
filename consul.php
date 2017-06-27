@@ -48,20 +48,35 @@ include("inc/header.php");
 
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <strong>Pagamentos</strong>
+                    <strong>Pagamentos do Filiado</strong>
                 </div>
                 <div class="panel-body">
                     <ul>
                         <?php
                             foreach (listaPagamentos($matricula) as $item) {
                             echo "<li>
-                        <a href='alt_pag.php?id=" . $item['idPagamento'] . "'>" . "Salário: " . $item['salario'] . " - Mês: " . $item['mes'] . " - Ano: " . $item['ano'] . "</a> "; echo " </li>
+                        <a href='alt_pag_fil.php?id=" . $item['idPagamento'] . "'>" . "RCS: " . $item['rcs'] . " - DAS: " . $item['das'] .  " - Mês: " . $item['mes'] . " - Ano: " . $item['ano'] . "</a> "; echo " </li>
                          "; } ?>
                     </ul>
                 </div>
             </div>
 
             <div class="panel panel-info">
+                <div class="panel-heading">
+                    <strong>Gasto dos Dependentes</strong>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <?php
+                            foreach (listaPagamentosDep($matricula) as $item) {
+                            echo "<li>
+                        <a href='alt_pag_dep.php?id=" . $item['idPagamento'] . "'>" . "Nome: " . $item['nome'] . " - Mês: " . $item['mes'] . " - Ano: " . $item['ano'] . "</a> "; echo " </li>
+                         "; } ?>
+                    </ul>
+                </div>
+            </div>
+
+            <!--<div class="panel panel-info">
                 <div class="panel-heading">
                     <strong>Encargos</strong>
                 </div>
@@ -77,7 +92,7 @@ include("inc/header.php");
             </div>
 
         </div>
-
+-->
         <div class="col-sm-offset-2 col-sm-10">
             <abbr title="Imprimir Via do Cliente"><input type="button" class="btn btn-primary" value="Via do Cliente" onclick="javascript: location.href='impress.php?matricula=<?php echo $matricula?>';"/></abbr>
             <abbr title="Realizar Nova Busca"><input class="btn btn-secondary" onclick="javascript: location.href='consulta.php';" type="button" value="Nova Busca"></abbr>

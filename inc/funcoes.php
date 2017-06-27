@@ -622,7 +622,7 @@ function lista_filiado($matricula){
   if($matricula==''){
     $sql = 'SELECT nome, matricula, celular, taxa_rcs FROM filiado';
   }else{
-    $sql = 'SELECT nome, matricula, nascimento, sexo, telefone, celular, email, rg, cpf, endereco, taxa_rcs FROM filiado WHERE matricula = ?';
+    $sql = 'SELECT nome, matricula, nascimento, sexo, telefone, celular, email, rg, cpf, endrua, taxa_rcs FROM filiado WHERE matricula = ?';
   }
 
   try {
@@ -656,9 +656,9 @@ function lista_dependente($matricula){
   include 'conexao.php';
 
     if($matricula==''){
-      $sql = 'SELECT idDependente, cpf, Afiliado_matricula, nome, parentesco FROM dependente';
+      $sql = 'SELECT idDependente, cpf, Afiliado_matricula, nome, parentesco, endrua FROM dependente';
     }else{
-      $sql = 'SELECT nome, nascimento, sexo, telefone, celular, email, rg, cpf, parentesco, Afiliado_matricula FROM dependente WHERE Afiliado_matricula = ?';
+      $sql = 'SELECT nome, nascimento, sexo, telefone, celular, email, rg, cpf, parentesco, Afiliado_matricula, endrua FROM dependente WHERE Afiliado_matricula = ?';
     }
 
   try {
@@ -705,13 +705,33 @@ function get_pagamentos_dep($id){
   return $results->fetch();
 }
 
+function listaPagamentosDep($matricula){
+  include 'conexao.php';
+
+  if($matricula==''){
+    $sql = 'SELECT Afiliado_matricula, ano, mes, unimed, uniodonto, nome, idPagamento FROM pagamentodep';
+  }else{
+    $sql = 'SELECT Afiliado_matricula, ano, mes, unimed, uniodonto, nome, idPagamento FROM pagamentodep WHERE Afiliado_matricula = ?';
+  }
+
+  try {
+      $results = $db->prepare($sql);
+      $results->bindValue(1, $matricula, PDO::PARAM_INT);
+      $results->execute();
+  } catch (Exception $e) {
+      echo "Error!: " . $e->getMessage() . "<br />";
+      return false;
+  }
+  return $results->fetchAll(PDO::FETCH_ASSOC);
+}
+
 function listaPagamentos($matricula){
   include 'conexao.php';
 
   if($matricula==''){
-    $sql = 'SELECT Afiliado_matricula, ano, mes, unimed, uniodonto, adicional, das, rcs, idPagamento FROM pagamentofil';
+    $sql = 'SELECT Afiliado_matricula, ano, mes, unimed, uniodonto, adicional, das, rcs, idPagamento, desconto FROM pagamentofil';
   }else{
-    $sql = 'SELECT Afiliado_matricula, ano, mes, unimed, uniodonto, adicional, das, rcs, idPagamento FROM pagamentofil WHERE Afiliado_matricula = ?';
+    $sql = 'SELECT Afiliado_matricula, ano, mes, unimed, uniodonto, adicional, das, rcs, idPagamento, desconto FROM pagamentofil WHERE Afiliado_matricula = ?';
   }
 
   try {

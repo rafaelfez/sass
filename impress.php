@@ -40,7 +40,7 @@ include( "inc/header.php"); ?>
                             
                                  Email: <b>" . $item['email'] . "</b></br>
                             
-                                 Endereço: <b>" . $item['endereco'] . "</b></br>
+                                 Endereço: <b>" . $item['endrua'] . "</b></br>
                                 
                                  RG: <b>" . $item['rg'] . "</b></br>
                                 
@@ -76,7 +76,7 @@ include( "inc/header.php"); ?>
                                 Telefone: <b>" . $item['telefone'] . "</b></br>
                                 Celular: <b>" . $item['celular'] . "</b></br>
                                 Email: <b>" . $item[ 'email'] . "</b></br>
-                                Endereço: <b>" . $item['endereco'] . "</b></br>
+                                Endereço: <b>" . $item['endrua'] . "</b></br>
                                 RG: <b>" . $item['rg'] . "</b></br>
                                 CPF: <b>" . $item['cpf'] . "</b></br>
                                 Parentesco: <b>" . $item['parentesco'] . "</b></br>
@@ -89,7 +89,7 @@ include( "inc/header.php"); ?>
         <div class="panel panel-info">
             <div class="panel-heading">
                 <strong>
-                Pagamentos </strong>
+                Pagamentos do Filiado</strong>
             </div>
             <div class="panel-body">
 
@@ -101,7 +101,7 @@ include( "inc/header.php"); ?>
                 <th style="width:50px;">
                     Ano
                 </th>
-                <th style="width:50px;">
+                <th style="width:100px;">
                     Mês
                 </th>
                 <th style="width:100px;">
@@ -117,16 +117,13 @@ include( "inc/header.php"); ?>
                     DAS
                 </th>
                 <th style="width:100px;">
-                    Devendo
-                </th>
-                <th style="width:100px;">
                     Adicional
                 </th>
                 <th style="width:100px;">
-                    Bruto
+                    Desconto
                 </th>
                 <th style="width:100px;">
-                    Líquido
+                    DAS Retido
                 </th>
             </tr>
             </thead>
@@ -158,23 +155,24 @@ include( "inc/header.php"); ?>
                 <td>
                    R$ " . $item['das'] . "
                 </td>
+
+                <td>
+                   R$ "; 
+                   
+                   if($item['adicional']==''){
+                       echo '0.00';
+                   }else{
+                       echo $item['adicional'];
+                   }  echo "
+                </td>
                 
                 <td>
-                   R$ " . $item['devendo'] . "
+                   " . $item['desconto'] . "
                 </td>
-
+                
                 <td>
-                   R$ " . $item['adicional'] . "
+                   R$ " . $item['das']/2 . "
                 </td>
-
-                <td>
-                   R$ " . $item['bruto'] . "
-                </td>
-
-                <td>
-                   R$ " . $item['salario'] . "
-                </td>
-
             </tr>
             "; } ?>
             </ul>
@@ -182,8 +180,72 @@ include( "inc/header.php"); ?>
             </table> 
             </div>
         </div>
+        
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <strong>
+                Gasto dos Dependentes</strong>
+            </div>
+            <div class="panel-body">
+
+                    <table class="table table-bordered table-hover table-condensed table-striped" style="width:900px;">
+            <thead>
 
 
+            <tr>
+                <th style="width:100px;">
+                    Nome
+                </th>
+                <th style="width:50px;">
+                    Ano
+                </th>
+                <th style="width:100px;">
+                    Mês
+                </th>
+                <th style="width:100px;">
+                    Unimed
+                </th>
+                <th style="width:100px;">
+                    Uniodonto
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <ul class="items">
+                <?php foreach(listaPagamentosDep($matricula) as $item){ echo
+
+                    "<tr>
+                <td>
+                    " . $item['nome'] . "
+                </td>
+
+                <td>
+                    " . $item['ano'] . "
+                </td>
+    
+                <td>
+                    " . $item['mes'] . "
+                </td>
+                
+                <td>
+                   R$ " . $item['unimed'] . "
+                </td>
+                
+                <td>
+                   R$ " . $item['uniodonto'] . "
+                </td>
+                
+            </tr>
+            "; } ?>
+            </ul>
+            </tbody>
+            </table> 
+            </div>
+        </div>
+        
+
+
+<!--
         <div class="panel panel-info">
             <div class="panel-heading">
                 <strong>
@@ -248,11 +310,9 @@ include( "inc/header.php"); ?>
         </div>
             
     </div>
-
+-->
     <div class="col-sm-offset-2 col-sm-10">
-             <abbr title="Imprimir Via do Cliente">
                 <input type="button" name="imprimir" value="Imprimir" class="btn btn-success" onclick="window.print();">
-             </abbr>
              <abrr title="Cancelar">
                 <input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" />
             </abrr>
