@@ -245,9 +245,9 @@ function get_devedores() {
     include 'conexao.php';
 
       try {
-          return $db->query('SELECT afiliado.nome, afiliado.celular, folhadepagamento.devendo, folhadepagamento.mes FROM afiliado
-                              INNER JOIN folhadepagamento ON afiliado.matricula = folhadepagamento.Afiliado_matricula
-                                WHERE folhadepagamento.devendo > 0 ORDER BY folhadepagamento.idPagamento DESC');
+          return $db->query('SELECT filiado.nome, filiado.celular, pagamentofil.rcs, pagamentofil.das, pagamentofil.mes FROM filiado
+                              INNER JOIN pagamentofil ON filiado.matricula = pagamentofil.Afiliado_matricula
+                                WHERE pagamentofil.rcs < 0 OR pagamentofil.das < 0 ORDER BY pagamentofil.idPagamento DESC');
       } catch (Exception $e) {
           echo "Error!: " . $e->getMessage() . "<br />";
           return array();

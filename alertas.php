@@ -59,13 +59,16 @@ include("inc/header.php"); ?>
                             Nome
                         </th>
                         <th style="width:150px;">
-                            Celular
-                        </th>
-                        <th style="width:150px;">
                             Mês
                         </th>
                         <th style="width:150px;">
-                            Devendo
+                            DAS
+                        </th>
+                        <th style="width:150px;">
+                            RCS
+                        </th>
+                        <th style="width:150px;">
+                            Celular
                         </th>
                         <th style="width:75px;">
                             SMS
@@ -84,17 +87,21 @@ include("inc/header.php"); ?>
                     </td>
                     " . "
                     <td>
-                        " . $devedor['celular'] . "
-                    </td>
-                    " . "
-                    <td>
                         " . $devedor['mes'] . "
                     </td>
                     " . "
                     <td>
-                       R$ " . $devedor['devendo'] .  "
+                        " . $devedor['das'] . "
                     </td>
                     " . "
+                    <td>
+                        " . $devedor['rcs'] . "
+                    </td>
+                    " . "
+                    <td>
+                        " . $devedor['celular'] . "
+                    </td>
+                    " . " 
                     <td>
                         " . "<input class='btn btn-primary' type='submit' value='Enviar'/>" . "
                     </td>
