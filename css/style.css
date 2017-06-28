@@ -162,7 +162,7 @@ th, td {
   top: 15%;
 }
 
-.sms-geral {
+.sms-geralx {
 	font-size: 18px;
   text-align: center;
   position: absolute;
@@ -190,7 +190,7 @@ th, td {
 .form-container table{
 	padding:5px;
 	font-size:large;
-	text-alig:center;
+	text-align:center;
 }
 
 .container{
@@ -199,4 +199,18 @@ th, td {
   height:auto;
   min-height:100%;
   position:relative;
+}
+
+.timbre-p{
+  color: black;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 15px 10px 130px;
+  display: block;
+
+}
+
+.timbre-img {
+    padding: 10px 15px 10px 10px;
 }

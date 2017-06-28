@@ -3,6 +3,19 @@ $tituloPagina="Impressão" ;
 $matricula=$_GET[ 'matricula']; 
 include( "inc/header.php"); ?>
 
+<div class="timbre">
+    <div class="timbre-img">
+        <img src="img/sasslogo.png" align="left" style="width:150px; height:150px;">
+    </div>
+    <div class="timbre-p">
+        <p>Sindicato dos Trabalhadores Portuários Avulsos e com Vínculo Empregatício</p>
+        <p>nos Serviços de Capatazia e Arrumadores nas Cidades de São Sebastião,</p>
+        <p>Caraguatatuba, Ubatuba e Ilhabela</p>
+        <p>Rua: Três Bandeirantes, 144 – Centro – São Sebastião/ SP CEP: 11608-587</p>
+        <p>E-MAIL: sindiarrumadorss@uol.com.br / Telefax: (12) 3892.4319</p>
+        <p>CNPJ: 50.324.854/ 0001- 00</p>
+    </div>
+</div>
 
   <div class="panel panel-primary">
     <div class="panel-heading">
@@ -184,7 +197,7 @@ include( "inc/header.php"); ?>
         <div class="panel panel-info">
             <div class="panel-heading">
                 <strong>
-                Gasto dos Dependentes</strong>
+                Gastos dos Dependentes</strong>
             </div>
             <div class="panel-body">
 
