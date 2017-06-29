@@ -4,11 +4,10 @@ require 'inc/funcoes.php';
 
 $tituloPagina="DAS";
 
-$de = $ate = $total = '';
+$ano = $total = '';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-  $de = filter_input(INPUT_POST, 'de', FILTER_SANITIZE_STRING);
-  $ate = filter_input(INPUT_POST, 'ate', FILTER_SANITIZE_STRING);
+  $ano = filter_input(INPUT_POST, 'ano', FILTER_SANITIZE_NUMBER_INT);
 }
 
 include("inc/header.php");
@@ -17,10 +16,10 @@ include("inc/header.php");
 <?php
 try{
   if(isset($_POST["consultar"])){
-    if(empty($de)||empty($ate)){
-      $message = mesAlerta("Por favor informe o período");
+    if(empty($ano)){
+      $message = mesAlerta("Por favor informe o ano");
     }else{
-      if(get_das_total($de, $ate)){
+      if(get_das_ano($ano)){
         $message = mesSucesso("Pesquisa com sucesso");
       }
     }
@@ -43,24 +42,21 @@ try{
         </div>
         <div class="panel-body">
             <form action="das.php" class="form-horizontal" data-toggle="validator" method="post" role="form">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="de">De: <span class="required"></span>
-                    </label>
-                    <div class="col-sm-3">
-                        <input class="form-control" id="de" name="de" type="text" value="<?php echo htmlspecialchars($de); ?>">
-                    </div>
-                    <div class="help-block with-errors">
-                    </div>
+              <div class="form-group has-feedback">
+                <label for="ano" class="col-sm-2 control-label">Ano:<span class="required">*</span>
+                </label>
+                <div class="col-sm-2">
+                  <select class="form-control form-control-sucess" id="ano" name="ano" required>
+                    <option value="2017" <?php if($ano=='2017') echo 'selected'; ?>>2017</option>
+                    <option value="2018" <?php if($ano=='2018') echo 'selected'; ?>>2018</option>
+                    <option value="2019" <?php if($ano=='2019') echo 'selected'; ?>>2019</option>
+                    <option value="2020" <?php if($ano=='2020') echo 'selected'; ?>>2020</option>
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  </select>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="ate">Até: <span class="required"></span>
-                    </label>
-                    <div class="col-sm-3">
-                        <input class="form-control" id="ate" name="ate" type="text" value="<?php htmlspecialchars($ate); ?>">
-                    </div>
-                    <div class="help-block with-errors">
-                    </div>
+                <div class="help-block with-errors">
                 </div>
+              </div>
                 <abrr title="Consultar"><input class="btn btn-primary" type="submit" name="consultar" value="Consultar"/></abrr>
                 <div class="help-block with-errors">
             </form>
@@ -102,7 +98,7 @@ try{
             </thead>
             <tbody>
             <ul class="items">
-                <?php foreach(get_das_total($de,$ate) as $item){
+                <?php foreach(get_das_ano($ano) as $item){
 
                     echo "<tr>
                 <td>
