@@ -18,7 +18,7 @@ include( "inc/header.php"); ?>
         <div class="panel-heading hover-link" data-toggle="collapse" data-parent="false" data-target="#collapsePanel1">
             <h2 class="panel-title">
             <big>
-            Histórico de Filiados </big>
+            Cadastro de Filiados </big>
             </h2>
         </div>
         <div id="collapsePanel1" class="panel-collapse collapse out">
@@ -37,7 +37,7 @@ include( "inc/header.php"); ?>
         <div class="panel-heading hover-link" data-toggle="collapse" data-parent="false" data-target="#collapsePanel2">
             <h2 class="panel-title">
             <big>
-            Histórico de Dependentes </big>
+            Cadastro de Dependentes </big>
             </h2>
         </div>
         <div id="collapsePanel2" class="panel-collapse collapse out">
@@ -56,7 +56,7 @@ include( "inc/header.php"); ?>
         <div class="panel-heading hover-link" data-toggle="collapse" data-parent="false" data-target="#collapsePanel3">
             <h2 class="panel-title">
             <big>
-            Histórico de Pagamentos </big>
+            Pagamentos de Filiados</big>
             </h2>
         </div>
         <div id="collapsePanel3" class="panel-collapse collapse out">
@@ -64,7 +64,7 @@ include( "inc/header.php"); ?>
                 <ul>
                     <?php foreach(listaPagamentos($matricula) as $item){ echo
                         "<li>
-                    <a href='alt_pag.php?id=" .$item['idPagamento'] . "'>". "Matricula: " . $item['Afiliado_matricula'] . " - Mês: " .$item['mes'] . " - Ano: " .$item['ano'] . "</a>"; echo "</li>
+                    <a href='alt_pag_fil.php?id=" .$item['idPagamento'] . "'>". "Matricula: " . $item['Afiliado_matricula'] . " - Mês: " .$item['mes'] . " - Ano: " .$item['ano'] . "</a>"; echo "</li>
                      "; } ?>
                 </ul>
             </div>
@@ -75,20 +75,21 @@ include( "inc/header.php"); ?>
         <div class="panel-heading hover-link" data-toggle="collapse" data-parent="false" data-target="#collapsePanel4">
             <h2 class="panel-title">
             <big>
-            Histórico de Encargos </big>
+            Pagamentos de Dependentes </big>
             </h2>
         </div>
         <div id="collapsePanel4" class="panel-collapse collapse out">
             <div class="panel-body">
                 <ul>
-                    <?php foreach(listaEncargos($matricula) as $item){ echo
+                    <?php foreach(listaPagamentosDep($matricula) as $item){ echo
                         "<li>
-                    <a href='alt_enc.php?id=" .$item['idEncargo'] . "'>". "Matricula: " . $item['Afiliado_matricula'] . " - Mês: " .$item[ 'mes'] . " - Ano: " .$item['ano'] . " - 13º: " .$item['decimoterceiro'] . " - Refeição: " .$item['refeicao'] . " - Férias: " .$item['ferias'] . "</a>"; echo "</li>
+                    <a href='alt_pag_dep.php?id=" .$item['idPagamento'] . "'>". "Nome: " . $item['nome'] . " - Mês: " .$item['mes'] . " - Ano: " .$item['ano'] . "</a>"; echo "</li>
                      "; } ?>
                 </ul>
             </div>
         </div>
     </div>
+
 </div>
 
 <?php include( "inc/footer.php"); ?>

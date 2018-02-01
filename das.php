@@ -13,14 +13,24 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 include("inc/header.php");
 ?>
 
-<?php
+
+
+   <div class="panel-group">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2 class="panel-title"><big>DAS</big>
+            </h2>
+        </div>
+        <div class="panel-body">
+
+        <?php
 try{
   if(isset($_POST["consultar"])){
     if(empty($ano)){
-      $message = mesAlerta("Por favor informe o ano");
+      $message = mesAlerta("Por favor informe o ano.");
     }else{
       if(get_das_ano($ano)){
-        $message = mesSucesso("Pesquisa com sucesso");
+        $message = mesSucesso("Pesquisa realizada com sucesso.");
       }
     }
   }
@@ -34,13 +44,7 @@ try{
 
 ?>
 
-   <div class="panel-group">
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h2 class="panel-title"><big>DAS</big>
-            </h2>
-        </div>
-        <div class="panel-body">
+        
             <form action="das.php" class="form-horizontal" data-toggle="validator" method="post" role="form">
               <div class="form-group has-feedback">
                 <label for="ano" class="col-sm-2 control-label">Ano:<span class="required">*</span>
@@ -57,16 +61,21 @@ try{
                 <div class="help-block with-errors">
                 </div>
               </div>
+
+              <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
                 <abrr title="Consultar"><input class="btn btn-primary" type="submit" name="consultar" value="Consultar"/></abrr>
                 <div class="help-block with-errors">
             </form>
         </div>
     </div>
+    </div>
 
 
-    <div class="panel panel-primary">
+
+    <div class="panel panel-info">
         <div class="panel-heading">
-            <h2 class="panel-title"><big>Transações</big>
+            <h2 class="panel-title"><strong>Transações</strong>
             </h2>
         </div>
         <div class="panel-body">
@@ -140,9 +149,9 @@ try{
         </div>
     </div>
 
-    <div class="panel panel-primary">
+    <div class="panel panel-info">
         <div class="panel-heading">
-            <h2 class="panel-title"><big>Total</big>
+            <h2 class="panel-title"><strong>Total</strong>
             </h2>
         </div>
         <div class="panel-body">

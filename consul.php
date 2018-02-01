@@ -37,11 +37,10 @@ include("inc/header.php");
                 </div>
                 <div class="panel-body">
                     <ul>
-                        <?php
-                            foreach (lista_dependente($matricula) as $item) {
-                            echo "<li>
-                        <a href='alt_dep.php?cpf=" . $item['cpf'] . "'>" . "Nome: " . $item['nome'] . " - Parentesco: " . $item['parentesco'] . "</a>"; echo "</li>
-                         "; } ?>
+                        <?php foreach(lista_dependente($matricula) as $item){ echo
+                        "<li>
+                    <a href='alt_dep.php?id=" .$item['idDependente'] . "'>". "Nome: " . $item['nome'] . " - Parentesco: " . $item['parentesco'] . "</a>"; echo "</li>
+                     "; } ?>
                     </ul>
                 </div>
             </div>
@@ -92,15 +91,19 @@ include("inc/header.php");
             </div>
 
         </div>
+
 -->
+</div>
+        <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <abbr title="Imprimir Via do Cliente"><input type="button" class="btn btn-primary" value="Via do Cliente" onclick="javascript: location.href='impress.php?matricula=<?php echo $matricula?>';"/></abbr>
             <abbr title="Realizar Nova Busca"><input class="btn btn-secondary" onclick="javascript: location.href='consulta.php';" type="button" value="Nova Busca"></abbr>
+        </div>
         </div>
 
     </div>
 </div>
 
-<?php 
-    include( "inc/footer.php"); 
+<?php
+    include( "inc/footer.php");
  ?>

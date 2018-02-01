@@ -11,12 +11,7 @@ body {
   min-height: 100%;
 }
 
-footer {
-position: absolute;
-bottom: 0;
-text-align: center;
-width: 100%;
-}
+
 
 th, td {
 
@@ -68,7 +63,7 @@ th, td {
 
 
 .footer {
-  font-family: calibri;
+  font-family: arial;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -93,7 +88,7 @@ th, td {
 .home {
   font-size: 60px;
   text-align: center;
-  position: absolute;
+  /*position: absolute;*/
   left: 28%;
   top: 15%;
 }
@@ -213,4 +208,21 @@ th, td {
 
 .timbre-img {
     padding: 10px 15px 10px 10px;
+}
+
+.btn-xlarge {
+  background-color: #1C15E3;
+  color: #fff;
+  padding: 18px 28px;
+  font-size: 20px;
+  line-height: normal;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+}
+
+.btn-home {
+  margin-top: 30px;
+  font-size: 60px;
+  display: inline-block;
 }

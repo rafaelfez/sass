@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
     <script src="bootstrap/js/jquery-3.1.1.min.js" type="text/javascript"></script>
     <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="bootstrap/js/validator.min.js" type="text/javascript">></script>
+    <script src="bootstrap/js/validator.min.js" type="text/javascript"></script>
 
   </head>
 
@@ -69,3 +69,5 @@
           header('location:login.php');
       }
       ?>
+
+      <div class="container">

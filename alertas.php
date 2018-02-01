@@ -1,5 +1,5 @@
-<?php require 'inc/funcoes.php'; 
-$tituloPagina="Alertas" ; 
+<?php require 'inc/funcoes.php';
+$tituloPagina="Alertas" ;
 include("inc/header.php"); ?>
 
    <div class="panel-group">
@@ -12,7 +12,7 @@ include("inc/header.php"); ?>
         </div>
         <div class="panel-body">
 
-            <form class="form-horizontal" id="sms-geral" data-toggle="validator" role="form" method="post" action="send.php">
+            <form class="form-horizontal" id="sms-geral" data-toggle="validator" role="form" method="post" >
 
                 <div class="form-group has-feedback">
                     <label for="mensagem" class="col-sm-2 control-label">
@@ -29,7 +29,7 @@ include("inc/header.php"); ?>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <abrr title="Enviar mensagem SMS">
-                            <input class="btn btn-primary" type="submit" value="Enviar" />
+                            <input class="btn btn-primary" type="submit" value="Enviar" onclick="smsGeral()" />
                         </abrr>
                         <abbr title="Cancelar">
                         <input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';"/>
@@ -37,24 +37,35 @@ include("inc/header.php"); ?>
                     </div>
                 </div>
             </form>
+
+            <script>
+            function smsGeral() {
+                alert("SMS enviado para todos os filiados!");
+            }
+            function smsDeve() {
+                alert("SMS enviado para devedor!");
+            }
+            </script>
             <!--<abrr title="Enviar alerta para todos Filiados"><input class="btn btn-primary" type="submit" value="Enviar" /></abrr>
     <abrr title="Cancelar alerta"><input class="btn btn-danger" type="button" value="Cancelar"  onclick="javascript: location.href='index.php';" /></abrr>
   </form>
 -->
-        </div>
-    </div>
-    
-    <div class="panel panel-primary">
+<br />
+<br />
+    <div class="panel panel-info">
         <div class="panel-heading">
             <h2 class="panel-title">
-            <big>
-            Devedores </big>
+            <strong>
+            Devedores </strong>
             </h2>
         </div>
         <div class="panel-body">
             <table style="width:675px;" class="table table-bordered table-hover table-condensed table-striped">
                 <thead>
                     <tr>
+                        <th style="width:400px;">
+                            Matrícula
+                        </th>
                         <th style="width:400px;">
                             Nome
                         </th>
@@ -79,9 +90,13 @@ include("inc/header.php"); ?>
                     <?php foreach(get_devedores() as $devedor){ /*echo '<li>
             '. $devedor[ 'nome'] . " " .$devedor[ 'celular'] . " " .$devedor[ 'situacao'] . '</li>
             ';*/ echo "
-            <form id='devedores' class='form-group' method='post' action='send_one.php'>
+            <form id='devedores' class='form-group' method='post' >
                 "; echo "
                 <tr>
+                    <td>
+                        " . $devedor['matricula'] . "
+                    </td>
+                    " . "
                     <td>
                         " . $devedor['nome'] . "
                     </td>
@@ -101,9 +116,9 @@ include("inc/header.php"); ?>
                     <td>
                         " . $devedor['celular'] . "
                     </td>
-                    " . " 
+                    " . "
                     <td>
-                        " . "<input class='btn btn-primary' type='submit' value='Enviar'/>" . "
+                        " . "<input class='btn btn-primary' type='submit' value='Enviar' onclick='smsDeve()'/>" . "
                     </td>
                 </tr>
                 "; echo "
@@ -112,6 +127,8 @@ include("inc/header.php"); ?>
                 </tbody>
             </table>
         </div>
+    </div>
+    </div>
     </div>
 </div>
 <?php include("inc/footer.php"); ?>

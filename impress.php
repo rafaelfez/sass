@@ -324,12 +324,15 @@ include( "inc/header.php"); ?>
             
     </div>
 -->
+</div>
+    <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
                 <input type="button" name="imprimir" value="Imprimir" class="btn btn-success" onclick="window.print();">
              <abrr title="Cancelar">
                 <input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" />
             </abrr>
          </div>
+    </div>
 
   </div>
 </div>

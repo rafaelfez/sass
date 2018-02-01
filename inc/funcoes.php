@@ -24,10 +24,7 @@ function add_fil($matricula, $nome, $telefone, $nascimento, $rg, $cpf, $celular,
 
   include 'conexao.php';
 
-  $sql = "INSERT INTO filiado(matricula,nome,telefone,nascimento,rg,cpf,celular,sexo,email,taxa_rcs,"
-  ."pis, carteiratrab, eleitor, banco, agencia, conta, digito, civil, escolaridade,"
-  ."cnhnum, cnhtipo, cnhvalidade, endcep, endrua, endnum, endbairro, endcidade, enduf)"
-  ." VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+  $sql = "INSERT INTO filiado(matricula,nome,telefone,nascimento,rg,cpf,celular,sexo,email,taxa_rcs, pis, carteiratrab, eleitor, banco, agencia, conta, digito, civil, escolaridade, cnhnum, cnhtipo, cnhvalidade, endcep, endrua, endnum, endbairro, endcidade, enduf) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
   try {
     $resultado = $db->prepare($sql);
@@ -39,7 +36,7 @@ function add_fil($matricula, $nome, $telefone, $nascimento, $rg, $cpf, $celular,
     $resultado->bindValue(6, $cpf, PDO::PARAM_INT);
     $resultado->bindValue(7, $celular, PDO::PARAM_INT);
     $resultado->bindValue(8, $sexo, PDO::PARAM_STR);
-    $resultado->bindValue(9, $email, PDO::PARAM_INT);
+    $resultado->bindValue(9, $email, PDO::PARAM_STR);
     $resultado->bindValue(10, $taxa_rcs, PDO::PARAM_INT);
     $resultado->bindValue(11, $pis, PDO::PARAM_INT);
     $resultado->bindValue(12, $carteiratrab, PDO::PARAM_INT);
@@ -79,9 +76,7 @@ function add_dep($afiliado_matricula, $nome, $telefone, $nascimento, $rg, $cpf, 
 
   include 'conexao.php';
 
-  $sql = "INSERT INTO dependente(Afiliado_matricula, nome, telefone, nascimento, rg, cpf, celular, sexo, email,"
-    ."eleitor, civil, parentesco, principal, endcep, endrua, endnum, endbairro, endcidade, enduf)"
-    ." VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+  $sql = "INSERT INTO dependente(Afiliado_matricula, nome, telefone, nascimento, rg, cpf, celular, sexo, email, eleitor, civil, parentesco, principal, endcep, endrua, endnum, endbairro, endcidade, enduf) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
   try{
     if(get_filiado($afiliado_matricula)==true){
@@ -206,7 +201,7 @@ function alterarDependente($id, $afiliado_matricula, $nome, $telefone, $nascimen
     $resultado->bindValue(11, $civil, PDO::PARAM_STR);
     $resultado->bindValue(12, $parentesco, PDO::PARAM_STR);
     $resultado->bindValue(13, $principal, PDO::PARAM_INT);
-    $resultado->bindValue(14, $endcep, PDO::PARAM_INT);
+    $resultado->bindValue(14, $endcep, PDO::PARAM_STR);
     $resultado->bindValue(15, $endrua, PDO::PARAM_STR);
     $resultado->bindValue(16, $endnum, PDO::PARAM_INT);
     $resultado->bindValue(17, $endbairro, PDO::PARAM_STR);
@@ -245,7 +240,7 @@ function get_devedores() {
     include 'conexao.php';
 
       try {
-          return $db->query('SELECT filiado.nome, filiado.celular, pagamentofil.rcs, pagamentofil.das, pagamentofil.mes FROM filiado
+          return $db->query('SELECT filiado.matricula, filiado.nome, filiado.celular, pagamentofil.rcs, pagamentofil.das, pagamentofil.mes FROM filiado
                               INNER JOIN pagamentofil ON filiado.matricula = pagamentofil.Afiliado_matricula
                                 WHERE pagamentofil.rcs < 0 OR pagamentofil.das < 0 ORDER BY pagamentofil.idPagamento DESC');
       } catch (Exception $e) {
@@ -446,7 +441,7 @@ function adicional($id, $das, $rcs, $adicional, $desconto){
 
   include 'conexao.php';
 
-  if($das<0 && $rcs>0){
+  if($das<0 && $rcs>=0){
     $divida = $das;
     if($desconto=="DINHEIRO"){
       if($divida==($adicional*(-1))){
@@ -464,7 +459,7 @@ function adicional($id, $das, $rcs, $adicional, $desconto){
           return false;
         }
       }else{
-        mesErro('A dívida nao é igual ao adicional');
+        mesErro('A dívida nao é igual ao adicional.');
         return false;
       }
     }elseif($desconto=="RCS"){
@@ -483,16 +478,16 @@ function adicional($id, $das, $rcs, $adicional, $desconto){
           return false;
         }
       }else{
-        mesErro('A dívida nao é igual ao adicional');
+        mesErro('A dívida nao é igual ao adicional.');
         return false;
       }
     }elseif($desconto=="DAS"){
-      mesErro('O DAS já está negativo');
+      mesErro('O DAS já está negativo.');
       return false;
     }
   }
 
-  if($das>0 && $rcs<0){
+  if($das>=0 && $rcs<0){
     $divida = $rcs;
     if($desconto=="DINHEIRO"){
       if($divida==($adicional*(-1))){
@@ -510,7 +505,7 @@ function adicional($id, $das, $rcs, $adicional, $desconto){
           return false;
         }
       }else{
-        mesErro('A dívida nao é igual ao adicional');
+        mesErro('A dívida nao é igual ao adicional.');
         return false;
       }
     }elseif($desconto=="DAS"){
@@ -529,11 +524,11 @@ function adicional($id, $das, $rcs, $adicional, $desconto){
           return false;
         }
       }else{
-        mesErro('A dívida nao é igual ao adicional');
+        mesErro('A dívida nao é igual ao adicional.');
         return false;
       }
     }elseif($desconto=="RCS"){
-      mesErro('O RCS já está negativo');
+      mesErro('O RCS já está negativo.');
       return false;
     }
   }
@@ -658,7 +653,7 @@ function lista_dependente($matricula){
     if($matricula==''){
       $sql = 'SELECT idDependente, cpf, Afiliado_matricula, nome, parentesco, endrua FROM dependente';
     }else{
-      $sql = 'SELECT nome, nascimento, sexo, telefone, celular, email, rg, cpf, parentesco, Afiliado_matricula, endrua FROM dependente WHERE Afiliado_matricula = ?';
+      $sql = 'SELECT idDependente, nome, nascimento, sexo, telefone, celular, email, rg, cpf, parentesco, Afiliado_matricula, endrua FROM dependente WHERE Afiliado_matricula = ?';
     }
 
   try {

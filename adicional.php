@@ -37,23 +37,29 @@ include('inc/header.php');
           $id = get_pag($afiliado_matricula, $ano, $mes);
           header("location: adicional.php?id=$id");
         }else{
-          $message =mesErro("Matrícula não encontrada. Por favor, verifique o número e tente novamente.");
+          $message = mesErro("Pagamento não encontrado. Por favor, verifique os campos.");
      }
    }
  }
  } catch(Exception $message){
-    echo "Erro ao efetuar consultaregistro.";
+    echo "Erro ao efetuar consultar registro.";
     echo $message->
     getMessage(); exit;} if(isset($message)){ echo $message; } ?>
 
-    <form class="form-horizontal" data-toggle="" role="form" method="post" action="adicional.php">
+    <form class="form-horizontal" data-toggle="validator" role="form" method="post" action="adicional.php">
+
+    <div class="panel panel-info">
+  <div class="panel-heading"><strong>Buscar Matrícula e Período</strong></div>
+  <div class="panel-body">
 
       <div class="form-group has-feedback">
-        <label for="matricula" class="col-sm-2 control-label">Matrícula:<span class="required">*</span></label>
+        <label class="col-sm-2 control-label" for="matricula">Matrícula: <span class="required">*</span></label>
         <div class="col-sm-2">
-          <input type="text" required class="form-control form-control-success" id="matricula" name="matricula" data-error="Por favor, informe um número de matrícula correto." pattern="[0-9]{1,8}$" value="<?php echo htmlspecialchars($afiliado_matricula); ?>"/> <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          <input class="form-control form-control-success" placeholder="" data-error="Por favor, informe um número de matrícula correto." id="matricula" name="matricula" pattern="[0-9]{8}$" required="" type="text" value="<?php echo htmlspecialchars($afiliado_matricula); ?>"> <span aria-hidden="true" class="glyphicon form-control-feedback"></span>
         </div>
+        <div class="help-block with-errors">
         </div>
+      </div>
 
         <div class="form-group has-feedback">
           <label for="ano" class="col-sm-2 control-label">Ano:<span class="required">*</span>
@@ -75,7 +81,7 @@ include('inc/header.php');
           <label for="mes" class="col-sm-2 control-label">Mês:<span class="required">*</span>
           </label>
           <div class="col-sm-2">
-            <select class="form-control form-control-success" id="mes" name="mes" data-error="Por favor, selecione o mês referente." required>
+            <select class="form-control form-control-success" id="mes" name="mes" data-error="Por favor, selecione o mês referente." data-error="Por favor, informe um número de matrícula correto." required>
               <option value="">Selecione:</option>
               <option value="Janeiro" <?php if($mes=='Janeiro' ) echo 'selected'; ?>>Janeiro</option>
               <option value="Fevereiro" <?php if($mes=='Fevereiro' ) echo 'selected'; ?>>Fevereiro</option>
@@ -95,37 +101,23 @@ include('inc/header.php');
           <div class="help-block with-errors">
           </div>
         </div>
-        <abrr title="Consultar Filiado"><input class="btn btn-primary" type="submit" name="buscar" value="Inserir"/></abrr>
+
+        <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+        <abrr title="Inserir Período"><input class="btn btn-primary" type="submit" name="buscar" value="Inserir"/></abrr>
         <div class="help-block with-errors">
+        </div>
+        </div>
     </form>
   </div>
-</div>
-</div>
-
-<form class="form-horizontal" role="form" method="post" action="adicional.php">
-
-  <div class="form-group has-feedback">
-    <label for="das" class="col-sm-2 control-label">DAS (R$):<span class="required">*</span>
-    </label>
-    <div class="col-sm-2">
-      <input type="text" class="form-control" id="das" name="das" readonly="true" data-error="Por favor, informe um valor correto." pattern="^[0-9]+(\.[0-9]{1,2})?$" required value="<?php echo htmlspecialchars($das); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-    </div>
-    <div class="help-block with-errors">
-    </div>
+  </div>
   </div>
 
-  <div class="form-group has-feedback">
-    <label for="rcs" class="col-sm-2 control-label">RCS (R$):<span class="required">*</span>
-    </label>
-    <div class="col-sm-2">
-      <input type="text" class="form-control" id="rcs" name="rcs" readonly="true" data-error="Por favor, informe um valor correto." pattern="^[0-9]+(\.[0-9]{1,2})?$" required value="<?php echo htmlspecialchars($rcs); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-    </div>
-    <div class="help-block with-errors">
-    </div>
-  </div>
+<form class="form-horizontal" role="form" data-toggle="validator" method="post" action="adicional.php">
+
+
+
 </form>
-<hr>
-
 
 <?php
 try{
@@ -137,16 +129,16 @@ try{
         $message = mesSucesso("Foi acertado as contas do Filiado.");
         $id = $das = $rcs = $adicional = $desconto = '';
       }else{
-        $message = mesErro("Não foi possível acertar as contas do usuário");
+        $message = mesErro("Não foi possível acertar as contas do Filiado");
    }
  }
 }
 } catch(Exception $message){
-  echo "Erro ao efetuar consultaregistro.";
+  echo "Erro ao efetuar consultar registro.";
   echo $message->
   getMessage(); exit;} if(isset($message)){ echo $message; } ?>
 
-  <form class="form-horizontal" role="form" method="post" action="adicional.php">
+  <form class="form-horizontal" data-toggle="validator" role="form" method="post" action="adicional.php">
 
 
     <div class="form-group has-feedback">
@@ -213,5 +205,6 @@ try{
       </div>
   </div>
 </form>
-
+</div>
+</div>
 <?php include('inc/footer.php') ?>

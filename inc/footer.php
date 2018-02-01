@@ -1,11 +1,14 @@
+<?php require('./util/data.php'); ?>
+
 </div>
-<footer>
-    <div class="wrapper">
-        <p>
-            <?php echo date( "j F Y - "); ?>
-                Sistema SASS
-        </p>
+</div>
+</div>
+<footer class="footer">
+    
+  <div class="container">
+        <p><?php echo $semana["$data"] . ", {$dia} de " . $mes_extenso["$mes"] . " de {$ano}";?></p>
     </div>
+ 
 </footer>
 </body>
 

@@ -42,7 +42,7 @@ include("inc/header.php");
       <div class="form-group has-feedback">
         <label for="matricula" class="col-sm-2 control-label">Matrícula:<span class="required">*</span></label>
         <div class="col-sm-2">
-          <input type="text" required class="form-control form-control-success" id="matricula" name="matricula" data-error="Por favor, informe um número de matrícula correto." pattern="[0-9]{5,8}$" value="<?php echo htmlspecialchars($matricula); ?>"/> <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          <input type="text" required class="form-control form-control-success" id="matricula" name="matricula" data-error="Por favor, informe um número de matrícula correto." pattern="[0-9]{8}$" value="<?php echo htmlspecialchars($matricula); ?>"/> <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
         <div class="help-block with-errors">
         </div>

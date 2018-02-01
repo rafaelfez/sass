@@ -1,7 +1,7 @@
 <?php
 require 'inc/funcoes.php';
 
-$tituloPagina = "Cadastro de Filiado";
+$tituloPagina = "Alteração de Pagamento de Dependente";
 
 $afiliado_matricula = $mes = $ano = $unimed = $uniodonto = $message = $id = '';
 
@@ -25,7 +25,7 @@ include("inc/header.php");
 
 <div class="panel panel-primary">
 <div class="panel-heading">
-  <h2 class="panel-title"><big>Alteração de Pagamento de Convênios do Filiado</big></h2>
+  <h2 class="panel-title"><big>Alteração de Pagamento de Convênios do Dependente</big></h2>
 </div>
 <div class="panel-body">
 <?php
@@ -36,8 +36,7 @@ include("inc/header.php");
   }else{
     if(alterarPagamentoDep($afiliado_matricula, $ano, $mes, $unimed, $uniodonto, $id)){
     $message = mesSucesso("Pagamento alterado com sucesso!");
-    //Limpa o formulário
-    $afiliado_matricula = $mes = $ano = $unimed = $uniodonto = $id = '';
+    
     }
   }
 }
@@ -53,7 +52,7 @@ include("inc/header.php");
       <label for="id" class="col-sm-2 control-label">Id:<span class="required">*</span>
       </label>
       <div class="col-sm-2">
-        <input type="text" class="form-control form-control-success" id="id" name="id" data-error="O id não está correto." pattern="[0-9]{1,11}$" required value="<?php echo htmlspecialchars($id); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+        <input type="text" class="form-control form-control-success" id="id" name="id" data-error="O id não está correto." pattern="[0-9]{1,11}$" required readonly value="<?php echo htmlspecialchars($id); ?>" /> <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
       </div>
       <div class="help-block with-errors">
       </div>

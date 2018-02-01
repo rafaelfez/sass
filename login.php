@@ -92,15 +92,18 @@ try{
 
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <abbr title="Entrar no Sistema"><input type="submit" name="login" class="btn btn-info" value="Entrar"/>
+            <abbr title="Entrar no Sistema"><input type="submit" name="login" class="btn btn-primary" value="Entrar"/>
             </abbr>
           </div>
         </div>
+
 
       </form>
     </div>
   </div>
 </div>
-</div>
+
+    <script src='https://www.google.com/recaptcha/api.js?hl=pt-BR'></script>
+
 
 <?php include("inc/footer.php"); ?>

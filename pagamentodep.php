@@ -38,36 +38,42 @@ include("inc/header.php");
    }else{
      if(get_filiado($matricula)){
       header("location: pagamentodep.php?matricula=$matricula");
-      }else{
-       $message =mesErro("Matrícula não encontrada. Por favor, verifique o número e tente novamente.");
      }
+     else{
+      $message =mesErro("Matrícula não encontrada. Por favor, verifique o número e tente novamente.");}
    }
  }
  } catch(Exception $message){
-  echo "Erro ao efetuar consultaregistro.";
+  echo "Erro ao efetuar consultar registro.";
   echo $message->
     getMessage(); exit;} if(isset($message)){ echo $message; } ?>
 
-    <form class="form-horizontal" data-toggle="" role="form" method="post" action="pagamentodep.php">
+  <!-- <div class="panel panel-info">
+  <div class="panel-heading"><strong>Buscar Matrícula</strong></div>
+  <div class="panel-body"> -->
+
+    <form class="form-horizontal" data-toggle="validator" role="form" method="post" action="pagamentodep.php">
 
       <div class="form-group has-feedback">
-        <label for="matricula" class="col-sm-2 control-label">Matrícula:<span class="required">*</span></label>
+        <label for="matricula" class="col-sm-2 control-label">Buscar Matrícula:<span class="required">*</span></label>
         <div class="col-sm-2">
-          <input type="text" required class="form-control form-control-success" id="matricula" name="matricula" data-error="Por favor, informe um número de matrícula correto." pattern="[0-9]{1,8}$" value="<?php echo htmlspecialchars($matricula); ?>"/> <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          <input type="text" required class="form-control form-control-success" id="matricula" name="matricula" data-error="Por favor, informe um número de matrícula correto." pattern="[0-9]{8}$" value="<?php echo htmlspecialchars($matricula); ?>"/> <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
+        <div class="help-block with-errors">
+        </div>
+        </div>
+
+        <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
         <abrr title="Consultar Filiado"><input class="btn btn-primary" type="submit" name="pagamentodep" value="Inserir"/></abrr>
         <div class="help-block with-errors">
         </div>
       </div>
-    </form>
-  </div>
-</div>
+      </div>
 
-  <div class="panel panel-secundary">
-  <div class="panel-heading">
-    <h2 class="panel-title"><big></big></h2>
-  </div>
-  <div class="panel-body">
+      
+
+    </form>
 
     <?php
       try{
@@ -87,28 +93,32 @@ include("inc/header.php");
       echo $message->getMessage(); exit;} if(isset($message)){ echo $message; }
     ?>
 
-    <form class="form-horizontal" role="form" method="post" action="pagamentodep.php">
+    <form class="form-horizontal" role="form" data-toggle="validator" method="post" action="pagamentodep.php">
 
-      <div class="form-group has-feedback">
-        <label class="col-sm-2 control-label" for="matricula">Matrícula: <span class="required">*</span></label>
+        <div class="form-group has-feedback">
+        <label for="matricula" class="col-sm-2 control-label">Matrícula:<span class="required">*</span></label>
         <div class="col-sm-2">
-          <input class="form-control form-control-success" readonly="true" data-error="Por favor, informe um número de matrícula correto." id="matricula" name="matricula" pattern="[0-9]{8}$" required="" type="text" value="<?php echo htmlspecialchars($matricula); ?>"> <span aria-hidden="true" class="glyphicon form-control-feedback"></span>
+          <input type="text" required class="form-control form-control-success" id="matricula" name="matricula" data-error="Por favor, informe um número de matrícula correto." pattern="[0-9]{8}$" readonly="readonly" value="<?php echo htmlspecialchars($matricula); ?>"/> <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
         <div class="help-block with-errors">
         </div>
-      </div>
+        </div>
 
 
         <div class="form-group has-feedback">
-        <label for="nome" class="col-sm-2 control-label">Dependente:<span class="required">*</span>
+        <label for="dependente" class="col-sm-2 control-label">Dependente:<span class="required">*</span>
         </label>
         <div class="col-sm-2">
-          <select class="form-control form-control-sucess" id="nome" name="nome" required>
+          <select class="form-control form-control-sucess" id="nome" name="nome" data-error="Por favor, selecione um Dependente da lista." required>
             <option value="">Selecione:</option>
             <?php
+              if($matricula != '') {
                 foreach(lista_dependente($_GET['matricula']) as $nome){
+                  if($matricula == $_GET['matricula']){
                     echo '<option value="'.$nome['nome'].'">'.$nome['nome'].'</option>';
+                  }
                 }
+              }
             ?>
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
           </select>
@@ -178,6 +188,7 @@ include("inc/header.php");
         </div>
       </div>
 
+      
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <abrr title="Concluir Registro de Pagamento">
@@ -192,5 +203,8 @@ include("inc/header.php");
 </form>
 </div>
 </div>
+</div>
+</div>
+
 
 <?php include( "inc/footer.php"); ?>
