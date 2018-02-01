@@ -1,61 +1,165 @@
 <?php
-
+//SELECT idPagamento FROM pagamentofil WHERE data BETWEEN "2017-06-01%" AND "2018-12-01%";
 require 'inc/funcoes.php';
 
-$tituloPagina = "DAS";
+$tituloPagina="DAS";
 
-$das1 = '';
+$ano = $total = '';
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+  $ano = filter_input(INPUT_POST, 'ano', FILTER_SANITIZE_NUMBER_INT);
+}
 
 include("inc/header.php");
 ?>
 
+<?php
+try{
+  if(isset($_POST["consultar"])){
+    if(empty($ano)){
+      $message = mesAlerta("Por favor informe o ano");
+    }else{
+      if(get_das_ano($ano)){
+        $message = mesSucesso("Pesquisa com sucesso");
+      }
+    }
+  }
+} catch(Exception $message){
+  echo "Erro ao efetuar consulta/registro.";
+  echo $message->getMessage();
+  exit;
+} if(isset($message)){
+  echo $message;
+}
 
-<div class="panel panel-primary">
-<div class="panel-heading">
-    <h2 class="panel-title"><big>DAS</big></h2>
-  </div>
-<div class="panel-body">
+?>
 
-  <form class="form-horizontal" data-toggle="validator" method="post"  role="form" action="das.php">
+   <div class="panel-group">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2 class="panel-title"><big>DAS</big>
+            </h2>
+        </div>
+        <div class="panel-body">
+            <form action="das.php" class="form-horizontal" data-toggle="validator" method="post" role="form">
+              <div class="form-group has-feedback">
+                <label for="ano" class="col-sm-2 control-label">Ano:<span class="required">*</span>
+                </label>
+                <div class="col-sm-2">
+                  <select class="form-control form-control-sucess" id="ano" name="ano" required>
+                    <option value="2017" <?php if($ano=='2017') echo 'selected'; ?>>2017</option>
+                    <option value="2018" <?php if($ano=='2018') echo 'selected'; ?>>2018</option>
+                    <option value="2019" <?php if($ano=='2019') echo 'selected'; ?>>2019</option>
+                    <option value="2020" <?php if($ano=='2020') echo 'selected'; ?>>2020</option>
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  </select>
+                </div>
+                <div class="help-block with-errors">
+                </div>
+              </div>
+                <abrr title="Consultar"><input class="btn btn-primary" type="submit" name="consultar" value="Consultar"/></abrr>
+                <div class="help-block with-errors">
+            </form>
+        </div>
+    </div>
 
-<div class="form-group">
-<label for="das" class="col-sm-2 control-label">DAS do Sindicato:<span class="required"></span></label>
-<div class="col-sm-3">
-<input type="text" class="form-control" id="das" name="das" disabled="disabled" value="<?php echo get_das(); ?>"/>
-       </div>
-      <div class="help-block with-errors"></div>
-      </div>
 
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2 class="panel-title"><big>Transações</big>
+            </h2>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered table-hover table-condensed table-striped" style="width:850px;">
+            <thead>
+            <tr>
+                <th style="width:150px;">
+                    DAS
+                </th>
+                <th style="width:150px;">
+                    Matrícula
+                </th>
+                <th style="width:150px;">
+                    Mês
+                </th>
+                <th style="width:150px;">
+                    Ano
+                </th>
+                <th style="width:150px;">
+                    Unimed
+                </th>
+                <th style="width:150px;">
+                    Uniodonto
+                </th>
+                <th style="width:300px;">
+                    Registro
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <ul class="items">
+                <?php foreach(get_das_ano($ano) as $item){
 
-  </form>
-</div>
-</div>
+                    echo "<tr>
+                <td>
+                   R$ " . $item['das'] . "
+                </td>
 
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h2 class="panel-title"><big>Transações</big></h2>
-  </div>
-  <div class="panel-body">
+                <td>
+                    " . $item['Afiliado_matricula'] . "
+                </td>
 
-  <table class="table table-striped table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>DAS</th>
-        <th>Salario</th>
-        <th>Matricula</th>
-        <th>Mes</th>
-        <th>Ano</th>
-      </tr>
-    </thead>
-    <tbody>
-    <ul class="items">
-      <?php
-      foreach(get_pagamentos_das() as $item){
-        echo "<tr><td>" . $item['das'] . "</td>" . "<td>" . $item['salario'] . "</td>" . "<td>" . $item['Afiliado_matricula'] . "</td>" . "<td>" . $item['mes'] . "</td>" . "<td>" . $item['ano'] . "</td></tr>";
+                <td>
+                    " . $item['mes'] . "
+                </td>
+
+                <td>
+                    " . $item['ano'] . "
+                </td>
+
+                <td>
+                    " . $item['unimed'] . "
+                </td>
+
+                <td>
+                    " . $item['uniodonto'] . "
+                </td>
+
+                <td>
+                    " . $item['data'] . "
+                </td>
+            </tr>
+            ";
+          $total = floatval($item['das']) + $total;
         }
-      ?>
-    </ul>
-    </tbody>
-  </table>
+        ?>
+            </ul>
+            </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2 class="panel-title"><big>Total</big>
+            </h2>
+        </div>
+        <div class="panel-body">
+          <form action="das.php" class="form-horizontal" data-toggle="validator" method="post" role="form">
+              <div class="form-group">
+                  <label class="col-sm-2 control-label" for="total">DAS do Sindicato: <span class="required"></span>
+                  </label>
+                  <div class="col-sm-3">
+                      <input class="form-control" disabled="disabled" id="total" name="total" type="text" value=" R$ <?php echo $total/2; ?>">
+                  </div>
+                  <div class="help-block with-errors">
+                  </div>
+              </div>
+          </form>
+        </div>
+    </div>
+
+
 </div>
-</div>
+<?php include( "inc/footer.php"); ?>

@@ -77,7 +77,7 @@ include("inc/header.php");
       </table>
       <br/>
       <abrr title="Alterar Convênio"><input class="btn btn-primary" type="submit" value="Alterar"/></abrr>
-  <abrr title="Cancelar alteração"><input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" /></abrr>
+  <abrr title="Cancelar"><input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" /></abrr>
   </form>
   </div>
 
