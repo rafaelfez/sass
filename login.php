@@ -37,50 +37,73 @@ try{
 }
 ?>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title><?php echo $tituloPagina; ?></title>
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
-    <script src="bootstrap/js/jquery-3.1.1.min.js" type="text/javascript"></script>
-    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-
-  <body class>
-
-    <nav class="navbar navbar">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <abbr title="Home"><a class="navbar-brand" href="index.php">SASS</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a href="sobre.php"><span></span>Sobre</a></li>
-    </ul>
+<head>
+<meta charset="utf-8">
+<title><?php echo $tituloPagina; ?>
+</title>
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
+<script src="bootstrap/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<nav class="navbar navbar">
+<div class="container-fluid">
+  <div class="navbar-header">
+    <abbr title="Home"><a class="navbar-brand" href="index.php">SASS</a>
   </div>
+  <ul class="nav navbar-nav">
+    <li><a href="sobre.php"><span></span>Sobre</a></li>
+  </ul>
+</div>
 </nav>
+<body>
+<div class="login">
+  <abbr title="Sindicato dos Arrumadores de São Sebastião"><img src="img/sasslogo.png" align="center" style="width:600px; height:250px;"></abbr>
+  <br>
+  <br>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2 class="panel-title"><big>Login</big></h2>
+    </div>
+    <div class="panel-body">
 
-  <div class="cad-arr">
-  
-    <abbr title="Sindicato dos Arrumadores de São Sebastião"><img src="img/saas-logo.png" align="center" style="width:600px; height:300px;"></abbr>
-    <form class="form-login" method="post" action="login.php">
-      <?php
+      <form class="form-login form-horizontal" method="post" action="login.php">
+
+        <?php
         if(isset($message)){
           echo $message;
         }
       ?>
-      <table>
-        <tr>
-          <th><label for="login">Login:<span class="required"></span></label></th>
-          <td><abbr title="Insira seu login de usuário"><input type="text" name="username" class="form-control" required/></abbr></td>
-        </tr>
-        <tr>
-          <th><label for="senha">Senha:<span class="required"></span></label></th>
-          <td><abbr title="Insira sua senha"><input type="password" name="password" class="form-control" required /></abbr></td>
-        </tr>
-      </table>
-      <abbr title="Entrar no sistema"><input type="submit" name="login" class="btn btn-info" value="Entrar" />
-    </form>
+
+        <div class="form-group">
+          <label for="login" class="col-sm-2 control-label">Usuário:<span class="required"></span></label>
+          <div class="col-sm-10">
+            <abbr title="Insira seu login de usuário"><input type="text" name="username" class="form-control" required/></abbr>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="senha" class="col-sm-2 control-label">Senha:<span class="required"></span></label>
+          <div class="col-sm-10">
+            <abbr title="Insira sua senha"><input type="password" name="password" class="form-control" required/></abbr>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <abbr title="Entrar no Sistema"><input type="submit" name="login" class="btn btn-primary" value="Entrar"/>
+            </abbr>
+          </div>
+        </div>
+
+
+      </form>
+    </div>
   </div>
+</div>
+
+    <script src='https://www.google.com/recaptcha/api.js?hl=pt-BR'></script>
+
 
 <?php include("inc/footer.php"); ?>

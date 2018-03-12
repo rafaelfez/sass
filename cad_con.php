@@ -83,7 +83,7 @@ include("inc/header.php");
       </table>
       <br/>
       <abbr title="Cadastrar Convênio"><input class="btn btn-primary" type="submit" value="Cadastrar"/></abbr>
-      <abbr title="Cancelar cadastro"><input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" /></abbr>
+      <abbr title="Cancelar"><input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" /></abbr>
     </form>
   </div>
 <?php

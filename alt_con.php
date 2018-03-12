@@ -14,12 +14,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $mensalidade = filter_input(INPUT_POST, 'mensalidade', FILTER_SANITIZE_NUMBER_INT);
 
   if(empty($cnpj) || empty($nome)|| empty($categoria) ||empty($empresa) ||empty($mensalidade) ||empty($desconto)){
-    mesErro("Por favor insira todos os campos");
+    mesAlerta("Por favor insira todos os campos");
   }else{
     if(alterarConvenio($cnpj,$nome,$categoria, $empresa, $mensalidade, $desconto)){
-      mesErro("Convênio Alterado");
+      mesSucesso("Convênio Alterado");
     }else{
-      mesErro("Não foi possível alterar");
+      mesFalha("Não foi possível alterar");
     }
   }
 }
@@ -77,7 +77,7 @@ include("inc/header.php");
       </table>
       <br/>
       <abrr title="Alterar Convênio"><input class="btn btn-primary" type="submit" value="Alterar"/></abrr>
-  <abrr title="Cancelar alteração"><input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" /></abrr>
+  <abrr title="Cancelar"><input class="btn btn-danger" type="button" value="Cancelar" onclick="javascript: location.href='index.php';" /></abrr>
   </form>
   </div>
 

@@ -56,3 +56,19 @@ $data = array(
 $req_sms = requisicaoApi($data, "sms/send");
 // FIM
 ?>
+
+<?php
+
+$tituloPagina = "SMS";
+
+include("inc/header.php");
+
+?>
+
+<div class="home">
+  <p>SMS Enviados!</p>
+  <br/>
+  <abbr title="Sindicato dos Arrumadores de São Sebastião"><img src="img/saas-logo.png"style="width:600px; height:300px;"/></abbr>
+</div>
+
+<?php include("inc/footer.php"); ?>
